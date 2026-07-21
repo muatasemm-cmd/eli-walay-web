@@ -1,0 +1,2519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>إلي وعليّ | آيفون | v3</title>
+  <meta name="theme-color" content="#1f221b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="إلي وعليّ" />
+  <meta name="description" content="نسخة ويب ثابتة من إلي وعليّ للآيفون، بحفظ محلي ونسخة احتياطية." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./app-icon.svg" />
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --surface: rgba(255, 250, 243, 0.92);
+      --surface-strong: #fffaf3;
+      --surface-soft: #f6efe4;
+      --line: #e5dac8;
+      --text: #191714;
+      --muted: #70685c;
+      --green: #1d6c5e;
+      --green-soft: #dceee6;
+      --red: #a14439;
+      --red-soft: #f7dfd9;
+      --gold: #a06c2d;
+      --gold-soft: #f0e3c3;
+      --blue: #305a8f;
+      --blue-soft: #dde8f7;
+      --dark: #1f221b;
+      --shadow: 0 16px 34px rgba(25, 23, 20, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "SF Pro Display", "Segoe UI", Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(240, 227, 195, 0.72), transparent 26%),
+        radial-gradient(circle at left center, rgba(220, 238, 230, 0.7), transparent 22%),
+        linear-gradient(180deg, #faf5ee 0%, #f3ece4 52%, #faf7f1 100%);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .app-shell {
+      max-width: 560px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding:
+        calc(env(safe-area-inset-top, 0px) + 16px)
+        16px
+        calc(env(safe-area-inset-bottom, 0px) + 108px);
+    }
+
+    .stack,
+    .section-stack,
+    .panel-grid,
+    .summary-grid,
+    .actions-grid,
+    .metrics-grid,
+    .list-stack,
+    .modal-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .surface,
+    .hero,
+    .card,
+    .topbar,
+    .empty-block,
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .topbar,
+    .hero,
+    .card,
+    .empty-block,
+    .modal-card {
+      padding: 18px;
+    }
+
+    .topbar {
+      margin-bottom: 16px;
+      background:
+        radial-gradient(circle at top left, rgba(221, 232, 247, 0.8), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(250, 244, 235, 0.92));
+    }
+
+    .topbar-head,
+    .hero-head,
+    .section-head,
+    .person-head,
+    .detail-head,
+    .inline-row,
+    .status-row,
+    .bottom-nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    .topbar-head,
+    .hero-head,
+    .section-head,
+    .detail-head,
+    .status-row {
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    h1, h2, h3, h4 {
+      letter-spacing: -0.03em;
+      font-weight: 900;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .version-badge,
+    .save-pill,
+    .chip,
+    .balance-pill,
+    .filter-chip,
+    .tiny-chip,
+    .type-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: none;
+      transition: 180ms ease;
+    }
+
+    .version-badge,
+    .save-pill,
+    .chip,
+    .filter-chip,
+    .tiny-chip {
+      padding: 9px 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .version-badge {
+      background: linear-gradient(135deg, rgba(29, 108, 94, 0.12), rgba(48, 90, 143, 0.14));
+      color: var(--dark);
+      font-size: 0.82rem;
+    }
+
+    .save-pill {
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 0.78rem;
+    }
+
+    .save-pill[data-state="saving"] {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    .save-pill[data-state="error"] {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(240, 227, 195, 0.55), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(248, 241, 229, 0.92));
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle,
+    .subtitle,
+    .helper,
+    .note {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .metrics-grid,
+    .summary-grid,
+    .actions-grid,
+    .panel-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric,
+    .summary-card,
+    .action-card,
+    .panel-card {
+      background: var(--surface-soft);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(229, 218, 200, 0.9);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .metric span,
+    .summary-card span,
+    .panel-card span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .metric strong,
+    .summary-card strong,
+    .panel-card strong {
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    .summary-card[data-tone="green"] { background: var(--green-soft); }
+    .summary-card[data-tone="red"] { background: var(--red-soft); }
+    .summary-card[data-tone="gold"] { background: var(--gold-soft); }
+    .summary-card[data-tone="blue"] { background: var(--blue-soft); }
+
+    .action-card {
+      cursor: pointer;
+      text-align: right;
+    }
+
+    .action-card strong {
+      font-size: 1rem;
+    }
+
+    .action-card small {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .section-head h2,
+    .section-head h3 {
+      font-size: 1.35rem;
+    }
+
+    .section-head p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .chip,
+    .filter-chip,
+    .tiny-chip {
+      background: #efe7db;
+      color: var(--muted);
+    }
+
+    .chip-dark { background: #e4d9c5; color: var(--text); }
+    .filter-chip.active,
+    .tiny-chip.active {
+      background: var(--dark);
+      color: #fff8ed;
+    }
+
+    .chip.primary {
+      background: linear-gradient(135deg, var(--green), #2d8a79);
+      color: #fffdf8;
+    }
+
+    .chip.warning {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    .chip.danger {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .filters-row,
+    .chips-row,
+    .tabs-row {
+      display: flex;
+      gap: 10px;
+      overflow: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .filters-row::-webkit-scrollbar,
+    .chips-row::-webkit-scrollbar,
+    .tabs-row::-webkit-scrollbar { display: none; }
+
+    .text-input,
+    .textarea {
+      width: 100%;
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .person-card,
+    .transaction-card,
+    .priority-card,
+    .status-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      border-radius: 24px;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .person-head {
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .person-name {
+      font-size: 1.28rem;
+      font-weight: 900;
+    }
+
+    .person-amount,
+    .detail-amount {
+      font-size: 2.1rem;
+      font-weight: 900;
+    }
+
+    .balance-pill {
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .balance-pill.green { background: var(--green-soft); color: var(--green); }
+    .balance-pill.red { background: var(--red-soft); color: var(--red); }
+    .balance-pill.gold { background: var(--gold-soft); color: var(--gold); }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      right: 50%;
+      transform: translateX(50%);
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+      width: min(540px, calc(100% - 24px));
+      padding: 12px;
+      background: rgba(31, 34, 27, 0.96);
+      border-radius: 30px;
+      box-shadow: 0 16px 30px rgba(31, 34, 27, 0.26);
+      z-index: 30;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-item {
+      flex: 1;
+      min-height: 58px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 248, 237, 0.72);
+      cursor: pointer;
+      border-radius: 22px;
+      display: grid;
+      gap: 4px;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 248, 237, 0.12);
+      color: #fff8ed;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(25, 23, 20, 0.38);
+      display: grid;
+      place-items: end center;
+      padding: 18px;
+      z-index: 60;
+    }
+
+    .modal-card {
+      width: min(560px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+    }
+
+    .modal-head,
+    .detail-head {
+      margin-bottom: 10px;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .button {
+      border: none;
+      border-radius: 20px;
+      padding: 15px 16px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--green), #2d8a79);
+      color: #fffdf8;
+    }
+
+    .button.secondary {
+      background: #f3ecdf;
+      color: var(--text);
+    }
+
+    .button.danger {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .preview-card,
+    .detail-hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,241,229,0.94));
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      border-radius: 22px;
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-hero {
+      margin-bottom: 14px;
+    }
+
+    .detail-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .detail-stat {
+      border-radius: 20px;
+      padding: 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .detail-stat.green { background: var(--green-soft); }
+    .detail-stat.blue { background: var(--blue-soft); }
+    .detail-stat.red { background: var(--red-soft); }
+    .detail-stat.gold { background: var(--gold-soft); }
+
+    .detail-stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .detail-stat strong {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .empty-block {
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    .welcome-card {
+      background: linear-gradient(135deg, rgba(221, 232, 247, 0.92), rgba(240, 227, 195, 0.9));
+      border-radius: 26px;
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .toast-wrap {
+      position: fixed;
+      inset-inline: 0;
+      top: calc(env(safe-area-inset-top, 0px) + 12px);
+      display: grid;
+      justify-items: center;
+      z-index: 80;
+      pointer-events: none;
+      padding: 0 16px;
+    }
+
+    .toast {
+      min-width: min(440px, calc(100vw - 32px));
+      background: rgba(31, 34, 27, 0.96);
+      color: #fff8ed;
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: 0 16px 30px rgba(31, 34, 27, 0.22);
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      text-align: right;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .empty-block h3 {
+      margin-bottom: 8px;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-card {
+      cursor: default;
+    }
+
+    .tiny-help {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 560px) {
+      .metrics-grid,
+      .summary-grid,
+      .actions-grid,
+      .panel-grid,
+      .detail-stats,
+      .modal-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .person-amount,
+      .detail-amount {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-head">
+        <div class="stack" style="gap: 6px;">
+          <p class="eyebrow">نسخة ويب ثابتة للآيفون</p>
+          <h1>إلي وعليّ</h1>
+          <p class="subtitle">ديونك، مستحقاتك، وحركاتك كلها في مكان واحد. تحفظ محليًا وتفتح كرابط ثابت من Safari.</p>
+        </div>
+        <div class="stack" style="justify-items: end; gap: 8px;">
+          <span class="version-badge">v3</span>
+          <span class="save-pill" id="saveStatePill" data-state="idle">بانتظار أول حفظ</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="section-stack">
+      <section class="screen active" id="screen-home">
+        <div class="hero">
+          <div class="hero-head">
+            <div class="stack" style="gap: 8px;">
+              <p class="eyebrow">لوحة اليوم</p>
+              <h2 class="hero-title">ابدأ من الصحيح</h2>
+              <p class="hero-subtitle" id="heroInsight">كل شيء تحت السيطرة، ومجرد لمستين تكفيان لإضافة أي حركة جديدة.</p>
+            </div>
+            <div class="stack" style="justify-items: end; gap: 10px;">
+              <button class="chip primary" id="quickAddTransaction">حركة جديدة</button>
+              <button class="chip chip-dark" id="quickAddPerson">شخص جديد</button>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric">
+              <span>عدد الأشخاص</span>
+              <strong id="metricPeople">0</strong>
+            </div>
+            <div class="metric">
+              <span>حسابات مفتوحة</span>
+              <strong id="metricOpen">0</strong>
+            </div>
+            <div class="metric">
+              <span>عدد الحركات</span>
+              <strong id="metricTransactions">0</strong>
+            </div>
+            <div class="metric">
+              <span>آخر حفظ</span>
+              <strong id="metricLastSave">لا يوجد</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="welcomeCardSlot"></div>
+        <div class="summary-grid" id="summaryGrid"></div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>أولوية اليوم</h2>
+              <p>هذه أكثر الحالات التي تحتاج متابعة الآن</p>
+            </div>
+          </div>
+          <div class="list-stack" id="priorityList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>آخر الحركات</h2>
+              <p>كل جديد مسجل مباشرة</p>
+            </div>
+          </div>
+          <div class="list-stack" id="recentTransactionsList"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-people">
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>الأشخاص</h2>
+              <p>ابحث، فلتر، ورتب كما يناسبك</p>
+            </div>
+            <button class="chip primary" id="peopleAddButton">+ شخص</button>
+          </div>
+
+          <div class="field-grid">
+            <input class="text-input" id="peopleSearch" placeholder="ابحث بالاسم أو الملاحظة أو الهاتف" enterkeyhint="search" autocapitalize="off" />
+            <div class="filters-row" id="peopleFilterRow"></div>
+            <div class="filters-row" id="peopleSortRow"></div>
+            <button class="chip chip-dark" id="resetPeopleFilters" hidden>إعادة ضبط البحث والفرز</button>
+          </div>
+        </div>
+
+        <div class="panel-grid" id="peopleSummaryGrid"></div>
+        <div class="list-stack" id="peopleList"></div>
+      </section>
+
+      <section class="screen" id="screen-reports">
+        <div class="hero">
+          <div class="stack" style="gap: 8px;">
+            <p class="eyebrow">تقارير ذكية</p>
+            <h2 class="hero-title" style="font-size: 2.1rem;">شوف الصورة كاملة</h2>
+            <p class="hero-subtitle">بدل ما تتعب تجمع الأرقام، التطبيق يلخص الفترة ويقول لك أين تركز.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ملخص التقارير</h2>
+              <p id="reportsSubtitle">كل البيانات</p>
+            </div>
+          </div>
+          <div class="filters-row" id="reportRangeRow"></div>
+          <p class="note" id="reportInsight">لا توجد حركة في هذه الفترة بعد.</p>
+          <div class="panel-grid" id="reportsGrid"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>أعلى ناس إلك عليهم</h2>
+              <p>رتب التحصيل من الأعلى</p>
+            </div>
+          </div>
+          <div class="list-stack" id="topClaimsList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>أعلى ناس عليك إلهم</h2>
+              <p>هذه المبالغ تحتاج ترتيب دفع</p>
+            </div>
+          </div>
+          <div class="list-stack" id="topDebtsList"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-settings">
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>حالة التطبيق</h2>
+              <p>معلومات سريعة</p>
+            </div>
+          </div>
+          <div class="status-list" id="statusList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>طريقة عرض التاريخ</h2>
+              <p>اختر الشكل الذي تفضله</p>
+            </div>
+          </div>
+          <div class="filters-row" id="dateStyleRow"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>العملة</h2>
+              <p>كيف تظهر المبالغ داخل التطبيق</p>
+            </div>
+          </div>
+          <div class="filters-row" id="currencyRow"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>سعر العملات</h2>
+              <p>جلب تلقائي من مصدر ويب ثابت، مع أسعار بنك إسرائيل التمثيلية عندما تكون متاحة</p>
+            </div>
+            <button class="chip primary" id="refreshRatesButton" type="button">تحديث السعر</button>
+          </div>
+          <p class="note" id="exchangeRatesStatus">بانتظار أول جلب من المصدر.</p>
+          <div class="field-grid" id="exchangeRatesFields"></div>
+          <div class="preview-card" style="margin-top: 14px;">
+            <div class="stack" style="gap: 10px;">
+              <label class="helper">تحويل سريع إلى الشيكل</label>
+              <input class="text-input" id="converterAmountInput" placeholder="مثال: 20" inputmode="decimal" enterkeyhint="done" />
+              <div class="filters-row" id="converterCurrencyRow"></div>
+              <div class="panel-card">
+                <span>الناتج بالشيكل</span>
+                <strong id="converterResult">0 شيكل</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>نسخ ونسخ احتياطي</h2>
+              <p>للحماية، شارك ملف احتياطي بين فترة وفترة</p>
+            </div>
+          </div>
+          <div class="actions-grid">
+            <button class="action-card" id="exportReportButton" type="button">
+              <strong>تصدير تقرير نصي</strong>
+              <small>للمشاركة أو الطباعة السريعة</small>
+            </button>
+            <button class="action-card" id="exportBackupButton" type="button">
+              <strong>تصدير JSON</strong>
+              <small>نسخة احتياطية كاملة</small>
+            </button>
+            <button class="action-card" id="importBackupButton" type="button">
+              <strong>استيراد JSON</strong>
+              <small>إرجاع نسخة محفوظة</small>
+            </button>
+            <button class="action-card" id="addToHomeInfoButton" type="button">
+              <strong>كيف أضيفه للشاشة</strong>
+              <small>خطوات Safari السريعة</small>
+            </button>
+          </div>
+          <input id="backupFileInput" type="file" accept=".json,application/json" hidden />
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>أدوات سريعة</h2>
+              <p>للإدارة فقط</p>
+            </div>
+          </div>
+          <div class="actions-grid">
+            <button class="action-card" id="restoreDemoButton" type="button">
+              <strong>بيانات تجريبية</strong>
+              <small>للتجربة أو الشرح</small>
+            </button>
+            <button class="action-card" id="clearAllButton" type="button">
+              <strong>مسح كل البيانات</strong>
+              <small>تنظيف التطبيق بالكامل</small>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" id="bottomNav"></nav>
+  <div class="toast-wrap"><div class="toast" id="toast"></div></div>
+
+  <div class="overlay" id="personModal" hidden>
+    <div class="modal-card">
+      <div class="detail-head">
+        <div class="stack" style="gap: 4px;">
+          <p class="eyebrow" id="personModalEyebrow">شخص جديد</p>
+          <h3 id="personModalTitle">إضافة شخص</h3>
+        </div>
+        <button class="chip chip-dark" data-close="personModal">إغلاق</button>
+      </div>
+      <div class="modal-stack">
+        <input class="text-input" id="personNameInput" placeholder="اسم الشخص" enterkeyhint="next" autocapitalize="words" />
+        <input class="text-input" id="personPhoneInput" placeholder="رقم الهاتف اختياري" inputmode="tel" enterkeyhint="next" />
+        <textarea class="textarea" id="personNoteInput" placeholder="ملاحظة قصيرة" enterkeyhint="done"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="button primary" id="savePersonButton" type="button">حفظ</button>
+        <button class="button secondary" data-close="personModal" type="button">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="transactionModal" hidden>
+    <div class="modal-card">
+      <div class="detail-head">
+        <div class="stack" style="gap: 4px;">
+          <p class="eyebrow" id="transactionModalEyebrow">حركة جديدة</p>
+          <h3 id="transactionModalTitle">إضافة حركة</h3>
+        </div>
+        <button class="chip chip-dark" data-close="transactionModal">إغلاق</button>
+      </div>
+
+      <div class="modal-stack">
+        <div class="filters-row" id="transactionPersonRow"></div>
+        <div class="filters-row" id="transactionTypeRow"></div>
+        <div class="preview-card" id="transactionPreviewCard"></div>
+
+        <div class="stack" style="gap: 10px;">
+          <label class="helper">المبلغ</label>
+          <div class="chips-row" id="transactionCurrencyRow"></div>
+          <div class="chips-row" id="quickAmountRow"></div>
+          <input class="text-input" id="transactionAmountInput" placeholder="المبلغ" inputmode="decimal" enterkeyhint="next" />
+        </div>
+
+        <div class="stack" style="gap: 10px;">
+          <label class="helper">التاريخ</label>
+          <div class="chips-row" id="quickDateRow"></div>
+          <input class="text-input" id="transactionDateInput" type="date" inputmode="numeric" enterkeyhint="done" />
+        </div>
+
+        <div class="stack" style="gap: 10px;">
+          <label class="helper">ملاحظات سريعة</label>
+          <div class="chips-row" id="quickNoteRow"></div>
+          <textarea class="textarea" id="transactionNoteInput" placeholder="ملاحظة اختيارية" enterkeyhint="done"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="button primary" id="saveTransactionButton" type="button">حفظ الحركة</button>
+        <button class="button secondary" data-close="transactionModal" type="button">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="personDetailModal" hidden>
+    <div class="modal-card">
+      <div class="detail-head">
+        <div class="stack" style="gap: 4px;">
+          <p class="eyebrow" id="detailEyebrow">تفاصيل الشخص</p>
+          <h3 id="detailPersonName">-</h3>
+        </div>
+        <button class="chip chip-dark" data-close="personDetailModal">إغلاق</button>
+      </div>
+
+      <div class="detail-hero" id="detailHero"></div>
+      <div class="detail-stats" id="detailStats"></div>
+
+      <div class="actions-grid">
+        <button class="action-card" id="detailAddTransactionButton" type="button">
+          <strong>حركة جديدة</strong>
+          <small>أضف دفعة أو دينًا فورًا</small>
+        </button>
+        <button class="action-card" id="detailEditPersonButton" type="button">
+          <strong>تعديل الشخص</strong>
+          <small>عدّل الاسم أو الملاحظة</small>
+        </button>
+      </div>
+
+      <div class="card" style="margin-top: 14px; padding: 0; background: transparent; border: none; box-shadow: none;">
+        <div class="stack" style="gap: 12px;">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h4>سجل الحركات</h4>
+              <p id="detailTransactionsSubtitle">0 حركة</p>
+            </div>
+          </div>
+          <input class="text-input" id="detailSearchInput" placeholder="ابحث بالملاحظة أو التاريخ أو المبلغ" enterkeyhint="search" autocapitalize="off" />
+          <div class="filters-row" id="detailFilterRow"></div>
+          <div class="list-stack" id="detailTransactionsList"></div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="button danger" id="detailDeletePersonButton" type="button">حذف الشخص مع كل حركاته</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "eli-walay-web-v1";
+
+    const transactionTypes = [
+      { value: "lentToHim", label: "سلفته", tone: "green" },
+      { value: "collectedFromHim", label: "رجعلي", tone: "blue" },
+      { value: "borrowedFromHim", label: "استلفت منه", tone: "red" },
+      { value: "paidToHim", label: "دفعت له", tone: "gold" }
+    ];
+
+    const currencies = [
+      { value: "ILS", label: "شيكل", suffix: "شيكل" },
+      { value: "USD", label: "دولار", suffix: "$" },
+      { value: "JOD", label: "دينار", suffix: "دينار" },
+      { value: "EUR", label: "يورو", suffix: "€" }
+    ];
+
+    const dateStyles = [
+      { value: "arabic", label: "يوم/شهر/سنة" },
+      { value: "iso", label: "رقمي YYYY-MM-DD" }
+    ];
+
+    const personFilters = [
+      { value: "all", label: "الكل" },
+      { value: "claims", label: "إلي" },
+      { value: "debts", label: "عليّ" },
+      { value: "closed", label: "مسكر" }
+    ];
+
+    const personSorts = [
+      { value: "recent", label: "الأحدث" },
+      { value: "largest", label: "الأكبر مبلغًا" },
+      { value: "mostTransactions", label: "الأكثر حركة" },
+      { value: "name", label: "الاسم" }
+    ];
+
+    const reportRanges = [
+      { value: "month", label: "هذا الشهر" },
+      { value: "30days", label: "آخر 30 يوم" },
+      { value: "all", label: "كل الوقت" }
+    ];
+
+    const quickAmountOptions = [50, 100, 200, 500];
+    const quickNoteOptions = ["دفعة جزئية", "سلفة جديدة", "تسوية", "موعد لاحق"];
+
+    const demoPeople = [
+      { id: "person-1", name: "أحمد", phone: "0599000001", note: "يتعامل معي بشكل شبه أسبوعي", createdAt: "2026-07-18" },
+      { id: "person-2", name: "سامر", phone: "0599000002", note: "مهم أعرف وضعه بسرعة", createdAt: "2026-07-17" },
+      { id: "person-3", name: "خالد", note: "غالبًا يرجع المبلغ آخر الشهر", createdAt: "2026-07-16" }
+    ];
+
+    const demoTransactions = [
+      { id: "tx-1", personId: "person-1", type: "lentToHim", amount: 500, date: "2026-07-19", note: "سلفة أولى", createdAt: "2026-07-19T10:00:00" },
+      { id: "tx-2", personId: "person-1", type: "collectedFromHim", amount: 150, date: "2026-07-20", note: "دفعة جزئية", createdAt: "2026-07-20T09:00:00" },
+      { id: "tx-3", personId: "person-2", type: "borrowedFromHim", amount: 400, date: "2026-07-18", note: "استلفت منه لمصلحة طارئة", createdAt: "2026-07-18T14:20:00" },
+      { id: "tx-4", personId: "person-2", type: "paidToHim", amount: 100, date: "2026-07-19", note: "دفعة أولى", createdAt: "2026-07-19T18:20:00" }
+    ];
+
+    const defaultState = {
+      people: [],
+      transactions: [],
+      settings: {
+        currency: "ILS",
+        dateStyle: "arabic",
+        exchangeRates: {
+          USD: null,
+          JOD: null,
+          EUR: null
+        },
+        exchangeRatesMeta: {
+          source: "none",
+          lastFetchedAt: null,
+          lastAttemptAt: null,
+          error: null
+        },
+        lastExportedAt: null
+      },
+      meta: {
+        hasSeenWelcome: false,
+        lastLocalSaveAt: null
+      }
+    };
+
+    const ui = {
+      activeTab: "home",
+      searchQuery: "",
+      personFilter: "all",
+      personSort: "recent",
+      reportRange: "all",
+      selectedPersonId: null,
+      personDetailSearch: "",
+      personDetailFilter: "all",
+      editingPersonId: null,
+      editingTransactionId: null,
+      transactionPersonId: null,
+      transactionType: "lentToHim",
+      transactionAmount: "",
+      transactionDate: todayString(),
+      transactionNote: "",
+      converterAmount: "",
+      converterCurrency: "JOD",
+      ratesLoading: false,
+      saveState: "idle"
+    };
+
+    let state = loadState();
+
+    const elements = {
+      saveStatePill: document.getElementById("saveStatePill"),
+      heroInsight: document.getElementById("heroInsight"),
+      metricPeople: document.getElementById("metricPeople"),
+      metricOpen: document.getElementById("metricOpen"),
+      metricTransactions: document.getElementById("metricTransactions"),
+      metricLastSave: document.getElementById("metricLastSave"),
+      summaryGrid: document.getElementById("summaryGrid"),
+      welcomeCardSlot: document.getElementById("welcomeCardSlot"),
+      priorityList: document.getElementById("priorityList"),
+      recentTransactionsList: document.getElementById("recentTransactionsList"),
+      peopleList: document.getElementById("peopleList"),
+      peopleSearch: document.getElementById("peopleSearch"),
+      peopleFilterRow: document.getElementById("peopleFilterRow"),
+      peopleSortRow: document.getElementById("peopleSortRow"),
+      resetPeopleFilters: document.getElementById("resetPeopleFilters"),
+      peopleSummaryGrid: document.getElementById("peopleSummaryGrid"),
+      reportsSubtitle: document.getElementById("reportsSubtitle"),
+      reportRangeRow: document.getElementById("reportRangeRow"),
+      reportInsight: document.getElementById("reportInsight"),
+      reportsGrid: document.getElementById("reportsGrid"),
+      topClaimsList: document.getElementById("topClaimsList"),
+      topDebtsList: document.getElementById("topDebtsList"),
+      statusList: document.getElementById("statusList"),
+      dateStyleRow: document.getElementById("dateStyleRow"),
+      currencyRow: document.getElementById("currencyRow"),
+      refreshRatesButton: document.getElementById("refreshRatesButton"),
+      exchangeRatesStatus: document.getElementById("exchangeRatesStatus"),
+      exchangeRatesFields: document.getElementById("exchangeRatesFields"),
+      converterAmountInput: document.getElementById("converterAmountInput"),
+      converterCurrencyRow: document.getElementById("converterCurrencyRow"),
+      converterResult: document.getElementById("converterResult"),
+      backupFileInput: document.getElementById("backupFileInput"),
+      personModal: document.getElementById("personModal"),
+      personModalEyebrow: document.getElementById("personModalEyebrow"),
+      personModalTitle: document.getElementById("personModalTitle"),
+      personNameInput: document.getElementById("personNameInput"),
+      personPhoneInput: document.getElementById("personPhoneInput"),
+      personNoteInput: document.getElementById("personNoteInput"),
+      transactionModal: document.getElementById("transactionModal"),
+      transactionModalEyebrow: document.getElementById("transactionModalEyebrow"),
+      transactionModalTitle: document.getElementById("transactionModalTitle"),
+      transactionPersonRow: document.getElementById("transactionPersonRow"),
+      transactionTypeRow: document.getElementById("transactionTypeRow"),
+      transactionPreviewCard: document.getElementById("transactionPreviewCard"),
+      transactionCurrencyRow: document.getElementById("transactionCurrencyRow"),
+      quickAmountRow: document.getElementById("quickAmountRow"),
+      transactionAmountInput: document.getElementById("transactionAmountInput"),
+      quickDateRow: document.getElementById("quickDateRow"),
+      transactionDateInput: document.getElementById("transactionDateInput"),
+      quickNoteRow: document.getElementById("quickNoteRow"),
+      transactionNoteInput: document.getElementById("transactionNoteInput"),
+      personDetailModal: document.getElementById("personDetailModal"),
+      detailPersonName: document.getElementById("detailPersonName"),
+      detailHero: document.getElementById("detailHero"),
+      detailStats: document.getElementById("detailStats"),
+      detailTransactionsSubtitle: document.getElementById("detailTransactionsSubtitle"),
+      detailSearchInput: document.getElementById("detailSearchInput"),
+      detailFilterRow: document.getElementById("detailFilterRow"),
+      detailTransactionsList: document.getElementById("detailTransactionsList"),
+      bottomNav: document.getElementById("bottomNav"),
+      toast: document.getElementById("toast")
+    };
+
+    bindStaticEvents();
+    renderApp();
+    registerServiceWorker();
+    fetchMarketRates(false);
+
+    function bindStaticEvents() {
+      document.getElementById("quickAddTransaction").addEventListener("click", () => openTransactionModal());
+      document.getElementById("quickAddPerson").addEventListener("click", () => openPersonModal());
+      document.getElementById("peopleAddButton").addEventListener("click", () => openPersonModal());
+      document.getElementById("savePersonButton").addEventListener("click", savePerson);
+      document.getElementById("saveTransactionButton").addEventListener("click", saveTransaction);
+      document.getElementById("restoreDemoButton").addEventListener("click", restoreDemoData);
+      document.getElementById("clearAllButton").addEventListener("click", clearAllData);
+      document.getElementById("exportBackupButton").addEventListener("click", exportBackup);
+      document.getElementById("exportReportButton").addEventListener("click", exportReport);
+      document.getElementById("importBackupButton").addEventListener("click", () => elements.backupFileInput.click());
+      document.getElementById("addToHomeInfoButton").addEventListener("click", showAddToHomeInfo);
+      elements.refreshRatesButton?.addEventListener("click", () => fetchMarketRates(true));
+      document.getElementById("detailAddTransactionButton").addEventListener("click", () => openTransactionModal(ui.selectedPersonId));
+      document.getElementById("detailEditPersonButton").addEventListener("click", () => {
+        const person = getSelectedPerson();
+        if (person) {
+          openPersonModal(person.id);
+        }
+      });
+      document.getElementById("detailDeletePersonButton").addEventListener("click", () => {
+        const person = getSelectedPerson();
+        if (person) {
+          deletePerson(person.id);
+        }
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          const opened = [...document.querySelectorAll(".overlay")].find((overlay) => !overlay.hidden);
+          if (opened) {
+            blurActiveElement();
+            closeModal(opened.id);
+          }
+        }
+      });
+
+      document.querySelectorAll("[data-close]").forEach((button) => {
+        button.addEventListener("click", () => {
+          blurActiveElement();
+          closeModal(button.getAttribute("data-close"));
+        });
+      });
+
+      document.querySelectorAll(".overlay").forEach((overlay) => {
+        overlay.addEventListener("click", (event) => {
+          if (event.target === overlay) {
+            blurActiveElement();
+            closeModal(overlay.id);
+          }
+        });
+      });
+
+      document.querySelectorAll(".modal-card").forEach((card) => {
+        card.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      });
+
+      elements.peopleSearch.addEventListener("input", (event) => {
+        ui.searchQuery = event.target.value;
+        renderPeople();
+      });
+
+      elements.resetPeopleFilters.addEventListener("click", () => {
+        ui.searchQuery = "";
+        ui.personFilter = "all";
+        ui.personSort = "recent";
+        elements.peopleSearch.value = "";
+        renderPeople();
+      });
+
+      elements.detailSearchInput.addEventListener("input", (event) => {
+        ui.personDetailSearch = event.target.value;
+        renderPersonDetail();
+      });
+
+      elements.transactionAmountInput.addEventListener("input", (event) => {
+        ui.transactionAmount = normalizeAmountInput(event.target.value);
+        event.target.value = ui.transactionAmount;
+        renderTransactionPreview();
+      });
+
+      elements.transactionDateInput.addEventListener("input", (event) => {
+        ui.transactionDate = event.target.value;
+      });
+
+      elements.transactionNoteInput.addEventListener("input", (event) => {
+        ui.transactionNote = event.target.value;
+      });
+
+      elements.converterAmountInput?.addEventListener("input", (event) => {
+        ui.converterAmount = normalizeAmountInput(event.target.value);
+        event.target.value = ui.converterAmount;
+        renderConverterResult();
+      });
+
+      elements.backupFileInput.addEventListener("change", importBackup);
+      window.addEventListener("beforeunload", persistState);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState !== "visible") {
+          persistState();
+        }
+      });
+    }
+
+    function renderApp() {
+      renderNav();
+      renderHome();
+      renderPeople();
+      renderReports();
+      renderSettings();
+      renderPersonModal();
+      renderTransactionModal();
+      renderPersonDetail();
+      updateSavePill();
+    }
+
+    function renderNav() {
+      const items = [
+        { key: "home", label: "الرئيسية" },
+        { key: "people", label: "الأشخاص" },
+        { key: "reports", label: "التقارير" },
+        { key: "settings", label: "الإعدادات" }
+      ];
+
+      elements.bottomNav.innerHTML = items.map((item) => `
+        <button class="nav-item ${ui.activeTab === item.key ? "active" : ""}" data-tab="${item.key}">
+          <span>${item.label}</span>
+        </button>
+      `).join("");
+
+      elements.bottomNav.querySelectorAll("[data-tab]").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.activeTab = button.dataset.tab;
+          document.querySelectorAll(".screen").forEach((screen) => {
+            screen.classList.toggle("active", screen.id === `screen-${ui.activeTab}`);
+          });
+          renderNav();
+        });
+      });
+    }
+
+    function renderHome() {
+      const balances = getPeopleWithBalances();
+      const openAccounts = balances.filter((person) => person.net !== 0);
+      const totalClaims = balances.filter((person) => person.net > 0).reduce((sum, person) => sum + person.net, 0);
+      const totalDebts = balances.filter((person) => person.net < 0).reduce((sum, person) => sum + Math.abs(person.net), 0);
+      const net = totalClaims - totalDebts;
+      const priorities = [...openAccounts].sort((a, b) => Math.abs(b.net) - Math.abs(a.net)).slice(0, 3);
+      const recentTransactions = sortTransactionsDesc(state.transactions).slice(0, 5);
+
+      elements.metricPeople.textContent = String(state.people.length);
+      elements.metricOpen.textContent = String(openAccounts.length);
+      elements.metricTransactions.textContent = String(state.transactions.length);
+      elements.metricLastSave.textContent = state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "لا يوجد";
+      elements.heroInsight.textContent =
+        net > 0
+          ? "وضعك العام لصالحك، لكن تابع من هم أعلى عليك لتحصيل أسرع."
+          : net < 0
+            ? "عندك التزامات أكثر الآن، فابدأ بأكبر مبلغ يحتاج دفع."
+            : "الصافي متوازن حاليًا، والأولوية الآن لتنظيم الحركة القادمة بهدوء.";
+
+      elements.welcomeCardSlot.innerHTML = (!state.meta.hasSeenWelcome && state.people.length === 0 && state.transactions.length === 0) ? `
+        <div class="welcome-card">
+          <div class="stack" style="gap: 4px;">
+            <p class="eyebrow">بداية مرتبة</p>
+            <h3>لنبدأ بطريقة سهلة</h3>
+            <p class="muted">أضف أول شخص ثم أول حركة، وبعدها سيبدأ التطبيق يحسب لك كل شيء تلقائيًا ويحفظه مباشرة على الجهاز.</p>
+          </div>
+          <div class="actions-grid">
+            <button class="action-card" id="welcomeAddPersonButton" type="button">
+              <strong>أضف أول شخص</strong>
+              <small>ابدأ بالاسم فقط والباقي اختياري</small>
+            </button>
+            <button class="action-card" id="welcomeDemoButton" type="button">
+              <strong>جرّب بيانات جاهزة</strong>
+              <small>مفيد إذا أردت مشاهدة الفكرة بسرعة</small>
+            </button>
+          </div>
+        </div>
+      ` : "";
+
+      elements.summaryGrid.innerHTML = [
+        createSummaryCard("إجمالي إلي", formatAmount(totalClaims), "المبالغ التي ما زالت لك", "green"),
+        createSummaryCard("إجمالي عليّ", formatAmount(totalDebts), "الالتزامات الحالية", "red"),
+        createSummaryCard("الصافي", formatAmount(Math.abs(net)), net > 0 ? "وضعك لصالحك" : net < 0 ? "تحتاج متابعة" : "متوازن", "gold"),
+        createSummaryCard("الحسابات المسكرة", String(balances.filter((item) => item.net === 0).length), "جاهزة ومقفلة", "blue")
+      ].join("");
+
+      if (priorities.length === 0) {
+        elements.priorityList.innerHTML = createEmpty("كل الحسابات مسكرة الآن", "وهذا ممتاز. أول حركة جديدة ستظهر هنا.");
+      } else {
+        elements.priorityList.innerHTML = priorities.map((person, index) => `
+          <button class="priority-card" data-person-open="${person.id}">
+            <div class="person-head">
+              <span class="tiny-chip active">${index + 1}</span>
+              <strong class="person-name">${escapeHtml(person.name)}</strong>
+            </div>
+            <div class="inline-row" style="justify-content: space-between; align-items: center;">
+              <span class="muted">${getBalanceLabel(person.net)} • ${getBalanceRole(person.net)}</span>
+              <strong>${formatAmount(Math.abs(person.net))}</strong>
+            </div>
+            <p class="muted">${person.transactionsCount} حركة${person.lastTransactionDate ? ` • آخر حركة ${formatDisplayDate(person.lastTransactionDate)}` : ""}</p>
+          </button>
+        `).join("");
+      }
+
+      if (recentTransactions.length === 0) {
+        elements.recentTransactionsList.innerHTML = createEmpty("لا توجد حركات بعد", "ابدأ بإضافة أول حركة وستظهر هنا مباشرة.");
+      } else {
+        elements.recentTransactionsList.innerHTML = recentTransactions.map((item) => {
+          const person = state.people.find((entry) => entry.id === item.personId);
+          return `
+            <button class="transaction-card" data-transaction-edit="${item.id}">
+              <div class="person-head">
+                <span class="type-pill balance-pill ${getTone(item.type)}">${getTransactionLabel(item.type)}</span>
+                <strong class="person-name">${escapeHtml(person?.name ?? "شخص غير معروف")}</strong>
+              </div>
+              <div class="inline-row" style="justify-content: space-between; align-items: center;">
+                <span class="muted">${formatDisplayDate(item.date)}</span>
+                <strong>${formatAmount(item.amount)}</strong>
+              </div>
+              ${item.note ? `<p class="muted">${escapeHtml(item.note)}</p>` : ""}
+            </button>
+          `;
+        }).join("");
+      }
+
+      bindPeopleOpen();
+      bindTransactionEdit();
+      document.getElementById("welcomeAddPersonButton")?.addEventListener("click", () => {
+        state.meta.hasSeenWelcome = true;
+        persistState();
+        renderHome();
+        openPersonModal();
+      });
+      document.getElementById("welcomeDemoButton")?.addEventListener("click", () => {
+        state.meta.hasSeenWelcome = true;
+        persistState();
+        restoreDemoData();
+      });
+    }
+
+    function renderPeople() {
+      const balances = getPeopleWithBalances();
+      const filtered = getFilteredPeople(balances);
+      const openCount = filtered.filter((person) => person.net !== 0).length;
+      const claimsTotal = filtered.filter((person) => person.net > 0).reduce((sum, person) => sum + person.net, 0);
+      const debtsTotal = filtered.filter((person) => person.net < 0).reduce((sum, person) => sum + Math.abs(person.net), 0);
+
+      elements.peopleSearch.value = ui.searchQuery;
+      elements.peopleFilterRow.innerHTML = personFilters.map((option) => createFilterChip(option.label, ui.personFilter === option.value, `people-filter:${option.value}`)).join("");
+      elements.peopleSortRow.innerHTML = personSorts.map((option) => createFilterChip(option.label, ui.personSort === option.value, `people-sort:${option.value}`)).join("");
+      elements.resetPeopleFilters.hidden = !(ui.searchQuery.trim() || ui.personFilter !== "all" || ui.personSort !== "recent");
+
+      elements.peopleSummaryGrid.innerHTML = [
+        createPanelCard("الظاهرون الآن", String(filtered.length)),
+        createPanelCard("الحسابات المفتوحة", String(openCount)),
+        createPanelCard("إجمالي الدائن", formatAmount(claimsTotal)),
+        createPanelCard("إجمالي المدين", formatAmount(debtsTotal))
+      ].join("");
+
+      if (filtered.length === 0) {
+        elements.peopleList.innerHTML = createEmpty("لا يوجد نتائج", "جرّب تغيير البحث أو الفلتر، أو أضف شخصًا جديدًا.");
+      } else {
+        elements.peopleList.innerHTML = filtered.map((person) => `
+          <button class="person-card" data-person-open="${person.id}">
+            <div class="person-head">
+              <span class="balance-pill ${getToneByNet(person.net)}">${getBalanceLabel(person.net)}</span>
+              <strong class="person-name">${escapeHtml(person.name)}</strong>
+            </div>
+            <div class="inline-row" style="justify-content: space-between; align-items: center;">
+              <span class="muted">الحالة: ${getBalanceRole(person.net)}</span>
+              <strong class="person-amount">${formatAmount(Math.abs(person.net))}</strong>
+            </div>
+            <p class="muted">${person.transactionsCount} حركة${person.phone ? ` • ${escapeHtml(person.phone)}` : ""}</p>
+            ${person.lastTransactionDate ? `<p class="muted">آخر حركة: ${formatDisplayDate(person.lastTransactionDate)}</p>` : ""}
+            ${person.note ? `<p class="muted">${escapeHtml(person.note)}</p>` : ""}
+          </button>
+        `).join("");
+      }
+
+      bindPeopleOpen();
+
+      document.querySelectorAll("[data-action^='people-filter:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.personFilter = button.dataset.action.split(":")[1];
+          renderPeople();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='people-sort:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.personSort = button.dataset.action.split(":")[1];
+          renderPeople();
+        });
+      });
+    }
+
+    function renderReports() {
+      const balances = getPeopleWithBalances();
+      const reportData = getReportData(balances);
+
+      elements.reportsSubtitle.textContent = reportData.subtitle;
+      elements.reportRangeRow.innerHTML = reportRanges.map((option) => createFilterChip(option.label, ui.reportRange === option.value, `report-range:${option.value}`)).join("");
+      elements.reportInsight.textContent = reportData.insight;
+
+      elements.reportsGrid.innerHTML = [
+        createPanelCard("عدد الحركات", String(reportData.transactions.length)),
+        createPanelCard("صافي الفترة", formatAmount(Math.abs(reportData.netFlow))),
+        createPanelCard("الأكثر نشاطًا", reportData.mostActive?.name ?? "لا يوجد"),
+        createPanelCard("آخر نشاط", reportData.lastActivityDate ? formatDisplayDate(reportData.lastActivityDate) : "لا يوجد"),
+        createPanelCard("سلفته", formatAmount(reportData.lent)),
+        createPanelCard("رجعلي", formatAmount(reportData.collected)),
+        createPanelCard("استلفت", formatAmount(reportData.borrowed)),
+        createPanelCard("دفعت", formatAmount(reportData.paid))
+      ].join("");
+
+      elements.topClaimsList.innerHTML = reportData.topClaims.length === 0
+        ? createEmpty("لا يوجد حاليًا أحد إلك عليه مبلغ", "غيّر الفترة إذا أردت قراءة زاوية ثانية.")
+        : reportData.topClaims.map((person) => personRowHtml(person.id, person.name, "يمكنك فتحه ومراجعة الحركات معه", formatAmount(person.net))).join("");
+
+      elements.topDebtsList.innerHTML = reportData.topDebts.length === 0
+        ? createEmpty("لا يوجد حاليًا التزامات مفتوحة عليك", "هذا يعني أن هذه الفترة أخف عليك.")
+        : reportData.topDebts.map((person) => personRowHtml(person.id, person.name, "يفضل ترتيب دفعة قريبة إذا أمكن", formatAmount(Math.abs(person.net)))).join("");
+
+      bindPeopleOpen();
+      document.querySelectorAll("[data-action^='report-range:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.reportRange = button.dataset.action.split(":")[1];
+          renderReports();
+        });
+      });
+    }
+
+    function renderSettings() {
+      const statusItems = [
+        { label: "الحفظ المحلي", value: ui.saveState === "saving" ? "جاري الحفظ" : ui.saveState === "error" ? "في مشكلة" : "محفوظ" },
+        { label: "عدد الأشخاص", value: String(state.people.length) },
+        { label: "عدد الحركات", value: String(state.transactions.length) },
+        { label: "آخر حفظ محلي", value: state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "بانتظار أول حفظ" },
+        { label: "آخر نسخة مصدرة", value: state.settings.lastExportedAt ? formatDisplayDateTime(state.settings.lastExportedAt) : "لم يتم بعد" }
+      ];
+
+      elements.statusList.innerHTML = statusItems.map((item) => `
+        <div class="status-card">
+          <div class="status-row">
+            <strong>${escapeHtml(item.value)}</strong>
+            <span class="muted">${escapeHtml(item.label)}</span>
+          </div>
+        </div>
+      `).join("");
+
+      elements.dateStyleRow.innerHTML = dateStyles.map((option) => createFilterChip(option.label, state.settings.dateStyle === option.value, `date-style:${option.value}`)).join("");
+      elements.currencyRow.innerHTML = currencies.map((option) => createFilterChip(option.label, state.settings.currency === option.value, `currency:${option.value}`)).join("");
+      elements.refreshRatesButton.textContent = ui.ratesLoading ? "جارٍ التحديث..." : "تحديث السعر";
+      elements.refreshRatesButton.disabled = ui.ratesLoading;
+      elements.exchangeRatesStatus.textContent = getExchangeRatesStatusText();
+      elements.exchangeRatesFields.innerHTML = [
+        createRateField("USD", "الدولار", state.settings.exchangeRates?.USD),
+        createRateField("JOD", "الدينار", state.settings.exchangeRates?.JOD),
+        createRateField("EUR", "اليورو", state.settings.exchangeRates?.EUR)
+      ].join("");
+      elements.converterCurrencyRow.innerHTML = [
+        createTinyChip("دولار", ui.converterCurrency === "USD", "converter-currency:USD"),
+        createTinyChip("دينار", ui.converterCurrency === "JOD", "converter-currency:JOD"),
+        createTinyChip("يورو", ui.converterCurrency === "EUR", "converter-currency:EUR")
+      ].join("");
+      elements.converterAmountInput.value = ui.converterAmount;
+      renderConverterResult();
+
+      document.querySelectorAll("[data-action^='date-style:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.settings.dateStyle = button.dataset.action.split(":")[1];
+          persistState();
+          renderApp();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='currency:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.settings.currency = button.dataset.action.split(":")[1];
+          persistState();
+          renderApp();
+        });
+      });
+
+      document.querySelectorAll("[data-rate-code]").forEach((input) => {
+        input.addEventListener("input", (event) => {
+          const code = event.target.dataset.rateCode;
+          const value = parseAmountInput(event.target.value);
+          state.settings.exchangeRates[code] = Number.isFinite(value) && value > 0 ? value : 0;
+          state.settings.exchangeRatesMeta = {
+            source: "manual",
+            lastFetchedAt: state.settings.exchangeRatesMeta?.lastFetchedAt ?? null,
+            lastAttemptAt: state.settings.exchangeRatesMeta?.lastAttemptAt ?? null,
+            error: null
+          };
+          persistState();
+          renderConverterResult();
+          elements.exchangeRatesStatus.textContent = getExchangeRatesStatusText();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='converter-currency:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.converterCurrency = button.dataset.action.split(":")[1];
+          renderSettings();
+        });
+      });
+    }
+
+    function renderPersonModal() {
+      const isEditing = Boolean(ui.editingPersonId);
+      elements.personModalEyebrow.textContent = isEditing ? "تعديل بيانات" : "شخص جديد";
+      elements.personModalTitle.textContent = isEditing ? "تعديل الشخص" : "إضافة شخص";
+    }
+
+    function renderTransactionModal() {
+      const balances = getPeopleWithBalances();
+      const person = balances.find((entry) => entry.id === ui.transactionPersonId) ?? null;
+      const editableOriginal = ui.editingTransactionId
+        ? state.transactions.find((entry) => entry.id === ui.editingTransactionId)
+        : null;
+      const baseTransactions = person ? state.transactions.filter((entry) => entry.personId === person.id) : [];
+      const currentNet = person ? computeNetBalance(baseTransactions) : 0;
+      const baseNet = editableOriginal ? applyTransactionOnNet(currentNet, editableOriginal.type, -editableOriginal.amount) : currentNet;
+      const parsedAmount = parseAmountInput(ui.transactionAmount);
+      const projectedNet = Number.isFinite(parsedAmount) && parsedAmount > 0
+        ? applyTransactionOnNet(baseNet, ui.transactionType, parsedAmount)
+        : baseNet;
+
+      elements.transactionModalEyebrow.textContent = ui.editingTransactionId ? "تعديل حركة" : "حركة جديدة";
+      elements.transactionModalTitle.textContent = ui.editingTransactionId ? "تعديل الحركة" : "إضافة حركة";
+      elements.transactionPersonRow.innerHTML = balances.map((entry) => createTinyChip(entry.name, ui.transactionPersonId === entry.id, `transaction-person:${entry.id}`)).join("");
+      elements.transactionTypeRow.innerHTML = transactionTypes.map((option) => createTinyChip(option.label, ui.transactionType === option.value, `transaction-type:${option.value}`)).join("");
+      elements.transactionCurrencyRow.innerHTML = currencies.map((option) => createTinyChip(option.label, state.settings.currency === option.value, `transaction-currency:${option.value}`)).join("");
+      elements.quickAmountRow.innerHTML = quickAmountOptions.map((value) => createTinyChip(formatAmount(value), false, `quick-amount:${value}`)).join("");
+      elements.quickDateRow.innerHTML = [
+        createTinyChip("اليوم", false, "quick-date:today"),
+        createTinyChip("أمس", false, "quick-date:yesterday")
+      ].join("");
+      elements.quickNoteRow.innerHTML = quickNoteOptions.map((note) => createTinyChip(note, false, `quick-note:${note}`)).join("");
+      elements.transactionAmountInput.value = ui.transactionAmount;
+      elements.transactionDateInput.value = ui.transactionDate;
+      elements.transactionNoteInput.value = ui.transactionNote;
+
+      elements.transactionPreviewCard.innerHTML = person ? `
+        <h4>معاينة حساب ${escapeHtml(person.name)}</h4>
+        <p class="note">الوضع الحالي: ${getBalanceLabel(baseNet)} • ${formatAmount(Math.abs(baseNet))}</p>
+        <p class="note">بعد الحفظ: ${getBalanceLabel(projectedNet)} • ${formatAmount(Math.abs(projectedNet))}</p>
+        <p class="tiny-help">${getTransactionTypeHint(ui.transactionType)}</p>
+      ` : `
+        <h4>اختر شخصًا للمعاينة</h4>
+        <p class="tiny-help">حدد الشخص أولًا، وبعدها سترى الرصيد قبل وبعد الحركة.</p>
+      `;
+
+      document.querySelectorAll("[data-action^='transaction-person:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionPersonId = button.dataset.action.split(":")[1];
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='transaction-type:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionType = button.dataset.action.split(":")[1];
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='transaction-currency:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.settings.currency = button.dataset.action.split(":")[1];
+          persistState();
+          renderApp();
+          openModal("transactionModal");
+        });
+      });
+
+      document.querySelectorAll("[data-action^='quick-amount:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionAmount = normalizeAmountInput(button.dataset.action.split(":")[1]);
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action='quick-date:today']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionDate = todayString();
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action='quick-date:yesterday']").forEach((button) => {
+        button.addEventListener("click", () => {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          ui.transactionDate = yesterday.toISOString().slice(0, 10);
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='quick-note:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          const note = button.dataset.action.replace("quick-note:", "");
+          ui.transactionNote = ui.transactionNote.trim() ? `${ui.transactionNote} • ${note}` : note;
+          renderTransactionModal();
+        });
+      });
+    }
+
+    function renderTransactionPreview() {
+      renderTransactionModal();
+    }
+
+    function renderPersonDetail() {
+      const person = getSelectedPerson();
+      if (!person) {
+        return;
+      }
+
+      const transactions = sortTransactionsDesc(state.transactions.filter((item) => item.personId === person.id));
+      const timelineBalances = getTimelineBalances(transactions);
+      const net = computeNetBalance(transactions);
+      const stats = {
+        lent: transactions.filter((item) => item.type === "lentToHim").reduce((sum, item) => sum + item.amount, 0),
+        collected: transactions.filter((item) => item.type === "collectedFromHim").reduce((sum, item) => sum + item.amount, 0),
+        borrowed: transactions.filter((item) => item.type === "borrowedFromHim").reduce((sum, item) => sum + item.amount, 0),
+        paid: transactions.filter((item) => item.type === "paidToHim").reduce((sum, item) => sum + item.amount, 0)
+      };
+      const lastTransaction = transactions[0] ?? null;
+      const suggestion = net > 0
+        ? "ذكره بدفعة قريبة أو سجّل أي مبلغ رجعلك مباشرة."
+        : net < 0
+          ? "إذا دفعت له أي جزء، سجله فورًا حتى يبقى الرصيد صحيحًا."
+          : "الحساب مسكر حاليًا. فقط راقب أي حركة جديدة وسجلها مباشرة.";
+
+      const filteredTransactions = transactions.filter((item) => {
+        const query = ui.personDetailSearch.trim().toLowerCase();
+        const matchesQuery = !query ||
+          getTransactionLabel(item.type).toLowerCase().includes(query) ||
+          item.date.includes(query) ||
+          String(item.amount).includes(query) ||
+          (item.note ?? "").toLowerCase().includes(query);
+        if (!matchesQuery) return false;
+        return ui.personDetailFilter === "all" ? true : item.type === ui.personDetailFilter;
+      });
+
+      elements.detailPersonName.textContent = person.name;
+      elements.detailHero.innerHTML = `
+        <p class="eyebrow">الرصيد الحالي</p>
+        <h3 class="person-name">${getBalanceLabel(net)}</h3>
+        <p class="muted">التصنيف المالي: ${getBalanceRole(net)}</p>
+        <div class="detail-amount">${formatAmount(Math.abs(net))}</div>
+        <p class="note">الخطوة التالية: ${suggestion}</p>
+        ${lastTransaction ? `<p class="note">آخر حركة: ${getTransactionLabel(lastTransaction.type)} • ${formatDisplayDate(lastTransaction.date)}</p>` : ""}
+        ${person.note ? `<p class="note">${escapeHtml(person.note)}</p>` : ""}
+        ${person.phone ? `<p class="note">الهاتف: ${escapeHtml(person.phone)}</p>` : ""}
+      `;
+
+      elements.detailStats.innerHTML = [
+        detailStatHtml("أعطيته بالمجموع", formatAmount(stats.lent), "green"),
+        detailStatHtml("رجعلي بالمجموع", formatAmount(stats.collected), "blue"),
+        detailStatHtml("أخذت منه بالمجموع", formatAmount(stats.borrowed), "red"),
+        detailStatHtml("دفعته إله بالمجموع", formatAmount(stats.paid), "gold")
+      ].join("");
+
+      elements.detailTransactionsSubtitle.textContent = `${filteredTransactions.length} من أصل ${transactions.length} حركة`;
+      elements.detailSearchInput.value = ui.personDetailSearch;
+      elements.detailFilterRow.innerHTML = createDetailFilterChips();
+
+      if (transactions.length === 0) {
+        elements.detailTransactionsList.innerHTML = createEmpty("لا توجد حركات لهذا الشخص بعد", "أضف أول حركة من الزر الموجود فوق.");
+      } else if (filteredTransactions.length === 0) {
+        elements.detailTransactionsList.innerHTML = createEmpty("لا توجد نتائج مطابقة", "غيّر البحث أو الفلتر الحالي.");
+      } else {
+        elements.detailTransactionsList.innerHTML = filteredTransactions.map((item) => {
+          const balanceAfter = timelineBalances.get(item.id) ?? 0;
+          return `
+            <button class="transaction-card" data-transaction-edit="${item.id}">
+              <div class="person-head">
+                <span class="balance-pill ${getTone(item.type)}">${getTransactionLabel(item.type)}</span>
+                <strong>${formatAmount(item.amount)}</strong>
+              </div>
+              <p class="muted">${formatDisplayDate(item.date)}</p>
+              <p class="note">الرصيد بعد هذه الحركة: ${formatAmount(Math.abs(balanceAfter))} • ${getBalanceLabel(balanceAfter)} • ${getBalanceRole(balanceAfter)}</p>
+              ${item.note ? `<p class="muted">${escapeHtml(item.note)}</p>` : ""}
+              <div class="inline-row" style="justify-content: end;">
+                <button class="chip danger" type="button" data-transaction-delete="${item.id}">حذف الحركة</button>
+              </div>
+            </button>
+          `;
+        }).join("");
+      }
+
+      document.querySelectorAll("[data-action^='detail-filter:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.personDetailFilter = button.dataset.action.split(":")[1];
+          renderPersonDetail();
+        });
+      });
+
+      bindTransactionEdit();
+      bindTransactionDelete();
+    }
+
+    function savePerson() {
+      const name = elements.personNameInput.value.trim();
+      if (!name) {
+        alert("اكتب اسم الشخص قبل الحفظ.");
+        return;
+      }
+
+      if (ui.editingPersonId) {
+        state.people = state.people.map((person) => person.id === ui.editingPersonId ? {
+          ...person,
+          name,
+          phone: elements.personPhoneInput.value.trim() || undefined,
+          note: elements.personNoteInput.value.trim() || undefined
+        } : person);
+      } else {
+        state.people.unshift({
+          id: createId("person"),
+          name,
+          phone: elements.personPhoneInput.value.trim() || undefined,
+          note: elements.personNoteInput.value.trim() || undefined,
+          createdAt: todayString()
+        });
+      }
+
+      blurActiveElement();
+      closeModal("personModal");
+      resetPersonForm();
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      showToast(ui.editingPersonId ? "تم تعديل الشخص وحفظه." : "تمت إضافة الشخص وحفظه.");
+    }
+
+    function saveTransaction() {
+      if (!ui.transactionPersonId) {
+        alert("اختر شخصًا قبل حفظ الحركة.");
+        return;
+      }
+
+      const amount = parseAmountInput(ui.transactionAmount);
+      if (!Number.isFinite(amount) || amount <= 0) {
+        alert("أدخل مبلغًا صحيحًا أكبر من صفر.");
+        return;
+      }
+
+      const normalizedDate = normalizeTransactionDateInput(ui.transactionDate);
+      if (!normalizedDate) {
+        alert("اكتب التاريخ بهذا الشكل: 2026-07-21 أو 21/07/2026");
+        return;
+      }
+
+      if (ui.editingTransactionId) {
+        state.transactions = state.transactions.map((item) => item.id === ui.editingTransactionId ? {
+          ...item,
+          personId: ui.transactionPersonId,
+          type: ui.transactionType,
+          amount,
+          date: normalizedDate,
+          note: ui.transactionNote.trim() || undefined
+        } : item);
+      } else {
+        state.transactions.unshift({
+          id: createId("tx"),
+          personId: ui.transactionPersonId,
+          type: ui.transactionType,
+          amount,
+          date: normalizedDate,
+          note: ui.transactionNote.trim() || undefined,
+          createdAt: new Date().toISOString()
+        });
+      }
+
+      ui.selectedPersonId = ui.transactionPersonId;
+      blurActiveElement();
+      closeModal("transactionModal");
+      resetTransactionForm();
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      openModal("personDetailModal");
+      showToast(ui.editingTransactionId ? "تم تعديل الحركة وحفظها." : "تمت إضافة الحركة وحفظها.");
+    }
+
+    function openPersonModal(personId = null) {
+      ui.editingPersonId = personId;
+      if (personId) {
+        const person = state.people.find((entry) => entry.id === personId);
+        elements.personNameInput.value = person?.name ?? "";
+        elements.personPhoneInput.value = person?.phone ?? "";
+        elements.personNoteInput.value = person?.note ?? "";
+      } else {
+        resetPersonForm();
+      }
+      renderPersonModal();
+      openModal("personModal");
+      requestAnimationFrame(() => elements.personNameInput.focus());
+    }
+
+    function openTransactionModal(personId = null, transactionId = null) {
+      ui.editingTransactionId = transactionId;
+      if (transactionId) {
+        const item = state.transactions.find((entry) => entry.id === transactionId);
+        if (!item) return;
+        ui.transactionPersonId = item.personId;
+        ui.transactionType = item.type;
+        ui.transactionAmount = String(item.amount);
+        ui.transactionDate = item.date;
+        ui.transactionNote = item.note ?? "";
+      } else {
+        resetTransactionForm(personId ?? ui.selectedPersonId);
+      }
+
+      renderTransactionModal();
+      openModal("transactionModal");
+      requestAnimationFrame(() => elements.transactionAmountInput.focus());
+    }
+
+    function openPersonDetail(personId) {
+      ui.selectedPersonId = personId;
+      ui.personDetailSearch = "";
+      ui.personDetailFilter = "all";
+      renderPersonDetail();
+      openModal("personDetailModal");
+    }
+
+    function deletePerson(personId) {
+      const person = state.people.find((entry) => entry.id === personId);
+      if (!person) return;
+      if (!confirm(`هل تريد حذف ${person.name} وكل الحركات المرتبطة به؟`)) return;
+      state.people = state.people.filter((entry) => entry.id !== personId);
+      state.transactions = state.transactions.filter((entry) => entry.personId !== personId);
+      ui.selectedPersonId = null;
+      closeModal("personDetailModal");
+      persistState();
+      renderApp();
+      showToast("تم حذف الشخص وكل حركاته.");
+    }
+
+    function deleteTransaction(transactionId) {
+      if (!confirm("هل تريد حذف هذه الحركة نهائيًا؟")) return;
+      state.transactions = state.transactions.filter((entry) => entry.id !== transactionId);
+      persistState();
+      renderApp();
+      showToast("تم حذف الحركة.");
+    }
+
+    function restoreDemoData() {
+      if (!confirm("سيتم استبدال البيانات الحالية ببيانات تجريبية. هل تريد المتابعة؟")) return;
+      state.people = JSON.parse(JSON.stringify(demoPeople));
+      state.transactions = JSON.parse(JSON.stringify(demoTransactions));
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      showToast("تمت إعادة البيانات التجريبية.");
+    }
+
+    function clearAllData() {
+      if (!confirm("سيتم حذف كل الأشخاص والحركات من الجهاز. هل أنت متأكد؟")) return;
+      state.people = [];
+      state.transactions = [];
+      ui.selectedPersonId = null;
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      closeModal("personDetailModal");
+      showToast("تم مسح كل البيانات من هذا الجهاز.");
+    }
+
+    function exportBackup() {
+      const payload = JSON.stringify(state, null, 2);
+      downloadFile(`eli-walay-backup-${Date.now()}.json`, payload, "application/json");
+      state.settings.lastExportedAt = new Date().toISOString();
+      persistState();
+      renderSettings();
+      showToast("تم تصدير النسخة الاحتياطية بنجاح.");
+    }
+
+    function exportReport() {
+      const balances = getPeopleWithBalances();
+      const totalClaims = balances.filter((person) => person.net > 0).reduce((sum, person) => sum + person.net, 0);
+      const totalDebts = balances.filter((person) => person.net < 0).reduce((sum, person) => sum + Math.abs(person.net), 0);
+      const net = totalClaims - totalDebts;
+
+      const lines = [
+        "تقرير تطبيق إلي وعليّ",
+        `التاريخ: ${formatDisplayDate(todayString())}`,
+        "",
+        `إجمالي إلي: ${formatAmount(totalClaims)}`,
+        `إجمالي عليّ: ${formatAmount(totalDebts)}`,
+        `الصافي: ${formatAmount(Math.abs(net))} ${net > 0 ? "(لصالحي)" : net < 0 ? "(عليّ)" : "(متوازن)"}`,
+        "",
+        "الأشخاص:",
+        ...balances.map((person) => `- ${person.name}: ${getBalanceLabel(person.net)} ${formatAmount(Math.abs(person.net))}`),
+        "",
+        "آخر الحركات:",
+        ...sortTransactionsDesc(state.transactions).slice(0, 8).map((item) => {
+          const person = state.people.find((entry) => entry.id === item.personId);
+          return `- ${person?.name ?? "شخص غير معروف"} | ${getTransactionLabel(item.type)} | ${formatAmount(item.amount)} | ${formatDisplayDate(item.date)}${item.note ? ` | ${item.note}` : ""}`;
+        })
+      ];
+
+      downloadFile(`eli-walay-report-${Date.now()}.txt`, lines.join("\n"), "text/plain;charset=utf-8");
+      state.settings.lastExportedAt = new Date().toISOString();
+      persistState();
+      renderSettings();
+      showToast("تم تصدير التقرير النصي.");
+    }
+
+    async function importBackup(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      try {
+        const raw = await file.text();
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed.people) || !Array.isArray(parsed.transactions) || !parsed.settings) {
+          alert("هذا الملف لا يبدو نسخة صحيحة من التطبيق.");
+          return;
+        }
+
+        if (!confirm("سيتم استبدال البيانات الحالية بالنسخة المستوردة. هل تريد المتابعة؟")) {
+          return;
+        }
+
+        state = {
+          ...defaultState,
+          ...parsed,
+          settings: {
+            ...defaultState.settings,
+            ...(parsed.settings || {}),
+            exchangeRates: {
+              ...defaultState.settings.exchangeRates,
+              ...(parsed.settings?.exchangeRates || {})
+            },
+            exchangeRatesMeta: {
+              ...defaultState.settings.exchangeRatesMeta,
+              ...(parsed.settings?.exchangeRatesMeta || {})
+            }
+          },
+          meta: { ...defaultState.meta, ...(parsed.meta || {}), lastLocalSaveAt: new Date().toISOString() }
+        };
+        persistState();
+        renderApp();
+        showToast("تم استيراد النسخة الاحتياطية بنجاح.");
+      } catch {
+        alert("تعذر قراءة الملف. تأكد أنه JSON صحيح من نفس التطبيق.");
+      } finally {
+        event.target.value = "";
+      }
+    }
+
+    function showAddToHomeInfo() {
+      showToast("على الآيفون: افتح الرابط في Safari ثم Share ثم Add to Home Screen.");
+    }
+
+    function resetPersonForm() {
+      ui.editingPersonId = null;
+      elements.personNameInput.value = "";
+      elements.personPhoneInput.value = "";
+      elements.personNoteInput.value = "";
+    }
+
+    function resetTransactionForm(personId = null) {
+      ui.editingTransactionId = null;
+      ui.transactionPersonId = personId ?? getPeopleWithBalances()[0]?.id ?? null;
+      ui.transactionType = "lentToHim";
+      ui.transactionAmount = "";
+      ui.transactionDate = todayString();
+      ui.transactionNote = "";
+    }
+
+    function getPeopleWithBalances() {
+      return state.people.map((person) => {
+        const personTransactions = state.transactions.filter((item) => item.personId === person.id);
+        const lastTransactionDate = sortTransactionsDesc(personTransactions)[0]?.date ?? null;
+        return {
+          ...person,
+          net: computeNetBalance(personTransactions),
+          transactionsCount: personTransactions.length,
+          lastTransactionDate
+        };
+      }).sort((a, b) => {
+        if (b.transactionsCount !== a.transactionsCount) {
+          return b.transactionsCount - a.transactionsCount;
+        }
+        return a.name.localeCompare(b.name, "ar");
+      });
+    }
+
+    function getFilteredPeople(balances) {
+      return balances.filter((person) => {
+        const query = ui.searchQuery.trim().toLowerCase();
+        const matchesQuery = !query ||
+          person.name.toLowerCase().includes(query) ||
+          (person.phone ?? "").includes(query) ||
+          (person.note ?? "").toLowerCase().includes(query);
+        if (!matchesQuery) return false;
+        if (ui.personFilter === "claims") return person.net > 0;
+        if (ui.personFilter === "debts") return person.net < 0;
+        if (ui.personFilter === "closed") return person.net === 0;
+        return true;
+      }).sort((a, b) => {
+        if (ui.personSort === "largest") return Math.abs(b.net) - Math.abs(a.net);
+        if (ui.personSort === "mostTransactions") return b.transactionsCount - a.transactionsCount;
+        if (ui.personSort === "name") return a.name.localeCompare(b.name, "ar");
+        return b.createdAt.localeCompare(a.createdAt);
+      });
+    }
+
+    function getReportData(balances) {
+      const today = todayString();
+      const currentMonth = today.slice(0, 7);
+      const transactions = state.transactions.filter((item) => {
+        if (ui.reportRange === "all") return true;
+        if (ui.reportRange === "month") return item.date.startsWith(currentMonth);
+        const start = new Date(`${today}T12:00:00`);
+        start.setDate(start.getDate() - 29);
+        return item.date >= start.toISOString().slice(0, 10);
+      });
+
+      const reportBalances = state.people.map((person) => {
+        const items = transactions.filter((entry) => entry.personId === person.id);
+        return {
+          ...person,
+          net: computeNetBalance(items),
+          transactionsCount: items.length
+        };
+      }).filter((person) => person.transactionsCount > 0);
+
+      const lent = transactions.filter((item) => item.type === "lentToHim").reduce((sum, item) => sum + item.amount, 0);
+      const collected = transactions.filter((item) => item.type === "collectedFromHim").reduce((sum, item) => sum + item.amount, 0);
+      const borrowed = transactions.filter((item) => item.type === "borrowedFromHim").reduce((sum, item) => sum + item.amount, 0);
+      const paid = transactions.filter((item) => item.type === "paidToHim").reduce((sum, item) => sum + item.amount, 0);
+      const netFlow = lent + paid - collected - borrowed;
+      const subtitle = ui.reportRange === "month" ? currentMonth : ui.reportRange === "30days" ? "آخر 30 يوم" : "كل البيانات";
+      const mostActive = [...reportBalances].sort((a, b) => b.transactionsCount - a.transactionsCount)[0] ?? null;
+      const lastActivityDate = sortTransactionsDesc(transactions)[0]?.date ?? null;
+      const insight =
+        transactions.length === 0
+          ? "لا توجد حركة في هذه الفترة بعد."
+          : netFlow > 0
+            ? "الفترة الحالية تميل لصالحك أكثر من الالتزامات."
+            : netFlow < 0
+              ? "الفترة الحالية فيها التزامات أكثر وتحتاج متابعة."
+              : "الفترة الحالية متوازنة تقريبًا بين الداخل والخارج.";
+
+      return {
+        subtitle,
+        transactions,
+        lent,
+        collected,
+        borrowed,
+        paid,
+        netFlow,
+        mostActive,
+        lastActivityDate,
+        insight,
+        topClaims: reportBalances.filter((person) => person.net > 0).sort((a, b) => b.net - a.net).slice(0, 3),
+        topDebts: reportBalances.filter((person) => person.net < 0).sort((a, b) => a.net - b.net).slice(0, 3)
+      };
+    }
+
+    function getSelectedPerson() {
+      return state.people.find((person) => person.id === ui.selectedPersonId) ?? null;
+    }
+
+    function createRateField(code, label, value) {
+      return `
+        <div class="stack" style="gap: 8px;">
+          <label class="helper">1 ${label} = كم شيكل؟</label>
+          <input
+            class="text-input"
+            data-rate-code="${code}"
+            value="${escapeHtml(String(value ?? ""))}"
+            inputmode="decimal"
+            placeholder="أدخل السعر"
+          />
+        </div>
+      `;
+    }
+
+    function createSummaryCard(label, value, hint, tone) {
+      return `<div class="summary-card" data-tone="${tone}"><span>${label}</span><strong>${value}</strong><p class="muted">${hint}</p></div>`;
+    }
+
+    function createPanelCard(label, value) {
+      return `<div class="panel-card"><span>${label}</span><strong>${value}</strong></div>`;
+    }
+
+    function createEmpty(title, text) {
+      return `<div class="empty-block"><h3>${title}</h3><p class="muted">${text}</p></div>`;
+    }
+
+    function createFilterChip(label, isActive, action) {
+      return `<button class="filter-chip ${isActive ? "active" : ""}" data-action="${action}" type="button">${label}</button>`;
+    }
+
+    function createTinyChip(label, isActive, action) {
+      return `<button class="tiny-chip ${isActive ? "active" : ""}" data-action="${action}" type="button">${label}</button>`;
+    }
+
+    function createDetailFilterChips() {
+      const options = [{ value: "all", label: "الكل" }, ...transactionTypes.map((item) => ({ value: item.value, label: item.label }))];
+      return options.map((option) => createFilterChip(option.label, ui.personDetailFilter === option.value, `detail-filter:${option.value}`)).join("");
+    }
+
+    function detailStatHtml(label, value, tone) {
+      return `<div class="detail-stat ${tone}"><span>${label}</span><strong>${value}</strong></div>`;
+    }
+
+    function personRowHtml(personId, name, subtitle, amount) {
+      return `
+        <button class="person-card" data-person-open="${personId}">
+          <div class="person-head">
+            <strong class="person-name">${escapeHtml(name)}</strong>
+            <strong>${amount}</strong>
+          </div>
+          <p class="muted">${escapeHtml(subtitle)}</p>
+        </button>
+      `;
+    }
+
+    function bindPeopleOpen() {
+      document.querySelectorAll("[data-person-open]").forEach((button) => {
+        button.addEventListener("click", () => openPersonDetail(button.dataset.personOpen));
+      });
+    }
+
+    function bindTransactionEdit() {
+      document.querySelectorAll("[data-transaction-edit]").forEach((button) => {
+        button.addEventListener("click", () => {
+          closeModal("personDetailModal");
+          openTransactionModal(null, button.dataset.transactionEdit);
+        });
+      });
+    }
+
+    function bindTransactionDelete() {
+      document.querySelectorAll("[data-transaction-delete]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          deleteTransaction(button.dataset.transactionDelete);
+        });
+      });
+    }
+
+    function openModal(id) {
+      document.getElementById(id).hidden = false;
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).hidden = true;
+      if (id === "personModal") resetPersonForm();
+      if (id === "transactionModal") resetTransactionForm(ui.selectedPersonId);
+    }
+
+    function persistState() {
+      ui.saveState = "saving";
+      updateSavePill();
+      try {
+        state.meta.lastLocalSaveAt = new Date().toISOString();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        ui.saveState = "saved";
+      } catch {
+        ui.saveState = "error";
+      }
+      updateSavePill();
+      if (ui.activeTab === "home") renderHome();
+      if (ui.activeTab === "settings") renderSettings();
+    }
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return structuredClone(defaultState);
+        const parsed = JSON.parse(raw);
+        return {
+          ...structuredClone(defaultState),
+          ...parsed,
+          settings: {
+            ...structuredClone(defaultState).settings,
+            ...(parsed.settings || {}),
+            exchangeRates: {
+              ...structuredClone(defaultState).settings.exchangeRates,
+              ...(parsed.settings?.exchangeRates || {})
+            },
+            exchangeRatesMeta: {
+              ...structuredClone(defaultState).settings.exchangeRatesMeta,
+              ...(parsed.settings?.exchangeRatesMeta || {})
+            }
+          },
+          meta: { ...structuredClone(defaultState).meta, ...(parsed.meta || {}) }
+        };
+      } catch {
+        return structuredClone(defaultState);
+      }
+    }
+
+    function updateSavePill() {
+      const text = ui.saveState === "saving"
+        ? "جاري الحفظ"
+        : ui.saveState === "error"
+          ? "في مشكلة"
+          : state.meta.lastLocalSaveAt
+            ? `محفوظ ${formatDisplayDateTime(state.meta.lastLocalSaveAt)}`
+            : "بانتظار أول حفظ";
+      elements.saveStatePill.textContent = text;
+      elements.saveStatePill.dataset.state = ui.saveState;
+    }
+
+    function formatAmount(value) {
+      const currency = currencies.find((item) => item.value === state.settings.currency) ?? currencies[0];
+      return `${new Intl.NumberFormat("ar").format(value)} ${currency.suffix}`;
+    }
+
+    function formatAmountByCurrency(value, currencyCode) {
+      const currency = currencies.find((item) => item.value === currencyCode) ?? currencies[0];
+      return `${new Intl.NumberFormat("ar").format(value)} ${currency.suffix}`;
+    }
+
+    function formatDisplayDate(date) {
+      if (!date) return "-";
+      if (state.settings.dateStyle === "iso") return date;
+      const [year, month, day] = date.split("-");
+      return `${Number(day)}/${month}/${year}`;
+    }
+
+    function formatDisplayDateTime(value) {
+      const date = new Date(value);
+      const day = date.getDate();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+
+    function normalizeTransactionDateInput(value) {
+      const trimmed = value.trim();
+      if (!trimmed) return null;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
+      const match = trimmed.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!match) return null;
+      const day = Number(match[1]);
+      const month = Number(match[2]);
+      const year = match[3];
+      if (day < 1 || day > 31 || month < 1 || month > 12) return null;
+      return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    }
+
+    function normalizeAmountInput(value) {
+      return value.replace(",", ".").replace(/[^0-9.]/g, "");
+    }
+
+    function parseAmountInput(value) {
+      const normalized = normalizeAmountInput(value);
+      const parts = normalized.split(".");
+      const safe = parts.length <= 2 ? normalized : `${parts[0]}.${parts.slice(1).join("")}`;
+      return Number(safe);
+    }
+
+    function computeNetBalance(items) {
+      return items.reduce((total, item) => applyTransactionOnNet(total, item.type, item.amount), 0);
+    }
+
+    function applyTransactionOnNet(net, type, amount) {
+      if (type === "lentToHim") return net + amount;
+      if (type === "collectedFromHim") return net - amount;
+      if (type === "borrowedFromHim") return net - amount;
+      if (type === "paidToHim") return net + amount;
+      return net;
+    }
+
+    function getBalanceLabel(net) {
+      if (net > 0) return "إلك عليه";
+      if (net < 0) return "عليك إله";
+      return "الحساب مسكر";
+    }
+
+    function getBalanceRole(net) {
+      if (net > 0) return "دائن";
+      if (net < 0) return "مدين";
+      return "مسكر";
+    }
+
+    function getTransactionLabel(type) {
+      return transactionTypes.find((item) => item.value === type)?.label ?? type;
+    }
+
+    function getTransactionTypeHint(type) {
+      if (type === "lentToHim") return "يزيد المبلغ الذي لك عليه.";
+      if (type === "collectedFromHim") return "ينقص المبلغ الذي لك عليه.";
+      if (type === "borrowedFromHim") return "يزيد المبلغ الذي عليك إله.";
+      if (type === "paidToHim") return "ينقص المبلغ الذي عليك إله.";
+      return "";
+    }
+
+    function getTone(type) {
+      return transactionTypes.find((item) => item.value === type)?.tone ?? "gold";
+    }
+
+    function getToneByNet(net) {
+      if (net > 0) return "green";
+      if (net < 0) return "red";
+      return "gold";
+    }
+
+    function createId(prefix) {
+      return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+    }
+
+    async function fetchMarketRates(force = false) {
+      if (ui.ratesLoading) return;
+      const lastFetchedAt = state.settings.exchangeRatesMeta?.lastFetchedAt;
+      const recentlyFetched = lastFetchedAt && (Date.now() - new Date(lastFetchedAt).getTime()) < 30 * 60 * 1000;
+      if (!force && recentlyFetched) return;
+
+      ui.ratesLoading = true;
+      if (ui.activeTab === "settings") renderSettings();
+
+      try {
+        const pairs = ["USD", "JOD", "EUR"];
+        const responses = await Promise.all(
+          pairs.map((code) =>
+            fetch(`https://api.frankfurter.dev/v2/rate/${code}/ILS?providers=BOI`, {
+              headers: { Accept: "application/json" }
+            }).then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+              }
+              return response.json();
+            })
+          )
+        );
+
+        const nextRates = { USD: null, JOD: null, EUR: null };
+        const lastUpdates = [];
+
+        responses.forEach((payload) => {
+          const code = payload?.base;
+          const value = Number(payload?.rate);
+          if (pairs.includes(code) && Number.isFinite(value) && value > 0) {
+            nextRates[code] = value;
+            if (payload?.date) {
+              lastUpdates.push(`${payload.date}T00:00:00`);
+            }
+          }
+        });
+
+        if (!nextRates.USD || !nextRates.JOD || !nextRates.EUR) {
+          throw new Error("Missing rates");
+        }
+
+        state.settings.exchangeRates = nextRates;
+        state.settings.exchangeRatesMeta = {
+          source: "frankfurter-boi",
+          lastFetchedAt: lastUpdates.sort().at(-1) ?? new Date().toISOString(),
+          lastAttemptAt: new Date().toISOString(),
+          error: null
+        };
+        persistState();
+        if (ui.activeTab === "settings") renderSettings();
+        showToast("تم جلب سعر العملات بنجاح.");
+      } catch {
+        state.settings.exchangeRatesMeta = {
+          ...(state.settings.exchangeRatesMeta || {}),
+          lastAttemptAt: new Date().toISOString(),
+          error: "fetch_failed"
+        };
+        persistState();
+        if (ui.activeTab === "settings") renderSettings();
+        showToast("تعذر جلب السعر الآن.");
+      } finally {
+        ui.ratesLoading = false;
+        if (ui.activeTab === "settings") renderSettings();
+      }
+    }
+
+    function renderConverterResult() {
+      if (!elements.converterResult) return;
+      const amount = parseAmountInput(ui.converterAmount);
+      const rate = Number(state.settings.exchangeRates?.[ui.converterCurrency] ?? 0);
+      if (!Number.isFinite(amount) || amount <= 0 || !Number.isFinite(rate) || rate <= 0) {
+        elements.converterResult.textContent = "حدّث السعر أولًا";
+        return;
+      }
+      elements.converterResult.textContent = formatAmountByCurrency(amount * rate, "ILS");
+    }
+
+    function getExchangeRatesStatusText() {
+      if (ui.ratesLoading) return "جارٍ جلب السعر الرسمي...";
+      const meta = state.settings.exchangeRatesMeta || {};
+      if (meta.source === "frankfurter-boi" && meta.lastFetchedAt) {
+        return `آخر سعر مجلوب من Frankfurter عبر بيانات BOI: ${formatDisplayDate(meta.lastFetchedAt.slice(0, 10))}`;
+      }
+      if (meta.source === "manual") {
+        return "الأسعار الحالية يدوية.";
+      }
+      if (meta.error === "fetch_failed") {
+        return "تعذر جلب السعر الآن. جرّب زر التحديث مرة ثانية.";
+      }
+      return "بانتظار أول جلب من المصدر.";
+    }
+
+    function getTransactionSortValue(item) {
+      return `${item.date || "0000-00-00"}T${item.createdAt || "0000-00-00T00:00:00"}`;
+    }
+
+    function sortTransactionsAsc(items) {
+      return [...items].sort((a, b) => getTransactionSortValue(a).localeCompare(getTransactionSortValue(b)));
+    }
+
+    function sortTransactionsDesc(items) {
+      return [...items].sort((a, b) => getTransactionSortValue(b).localeCompare(getTransactionSortValue(a)));
+    }
+
+    function getTimelineBalances(descTransactions) {
+      const balances = new Map();
+      let running = 0;
+      sortTransactionsAsc(descTransactions).forEach((item) => {
+        running = applyTransactionOnNet(running, item.type, item.amount);
+        balances.set(item.id, running);
+      });
+      return balances;
+    }
+
+    function blurActiveElement() {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }
+
+    let toastTimer = null;
+
+    function showToast(message) {
+      if (!elements.toast) return;
+      elements.toast.textContent = message;
+      elements.toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        elements.toast.classList.remove("show");
+      }, 2400);
+    }
+
+    function todayString() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function structuredClone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function downloadFile(name, content, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function registerServiceWorker() {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      }
+    }
+  </script>
+</body>
+</html>
