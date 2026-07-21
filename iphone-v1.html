@@ -774,11 +774,11 @@
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
               <h2>سعر العملات</h2>
-              <p>تحديث تلقائي من سعر السوق الرسمي، مع إمكانية التعديل اليدوي عند الحاجة</p>
+              <p>جلب مباشر من بنك إسرائيل، ولن نعرضه كسعر رسمي إلا بعد وصوله فعلًا</p>
             </div>
             <button class="chip primary" id="refreshRatesButton" type="button">تحديث السعر</button>
           </div>
-          <p class="note" id="exchangeRatesStatus">بانتظار أول تحديث.</p>
+          <p class="note" id="exchangeRatesStatus">بانتظار أول جلب من المصدر الرسمي.</p>
           <div class="field-grid" id="exchangeRatesFields"></div>
           <div class="preview-card" style="margin-top: 14px;">
             <div class="stack" style="gap: 10px;">
@@ -1018,13 +1018,15 @@
         currency: "ILS",
         dateStyle: "arabic",
         exchangeRates: {
-          USD: 3.65,
-          JOD: 5.15,
-          EUR: 4.10
+          USD: null,
+          JOD: null,
+          EUR: null
         },
         exchangeRatesMeta: {
-          source: "manual",
-          lastFetchedAt: null
+          source: "none",
+          lastFetchedAt: null,
+          lastAttemptAt: null,
+          error: null
         },
         lastExportedAt: null
       },
@@ -1521,7 +1523,9 @@
           state.settings.exchangeRates[code] = Number.isFinite(value) && value > 0 ? value : 0;
           state.settings.exchangeRatesMeta = {
             source: "manual",
-            lastFetchedAt: state.settings.exchangeRatesMeta?.lastFetchedAt ?? null
+            lastFetchedAt: state.settings.exchangeRatesMeta?.lastFetchedAt ?? null,
+            lastAttemptAt: state.settings.exchangeRatesMeta?.lastAttemptAt ?? null,
+            error: null
           };
           persistState();
           renderConverterResult();
@@ -2362,27 +2366,47 @@
 
         const payload = await response.json();
         const rows = Array.isArray(payload?.exchangeRates) ? payload.exchangeRates : [];
-        const nextRates = { ...(state.settings.exchangeRates || {}) };
+        if (!rows.length) {
+          throw new Error("No rows");
+        }
+
+        const nextRates = { USD: null, JOD: null, EUR: null };
+        const lastUpdates = [];
 
         ["USD", "JOD", "EUR"].forEach((code) => {
           const row = rows.find((item) => item.key === code);
           const value = Number(row?.currentExchangeRate);
           if (Number.isFinite(value) && value > 0) {
             nextRates[code] = value;
+            if (row?.lastUpdate) {
+              lastUpdates.push(row.lastUpdate);
+            }
           }
         });
+
+        if (!nextRates.USD || !nextRates.JOD || !nextRates.EUR) {
+          throw new Error("Missing official rates");
+        }
 
         state.settings.exchangeRates = nextRates;
         state.settings.exchangeRatesMeta = {
           source: "boi",
-          lastFetchedAt: new Date().toISOString()
+          lastFetchedAt: lastUpdates.sort().at(-1) ?? new Date().toISOString(),
+          lastAttemptAt: new Date().toISOString(),
+          error: null
         };
         persistState();
         if (ui.activeTab === "settings") renderSettings();
-        showToast("تم تحديث سعر السوق تلقائيًا.");
+        showToast("تم جلب السعر الرسمي من بنك إسرائيل.");
       } catch {
+        state.settings.exchangeRatesMeta = {
+          ...(state.settings.exchangeRatesMeta || {}),
+          lastAttemptAt: new Date().toISOString(),
+          error: "fetch_failed"
+        };
+        persistState();
         if (ui.activeTab === "settings") renderSettings();
-        showToast("تعذر جلب السعر الآن، بقي آخر سعر محفوظ.");
+        showToast("تعذر جلب السعر الرسمي الآن.");
       } finally {
         ui.ratesLoading = false;
         if (ui.activeTab === "settings") renderSettings();
@@ -2394,7 +2418,7 @@
       const amount = parseAmountInput(ui.converterAmount);
       const rate = Number(state.settings.exchangeRates?.[ui.converterCurrency] ?? 0);
       if (!Number.isFinite(amount) || amount <= 0 || !Number.isFinite(rate) || rate <= 0) {
-        elements.converterResult.textContent = "0 شيكل";
+        elements.converterResult.textContent = "حدّث السعر أولًا";
         return;
       }
       elements.converterResult.textContent = formatAmountByCurrency(amount * rate, "ILS");
@@ -2404,12 +2428,15 @@
       if (ui.ratesLoading) return "جارٍ جلب السعر الرسمي...";
       const meta = state.settings.exchangeRatesMeta || {};
       if (meta.source === "boi" && meta.lastFetchedAt) {
-        return `آخر تحديث تلقائي: ${formatDisplayDateTime(meta.lastFetchedAt)}`;
+        return `آخر سعر رسمي منشور من بنك إسرائيل: ${formatDisplayDateTime(meta.lastFetchedAt)}`;
       }
       if (meta.source === "manual") {
-        return "الأسعار الحالية يدوية، ويمكنك تحديثها تلقائيًا من الزر بالأعلى.";
+        return "الأسعار الحالية يدوية، وليست سعرًا رسميًا مباشرًا.";
       }
-      return "بانتظار أول تحديث.";
+      if (meta.error === "fetch_failed") {
+        return "تعذر جلب السعر الرسمي الآن. جرّب زر التحديث مرة ثانية.";
+      }
+      return "بانتظار أول جلب من المصدر الرسمي.";
     }
 
     function getTransactionSortValue(item) {
