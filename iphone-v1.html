@@ -774,11 +774,11 @@
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
               <h2>سعر العملات</h2>
-              <p>جلب مباشر من بنك إسرائيل، ولن نعرضه كسعر رسمي إلا بعد وصوله فعلًا</p>
+              <p>جلب تلقائي من مصدر ويب ثابت، مع أسعار بنك إسرائيل التمثيلية عندما تكون متاحة</p>
             </div>
             <button class="chip primary" id="refreshRatesButton" type="button">تحديث السعر</button>
           </div>
-          <p class="note" id="exchangeRatesStatus">بانتظار أول جلب من المصدر الرسمي.</p>
+          <p class="note" id="exchangeRatesStatus">بانتظار أول جلب من المصدر.</p>
           <div class="field-grid" id="exchangeRatesFields"></div>
           <div class="preview-card" style="margin-top: 14px;">
             <div class="stack" style="gap: 10px;">
@@ -2357,47 +2357,48 @@
       if (ui.activeTab === "settings") renderSettings();
 
       try {
-        const response = await fetch("https://boi.org.il/PublicApi/GetExchangeRates", {
-          headers: { Accept: "application/json" }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const payload = await response.json();
-        const rows = Array.isArray(payload?.exchangeRates) ? payload.exchangeRates : [];
-        if (!rows.length) {
-          throw new Error("No rows");
-        }
+        const pairs = ["USD", "JOD", "EUR"];
+        const responses = await Promise.all(
+          pairs.map((code) =>
+            fetch(`https://api.frankfurter.dev/v2/rate/${code}/ILS?providers=BOI`, {
+              headers: { Accept: "application/json" }
+            }).then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+              }
+              return response.json();
+            })
+          )
+        );
 
         const nextRates = { USD: null, JOD: null, EUR: null };
         const lastUpdates = [];
 
-        ["USD", "JOD", "EUR"].forEach((code) => {
-          const row = rows.find((item) => item.key === code);
-          const value = Number(row?.currentExchangeRate);
-          if (Number.isFinite(value) && value > 0) {
+        responses.forEach((payload) => {
+          const code = payload?.base;
+          const value = Number(payload?.rate);
+          if (pairs.includes(code) && Number.isFinite(value) && value > 0) {
             nextRates[code] = value;
-            if (row?.lastUpdate) {
-              lastUpdates.push(row.lastUpdate);
+            if (payload?.date) {
+              lastUpdates.push(`${payload.date}T00:00:00`);
             }
           }
         });
 
         if (!nextRates.USD || !nextRates.JOD || !nextRates.EUR) {
-          throw new Error("Missing official rates");
+          throw new Error("Missing rates");
         }
 
         state.settings.exchangeRates = nextRates;
         state.settings.exchangeRatesMeta = {
-          source: "boi",
+          source: "frankfurter-boi",
           lastFetchedAt: lastUpdates.sort().at(-1) ?? new Date().toISOString(),
           lastAttemptAt: new Date().toISOString(),
           error: null
         };
         persistState();
         if (ui.activeTab === "settings") renderSettings();
-        showToast("تم جلب السعر الرسمي من بنك إسرائيل.");
+        showToast("تم جلب سعر العملات بنجاح.");
       } catch {
         state.settings.exchangeRatesMeta = {
           ...(state.settings.exchangeRatesMeta || {}),
@@ -2427,16 +2428,16 @@
     function getExchangeRatesStatusText() {
       if (ui.ratesLoading) return "جارٍ جلب السعر الرسمي...";
       const meta = state.settings.exchangeRatesMeta || {};
-      if (meta.source === "boi" && meta.lastFetchedAt) {
-        return `آخر سعر رسمي منشور من بنك إسرائيل: ${formatDisplayDateTime(meta.lastFetchedAt)}`;
+      if (meta.source === "frankfurter-boi" && meta.lastFetchedAt) {
+        return `آخر سعر مجلوب من Frankfurter عبر بيانات BOI: ${formatDisplayDate(meta.lastFetchedAt.slice(0, 10))}`;
       }
       if (meta.source === "manual") {
-        return "الأسعار الحالية يدوية، وليست سعرًا رسميًا مباشرًا.";
+        return "الأسعار الحالية يدوية.";
       }
       if (meta.error === "fetch_failed") {
-        return "تعذر جلب السعر الرسمي الآن. جرّب زر التحديث مرة ثانية.";
+        return "تعذر جلب السعر الآن. جرّب زر التحديث مرة ثانية.";
       }
-      return "بانتظار أول جلب من المصدر الرسمي.";
+      return "بانتظار أول جلب من المصدر.";
     }
 
     function getTransactionSortValue(item) {
