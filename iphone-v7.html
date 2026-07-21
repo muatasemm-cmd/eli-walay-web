@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>إلي وعليّ | آيفون | v7</title>
+  <title>ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘ | ط¢ظٹظپظˆظ† | v7</title>
   <meta name="theme-color" content="#1f221b" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="إلي وعليّ" />
-  <meta name="description" content="نسخة ويب ثابتة من إلي وعليّ للآيفون، بحفظ محلي ونسخة احتياطية." />
+  <meta name="apple-mobile-web-app-title" content="ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘" />
+  <meta name="description" content="ظ†ط³ط®ط© ظˆظٹط¨ ط«ط§ط¨طھط© ظ…ظ† ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘ ظ„ظ„ط¢ظٹظپظˆظ†طŒ ط¨ط­ظپط¸ ظ…ط­ظ„ظٹ ظˆظ†ط³ط®ط© ط§ط­طھظٹط§ط·ظٹط©." />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="./app-icon.svg" />
@@ -605,13 +605,13 @@
     <header class="topbar">
       <div class="topbar-head">
         <div class="stack" style="gap: 6px;">
-          <p class="eyebrow">نسخة ويب ثابتة للآيفون</p>
-          <h1>إلي وعليّ</h1>
-          <p class="subtitle">ديونك، مستحقاتك، وحركاتك كلها في مكان واحد. تحفظ محليًا وتفتح كرابط ثابت من Safari.</p>
+          <p class="eyebrow">ظ†ط³ط®ط© ظˆظٹط¨ ط«ط§ط¨طھط© ظ„ظ„ط¢ظٹظپظˆظ†</p>
+          <h1>ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘</h1>
+          <p class="subtitle">ط¯ظٹظˆظ†ظƒطŒ ظ…ط³طھط­ظ‚ط§طھظƒطŒ ظˆط­ط±ظƒط§طھظƒ ظƒظ„ظ‡ط§ ظپظٹ ظ…ظƒط§ظ† ظˆط§ط­ط¯. طھط­ظپط¸ ظ…ط­ظ„ظٹظ‹ط§ ظˆطھظپطھط­ ظƒط±ط§ط¨ط· ط«ط§ط¨طھ ظ…ظ† Safari.</p>
         </div>
         <div class="stack" style="justify-items: end; gap: 8px;">
           <span class="version-badge">v7</span>
-          <span class="save-pill" id="saveStatePill" data-state="idle">بانتظار أول حفظ</span>
+          <span class="save-pill" id="saveStatePill" data-state="idle">ط¨ط§ظ†طھط¸ط§ط± ط£ظˆظ„ ط­ظپط¸</span>
         </div>
       </div>
     </header>
@@ -621,32 +621,32 @@
         <div class="hero">
           <div class="hero-head">
             <div class="stack" style="gap: 8px;">
-              <p class="eyebrow">لوحة اليوم</p>
-              <h2 class="hero-title">ابدأ من الصحيح</h2>
-              <p class="hero-subtitle" id="heroInsight">كل شيء تحت السيطرة، ومجرد لمستين تكفيان لإضافة أي حركة جديدة.</p>
+              <p class="eyebrow">ظ„ظˆط­ط© ط§ظ„ظٹظˆظ…</p>
+              <h2 class="hero-title">ط§ط¨ط¯ط£ ظ…ظ† ط§ظ„طµط­ظٹط­</h2>
+              <p class="hero-subtitle" id="heroInsight">ظƒظ„ ط´ظٹط، طھط­طھ ط§ظ„ط³ظٹط·ط±ط©طŒ ظˆظ…ط¬ط±ط¯ ظ„ظ…ط³طھظٹظ† طھظƒظپظٹط§ظ† ظ„ط¥ط¶ط§ظپط© ط£ظٹ ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©.</p>
             </div>
             <div class="stack" style="justify-items: end; gap: 10px;">
-              <button class="chip primary" id="quickAddTransaction">حركة جديدة</button>
-              <button class="chip chip-dark" id="quickAddPerson">شخص جديد</button>
+              <button class="chip primary" id="quickAddTransaction">ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©</button>
+              <button class="chip chip-dark" id="quickAddPerson">ط´ط®طµ ط¬ط¯ظٹط¯</button>
             </div>
           </div>
 
           <div class="metrics-grid">
             <div class="metric">
-              <span>عدد الأشخاص</span>
+              <span>ط¹ط¯ط¯ ط§ظ„ط£ط´ط®ط§طµ</span>
               <strong id="metricPeople">0</strong>
             </div>
             <div class="metric">
-              <span>حسابات مفتوحة</span>
+              <span>ط­ط³ط§ط¨ط§طھ ظ…ظپطھظˆط­ط©</span>
               <strong id="metricOpen">0</strong>
             </div>
             <div class="metric">
-              <span>عدد الحركات</span>
+              <span>ط¹ط¯ط¯ ط§ظ„ط­ط±ظƒط§طھ</span>
               <strong id="metricTransactions">0</strong>
             </div>
             <div class="metric">
-              <span>آخر حفظ</span>
-              <strong id="metricLastSave">لا يوجد</strong>
+              <span>ط¢ط®ط± ط­ظپط¸</span>
+              <strong id="metricLastSave">ظ„ط§ ظٹظˆط¬ط¯</strong>
             </div>
           </div>
         </div>
@@ -657,8 +657,8 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>أولوية اليوم</h2>
-              <p>هذه أكثر الحالات التي تحتاج متابعة الآن</p>
+              <h2>ط£ظˆظ„ظˆظٹط© ط§ظ„ظٹظˆظ…</h2>
+              <p>ظ‡ط°ظ‡ ط£ظƒط«ط± ط§ظ„ط­ط§ظ„ط§طھ ط§ظ„طھظٹ طھط­طھط§ط¬ ظ…طھط§ط¨ط¹ط© ط§ظ„ط¢ظ†</p>
             </div>
           </div>
           <div class="list-stack" id="priorityList"></div>
@@ -667,8 +667,8 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>آخر الحركات</h2>
-              <p>كل جديد مسجل مباشرة</p>
+              <h2>ط¢ط®ط± ط§ظ„ط­ط±ظƒط§طھ</h2>
+              <p>ظƒظ„ ط¬ط¯ظٹط¯ ظ…ط³ط¬ظ„ ظ…ط¨ط§ط´ط±ط©</p>
             </div>
           </div>
           <div class="list-stack" id="recentTransactionsList"></div>
@@ -679,17 +679,17 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>الأشخاص</h2>
-              <p>ابحث، فلتر، ورتب كما يناسبك</p>
+              <h2>ط§ظ„ط£ط´ط®ط§طµ</h2>
+              <p>ط§ط¨ط­ط«طŒ ظپظ„طھط±طŒ ظˆط±طھط¨ ظƒظ…ط§ ظٹظ†ط§ط³ط¨ظƒ</p>
             </div>
-            <button class="chip primary" id="peopleAddButton">+ شخص</button>
+            <button class="chip primary" id="peopleAddButton">+ ط´ط®طµ</button>
           </div>
 
           <div class="field-grid">
-            <input class="text-input" id="peopleSearch" placeholder="ابحث بالاسم أو الملاحظة أو الهاتف" enterkeyhint="search" autocapitalize="off" />
+            <input class="text-input" id="peopleSearch" placeholder="ط§ط¨ط­ط« ط¨ط§ظ„ط§ط³ظ… ط£ظˆ ط§ظ„ظ…ظ„ط§ط­ط¸ط© ط£ظˆ ط§ظ„ظ‡ط§طھظپ" enterkeyhint="search" autocapitalize="off" />
             <div class="filters-row" id="peopleFilterRow"></div>
             <div class="filters-row" id="peopleSortRow"></div>
-            <button class="chip chip-dark" id="resetPeopleFilters" hidden>إعادة ضبط البحث والفرز</button>
+            <button class="chip chip-dark" id="resetPeopleFilters" hidden>ط¥ط¹ط§ط¯ط© ط¶ط¨ط· ط§ظ„ط¨ط­ط« ظˆط§ظ„ظپط±ط²</button>
           </div>
         </div>
 
@@ -700,29 +700,29 @@
       <section class="screen" id="screen-reports">
         <div class="hero">
           <div class="stack" style="gap: 8px;">
-            <p class="eyebrow">تقارير ذكية</p>
-            <h2 class="hero-title" style="font-size: 2.1rem;">شوف الصورة كاملة</h2>
-            <p class="hero-subtitle">بدل ما تتعب تجمع الأرقام، التطبيق يلخص الفترة ويقول لك أين تركز.</p>
+            <p class="eyebrow">طھظ‚ط§ط±ظٹط± ط°ظƒظٹط©</p>
+            <h2 class="hero-title" style="font-size: 2.1rem;">ط´ظˆظپ ط§ظ„طµظˆط±ط© ظƒط§ظ…ظ„ط©</h2>
+            <p class="hero-subtitle">ط¨ط¯ظ„ ظ…ط§ طھطھط¹ط¨ طھط¬ظ…ط¹ ط§ظ„ط£ط±ظ‚ط§ظ…طŒ ط§ظ„طھط·ط¨ظٹظ‚ ظٹظ„ط®طµ ط§ظ„ظپطھط±ط© ظˆظٹظ‚ظˆظ„ ظ„ظƒ ط£ظٹظ† طھط±ظƒط².</p>
           </div>
         </div>
 
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>ملخص التقارير</h2>
-              <p id="reportsSubtitle">كل البيانات</p>
+              <h2>ظ…ظ„ط®طµ ط§ظ„طھظ‚ط§ط±ظٹط±</h2>
+              <p id="reportsSubtitle">ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ</p>
             </div>
           </div>
           <div class="filters-row" id="reportRangeRow"></div>
-          <p class="note" id="reportInsight">لا توجد حركة في هذه الفترة بعد.</p>
+          <p class="note" id="reportInsight">ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط© ظپظٹ ظ‡ط°ظ‡ ط§ظ„ظپطھط±ط© ط¨ط¹ط¯.</p>
           <div class="panel-grid" id="reportsGrid"></div>
         </div>
 
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>أعلى ناس إلك عليهم</h2>
-              <p>رتب التحصيل من الأعلى</p>
+              <h2>ط£ط¹ظ„ظ‰ ظ†ط§ط³ ط¥ظ„ظƒ ط¹ظ„ظٹظ‡ظ…</h2>
+              <p>ط±طھط¨ ط§ظ„طھط­طµظٹظ„ ظ…ظ† ط§ظ„ط£ط¹ظ„ظ‰</p>
             </div>
           </div>
           <div class="list-stack" id="topClaimsList"></div>
@@ -731,8 +731,8 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>أعلى ناس عليك إلهم</h2>
-              <p>هذه المبالغ تحتاج ترتيب دفع</p>
+              <h2>ط£ط¹ظ„ظ‰ ظ†ط§ط³ ط¹ظ„ظٹظƒ ط¥ظ„ظ‡ظ…</h2>
+              <p>ظ‡ط°ظ‡ ط§ظ„ظ…ط¨ط§ظ„ط؛ طھط­طھط§ط¬ طھط±طھظٹط¨ ط¯ظپط¹</p>
             </div>
           </div>
           <div class="list-stack" id="topDebtsList"></div>
@@ -743,8 +743,8 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>حالة التطبيق</h2>
-              <p>معلومات سريعة</p>
+              <h2>ط­ط§ظ„ط© ط§ظ„طھط·ط¨ظٹظ‚</h2>
+              <p>ظ…ط¹ظ„ظˆظ…ط§طھ ط³ط±ظٹط¹ط©</p>
             </div>
           </div>
           <div class="status-list" id="statusList"></div>
@@ -753,8 +753,8 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>طريقة عرض التاريخ</h2>
-              <p>اختر الشكل الذي تفضله</p>
+              <h2>ط·ط±ظٹظ‚ط© ط¹ط±ط¶ ط§ظ„طھط§ط±ظٹط®</h2>
+              <p>ط§ط®طھط± ط§ظ„ط´ظƒظ„ ط§ظ„ط°ظٹ طھظپط¶ظ„ظ‡</p>
             </div>
           </div>
           <div class="filters-row" id="dateStyleRow"></div>
@@ -763,26 +763,26 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>نسخ ونسخ احتياطي</h2>
-              <p>للحماية، شارك ملف احتياطي بين فترة وفترة</p>
+              <h2>ظ†ط³ط® ظˆظ†ط³ط® ط§ط­طھظٹط§ط·ظٹ</h2>
+              <p>ظ„ظ„ط­ظ…ط§ظٹط©طŒ ط´ط§ط±ظƒ ظ…ظ„ظپ ط§ط­طھظٹط§ط·ظٹ ط¨ظٹظ† ظپطھط±ط© ظˆظپطھط±ط©</p>
             </div>
           </div>
           <div class="actions-grid">
             <button class="action-card" id="exportReportButton" type="button">
-              <strong>تصدير تقرير نصي</strong>
-              <small>للمشاركة أو الطباعة السريعة</small>
+              <strong>طھطµط¯ظٹط± طھظ‚ط±ظٹط± ظ†طµظٹ</strong>
+              <small>ظ„ظ„ظ…ط´ط§ط±ظƒط© ط£ظˆ ط§ظ„ط·ط¨ط§ط¹ط© ط§ظ„ط³ط±ظٹط¹ط©</small>
             </button>
             <button class="action-card" id="exportBackupButton" type="button">
-              <strong>تصدير JSON</strong>
-              <small>نسخة احتياطية كاملة</small>
+              <strong>طھطµط¯ظٹط± JSON</strong>
+              <small>ظ†ط³ط®ط© ط§ط­طھظٹط§ط·ظٹط© ظƒط§ظ…ظ„ط©</small>
             </button>
             <button class="action-card" id="importBackupButton" type="button">
-              <strong>استيراد JSON</strong>
-              <small>إرجاع نسخة محفوظة</small>
+              <strong>ط§ط³طھظٹط±ط§ط¯ JSON</strong>
+              <small>ط¥ط±ط¬ط§ط¹ ظ†ط³ط®ط© ظ…ط­ظپظˆط¸ط©</small>
             </button>
             <button class="action-card" id="addToHomeInfoButton" type="button">
-              <strong>كيف أضيفه للشاشة</strong>
-              <small>خطوات Safari السريعة</small>
+              <strong>ظƒظٹظپ ط£ط¶ظٹظپظ‡ ظ„ظ„ط´ط§ط´ط©</strong>
+              <small>ط®ط·ظˆط§طھ Safari ط§ظ„ط³ط±ظٹط¹ط©</small>
             </button>
           </div>
           <input id="backupFileInput" type="file" accept=".json,application/json" hidden />
@@ -791,18 +791,18 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>أدوات سريعة</h2>
-              <p>للإدارة فقط</p>
+              <h2>ط£ط¯ظˆط§طھ ط³ط±ظٹط¹ط©</h2>
+              <p>ظ„ظ„ط¥ط¯ط§ط±ط© ظپظ‚ط·</p>
             </div>
           </div>
           <div class="actions-grid">
             <button class="action-card" id="restoreDemoButton" type="button">
-              <strong>بيانات تجريبية</strong>
-              <small>للتجربة أو الشرح</small>
+              <strong>ط¨ظٹط§ظ†ط§طھ طھط¬ط±ظٹط¨ظٹط©</strong>
+              <small>ظ„ظ„طھط¬ط±ط¨ط© ط£ظˆ ط§ظ„ط´ط±ط­</small>
             </button>
             <button class="action-card" id="clearAllButton" type="button">
-              <strong>مسح كل البيانات</strong>
-              <small>تنظيف التطبيق بالكامل</small>
+              <strong>ظ…ط³ط­ ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ</strong>
+              <small>طھظ†ط¸ظٹظپ ط§ظ„طھط·ط¨ظٹظ‚ ط¨ط§ظ„ظƒط§ظ…ظ„</small>
             </button>
           </div>
         </div>
@@ -817,19 +817,19 @@
     <div class="modal-card">
       <div class="detail-head">
         <div class="stack" style="gap: 4px;">
-          <p class="eyebrow" id="personModalEyebrow">شخص جديد</p>
-          <h3 id="personModalTitle">إضافة شخص</h3>
+          <p class="eyebrow" id="personModalEyebrow">ط´ط®طµ ط¬ط¯ظٹط¯</p>
+          <h3 id="personModalTitle">ط¥ط¶ط§ظپط© ط´ط®طµ</h3>
         </div>
-        <button class="chip chip-dark" data-close="personModal">إغلاق</button>
+        <button class="chip chip-dark" data-close="personModal">ط¥ط؛ظ„ط§ظ‚</button>
       </div>
       <div class="modal-stack">
-        <input class="text-input" id="personNameInput" placeholder="اسم الشخص" enterkeyhint="next" autocapitalize="words" />
-        <input class="text-input" id="personPhoneInput" placeholder="رقم الهاتف اختياري" inputmode="tel" enterkeyhint="next" />
-        <textarea class="textarea" id="personNoteInput" placeholder="ملاحظة قصيرة" enterkeyhint="done"></textarea>
+        <input class="text-input" id="personNameInput" placeholder="ط§ط³ظ… ط§ظ„ط´ط®طµ" enterkeyhint="next" autocapitalize="words" />
+        <input class="text-input" id="personPhoneInput" placeholder="ط±ظ‚ظ… ط§ظ„ظ‡ط§طھظپ ط§ط®طھظٹط§ط±ظٹ" inputmode="tel" enterkeyhint="next" />
+        <textarea class="textarea" id="personNoteInput" placeholder="ظ…ظ„ط§ط­ط¸ط© ظ‚طµظٹط±ط©" enterkeyhint="done"></textarea>
       </div>
       <div class="modal-actions">
-        <button class="button primary" id="savePersonButton" type="button">حفظ</button>
-        <button class="button secondary" data-close="personModal" type="button">إلغاء</button>
+        <button class="button primary" id="savePersonButton" type="button">ط­ظپط¸</button>
+        <button class="button secondary" data-close="personModal" type="button">ط¥ظ„ط؛ط§ط،</button>
       </div>
     </div>
   </div>
@@ -838,10 +838,10 @@
     <div class="modal-card">
       <div class="detail-head">
         <div class="stack" style="gap: 4px;">
-          <p class="eyebrow" id="transactionModalEyebrow">حركة جديدة</p>
-          <h3 id="transactionModalTitle">إضافة حركة</h3>
+          <p class="eyebrow" id="transactionModalEyebrow">ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©</p>
+          <h3 id="transactionModalTitle">ط¥ط¶ط§ظپط© ط­ط±ظƒط©</h3>
         </div>
-        <button class="chip chip-dark" data-close="transactionModal">إغلاق</button>
+        <button class="chip chip-dark" data-close="transactionModal">ط¥ط؛ظ„ط§ظ‚</button>
       </div>
 
       <div class="modal-stack">
@@ -850,27 +850,27 @@
         <div class="preview-card" id="transactionPreviewCard"></div>
 
         <div class="stack" style="gap: 10px;">
-          <label class="helper">المبلغ</label>
+          <label class="helper">ط§ظ„ظ…ط¨ظ„ط؛</label>
           <div class="chips-row" id="quickAmountRow"></div>
-          <input class="text-input" id="transactionAmountInput" placeholder="المبلغ" inputmode="decimal" enterkeyhint="next" />
+          <input class="text-input" id="transactionAmountInput" placeholder="ط§ظ„ظ…ط¨ظ„ط؛" inputmode="decimal" enterkeyhint="next" />
         </div>
 
         <div class="stack" style="gap: 10px;">
-          <label class="helper">التاريخ</label>
+          <label class="helper">ط§ظ„طھط§ط±ظٹط®</label>
           <div class="chips-row" id="quickDateRow"></div>
           <input class="text-input" id="transactionDateInput" type="date" inputmode="numeric" enterkeyhint="done" />
         </div>
 
         <div class="stack" style="gap: 10px;">
-          <label class="helper">ملاحظات سريعة</label>
+          <label class="helper">ظ…ظ„ط§ط­ط¸ط§طھ ط³ط±ظٹط¹ط©</label>
           <div class="chips-row" id="quickNoteRow"></div>
-          <textarea class="textarea" id="transactionNoteInput" placeholder="ملاحظة اختيارية" enterkeyhint="done"></textarea>
+          <textarea class="textarea" id="transactionNoteInput" placeholder="ظ…ظ„ط§ط­ط¸ط© ط§ط®طھظٹط§ط±ظٹط©" enterkeyhint="done"></textarea>
         </div>
       </div>
 
       <div class="modal-actions">
-        <button class="button primary" id="saveTransactionButton" type="button">حفظ الحركة</button>
-        <button class="button secondary" data-close="transactionModal" type="button">إلغاء</button>
+        <button class="button primary" id="saveTransactionButton" type="button">ط­ظپط¸ ط§ظ„ط­ط±ظƒط©</button>
+        <button class="button secondary" data-close="transactionModal" type="button">ط¥ظ„ط؛ط§ط،</button>
       </div>
     </div>
   </div>
@@ -879,10 +879,10 @@
     <div class="modal-card">
       <div class="detail-head">
         <div class="stack" style="gap: 4px;">
-          <p class="eyebrow" id="detailEyebrow">تفاصيل الشخص</p>
+          <p class="eyebrow" id="detailEyebrow">طھظپط§طµظٹظ„ ط§ظ„ط´ط®طµ</p>
           <h3 id="detailPersonName">-</h3>
         </div>
-        <button class="chip chip-dark" data-close="personDetailModal">إغلاق</button>
+        <button class="chip chip-dark" data-close="personDetailModal">ط¥ط؛ظ„ط§ظ‚</button>
       </div>
 
       <div class="detail-hero" id="detailHero"></div>
@@ -890,12 +890,12 @@
 
       <div class="actions-grid">
         <button class="action-card" id="detailAddTransactionButton" type="button">
-          <strong>حركة جديدة</strong>
-          <small>أضف دفعة أو دينًا فورًا</small>
+          <strong>ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©</strong>
+          <small>ط£ط¶ظپ ط¯ظپط¹ط© ط£ظˆ ط¯ظٹظ†ظ‹ط§ ظپظˆط±ظ‹ط§</small>
         </button>
         <button class="action-card" id="detailEditPersonButton" type="button">
-          <strong>تعديل الشخص</strong>
-          <small>عدّل الاسم أو الملاحظة</small>
+          <strong>طھط¹ط¯ظٹظ„ ط§ظ„ط´ط®طµ</strong>
+          <small>ط¹ط¯ظ‘ظ„ ط§ظ„ط§ط³ظ… ط£ظˆ ط§ظ„ظ…ظ„ط§ط­ط¸ط©</small>
         </button>
       </div>
 
@@ -903,18 +903,18 @@
         <div class="stack" style="gap: 12px;">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h4>سجل الحركات</h4>
-              <p id="detailTransactionsSubtitle">0 حركة</p>
+              <h4>ط³ط¬ظ„ ط§ظ„ط­ط±ظƒط§طھ</h4>
+              <p id="detailTransactionsSubtitle">0 ط­ط±ظƒط©</p>
             </div>
           </div>
-          <input class="text-input" id="detailSearchInput" placeholder="ابحث بالملاحظة أو التاريخ أو المبلغ" enterkeyhint="search" autocapitalize="off" />
+          <input class="text-input" id="detailSearchInput" placeholder="ط§ط¨ط­ط« ط¨ط§ظ„ظ…ظ„ط§ط­ط¸ط© ط£ظˆ ط§ظ„طھط§ط±ظٹط® ط£ظˆ ط§ظ„ظ…ط¨ظ„ط؛" enterkeyhint="search" autocapitalize="off" />
           <div class="filters-row" id="detailFilterRow"></div>
           <div class="list-stack" id="detailTransactionsList"></div>
         </div>
       </div>
 
       <div class="modal-actions">
-        <button class="button danger" id="detailDeletePersonButton" type="button">حذف الشخص مع كل حركاته</button>
+        <button class="button danger" id="detailDeletePersonButton" type="button">ط­ط°ظپ ط§ظ„ط´ط®طµ ظ…ط¹ ظƒظ„ ط­ط±ظƒط§طھظ‡</button>
       </div>
     </div>
   </div>
@@ -924,51 +924,51 @@
     const LEGACY_STORAGE_KEY = "eli-walay-web-v1";
 
     const transactionTypes = [
-      { value: "lentToHim", label: "سلفته", tone: "green" },
-      { value: "collectedFromHim", label: "رجعلي", tone: "blue" },
-      { value: "borrowedFromHim", label: "استلفت منه", tone: "red" },
-      { value: "paidToHim", label: "دفعت له", tone: "gold" }
+      { value: "lentToHim", label: "ط³ظ„ظپطھظ‡", tone: "green" },
+      { value: "collectedFromHim", label: "ط±ط¬ط¹ظ„ظٹ", tone: "blue" },
+      { value: "borrowedFromHim", label: "ط§ط³طھظ„ظپطھ ظ…ظ†ظ‡", tone: "red" },
+      { value: "paidToHim", label: "ط¯ظپط¹طھ ظ„ظ‡", tone: "gold" }
     ];
 
     const dateStyles = [
-      { value: "arabic", label: "يوم/شهر/سنة" },
-      { value: "iso", label: "رقمي YYYY-MM-DD" }
+      { value: "arabic", label: "ظٹظˆظ…/ط´ظ‡ط±/ط³ظ†ط©" },
+      { value: "iso", label: "ط±ظ‚ظ…ظٹ YYYY-MM-DD" }
     ];
 
     const personFilters = [
-      { value: "all", label: "الكل" },
-      { value: "claims", label: "إلي" },
-      { value: "debts", label: "عليّ" },
-      { value: "closed", label: "مسكر" }
+      { value: "all", label: "ط§ظ„ظƒظ„" },
+      { value: "claims", label: "ط¥ظ„ظٹ" },
+      { value: "debts", label: "ط¹ظ„ظٹظ‘" },
+      { value: "closed", label: "ظ…ط³ظƒط±" }
     ];
 
     const personSorts = [
-      { value: "recent", label: "الأحدث" },
-      { value: "largest", label: "الأكبر مبلغًا" },
-      { value: "mostTransactions", label: "الأكثر حركة" },
-      { value: "name", label: "الاسم" }
+      { value: "recent", label: "ط§ظ„ط£ط­ط¯ط«" },
+      { value: "largest", label: "ط§ظ„ط£ظƒط¨ط± ظ…ط¨ظ„ط؛ظ‹ط§" },
+      { value: "mostTransactions", label: "ط§ظ„ط£ظƒط«ط± ط­ط±ظƒط©" },
+      { value: "name", label: "ط§ظ„ط§ط³ظ…" }
     ];
 
     const reportRanges = [
-      { value: "month", label: "هذا الشهر" },
-      { value: "30days", label: "آخر 30 يوم" },
-      { value: "all", label: "كل الوقت" }
+      { value: "month", label: "ظ‡ط°ط§ ط§ظ„ط´ظ‡ط±" },
+      { value: "30days", label: "ط¢ط®ط± 30 ظٹظˆظ…" },
+      { value: "all", label: "ظƒظ„ ط§ظ„ظˆظ‚طھ" }
     ];
 
     const quickAmountOptions = [50, 100, 200, 500];
-    const quickNoteOptions = ["دفعة جزئية", "سلفة جديدة", "تسوية", "موعد لاحق"];
+    const quickNoteOptions = ["ط¯ظپط¹ط© ط¬ط²ط¦ظٹط©", "ط³ظ„ظپط© ط¬ط¯ظٹط¯ط©", "طھط³ظˆظٹط©", "ظ…ظˆط¹ط¯ ظ„ط§ط­ظ‚"];
 
     const demoPeople = [
-      { id: "person-1", name: "أحمد", phone: "0599000001", note: "يتعامل معي بشكل شبه أسبوعي", createdAt: "2026-07-18" },
-      { id: "person-2", name: "سامر", phone: "0599000002", note: "مهم أعرف وضعه بسرعة", createdAt: "2026-07-17" },
-      { id: "person-3", name: "خالد", note: "غالبًا يرجع المبلغ آخر الشهر", createdAt: "2026-07-16" }
+      { id: "person-1", name: "ط£ط­ظ…ط¯", phone: "0599000001", note: "ظٹطھط¹ط§ظ…ظ„ ظ…ط¹ظٹ ط¨ط´ظƒظ„ ط´ط¨ظ‡ ط£ط³ط¨ظˆط¹ظٹ", createdAt: "2026-07-18" },
+      { id: "person-2", name: "ط³ط§ظ…ط±", phone: "0599000002", note: "ظ…ظ‡ظ… ط£ط¹ط±ظپ ظˆط¶ط¹ظ‡ ط¨ط³ط±ط¹ط©", createdAt: "2026-07-17" },
+      { id: "person-3", name: "ط®ط§ظ„ط¯", note: "ط؛ط§ظ„ط¨ظ‹ط§ ظٹط±ط¬ط¹ ط§ظ„ظ…ط¨ظ„ط؛ ط¢ط®ط± ط§ظ„ط´ظ‡ط±", createdAt: "2026-07-16" }
     ];
 
     const demoTransactions = [
-      { id: "tx-1", personId: "person-1", type: "lentToHim", amount: 500, date: "2026-07-19", note: "سلفة أولى", createdAt: "2026-07-19T10:00:00" },
-      { id: "tx-2", personId: "person-1", type: "collectedFromHim", amount: 150, date: "2026-07-20", note: "دفعة جزئية", createdAt: "2026-07-20T09:00:00" },
-      { id: "tx-3", personId: "person-2", type: "borrowedFromHim", amount: 400, date: "2026-07-18", note: "استلفت منه لمصلحة طارئة", createdAt: "2026-07-18T14:20:00" },
-      { id: "tx-4", personId: "person-2", type: "paidToHim", amount: 100, date: "2026-07-19", note: "دفعة أولى", createdAt: "2026-07-19T18:20:00" }
+      { id: "tx-1", personId: "person-1", type: "lentToHim", amount: 500, date: "2026-07-19", note: "ط³ظ„ظپط© ط£ظˆظ„ظ‰", createdAt: "2026-07-19T10:00:00" },
+      { id: "tx-2", personId: "person-1", type: "collectedFromHim", amount: 150, date: "2026-07-20", note: "ط¯ظپط¹ط© ط¬ط²ط¦ظٹط©", createdAt: "2026-07-20T09:00:00" },
+      { id: "tx-3", personId: "person-2", type: "borrowedFromHim", amount: 400, date: "2026-07-18", note: "ط§ط³طھظ„ظپطھ ظ…ظ†ظ‡ ظ„ظ…طµظ„ط­ط© ط·ط§ط±ط¦ط©", createdAt: "2026-07-18T14:20:00" },
+      { id: "tx-4", personId: "person-2", type: "paidToHim", amount: 100, date: "2026-07-19", note: "ط¯ظپط¹ط© ط£ظˆظ„ظ‰", createdAt: "2026-07-19T18:20:00" }
     ];
 
     const defaultState = {
@@ -1077,10 +1077,16 @@
       document.getElementById("exportReportButton").addEventListener("click", exportReport);
       document.getElementById("importBackupButton").addEventListener("click", () => elements.backupFileInput.click());
       document.getElementById("addToHomeInfoButton").addEventListener("click", showAddToHomeInfo);
-      document.getElementById("detailAddTransactionButton").addEventListener("click", () => openTransactionModal(ui.selectedPersonId));
+      document.getElementById("detailAddTransactionButton").addEventListener("click", () => {
+        blurActiveElement();
+        closeModal("personDetailModal");
+        openTransactionModal(ui.selectedPersonId);
+      });
       document.getElementById("detailEditPersonButton").addEventListener("click", () => {
         const person = getSelectedPerson();
         if (person) {
+          blurActiveElement();
+          closeModal("personDetailModal");
           openPersonModal(person.id);
         }
       });
@@ -1177,10 +1183,10 @@
 
     function renderNav() {
       const items = [
-        { key: "home", label: "الرئيسية" },
-        { key: "people", label: "الأشخاص" },
-        { key: "reports", label: "التقارير" },
-        { key: "settings", label: "الإعدادات" }
+        { key: "home", label: "ط§ظ„ط±ط¦ظٹط³ظٹط©" },
+        { key: "people", label: "ط§ظ„ط£ط´ط®ط§طµ" },
+        { key: "reports", label: "ط§ظ„طھظ‚ط§ط±ظٹط±" },
+        { key: "settings", label: "ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ" }
       ];
 
       elements.bottomNav.innerHTML = items.map((item) => `
@@ -1212,43 +1218,43 @@
       elements.metricPeople.textContent = String(state.people.length);
       elements.metricOpen.textContent = String(openAccounts.length);
       elements.metricTransactions.textContent = String(state.transactions.length);
-      elements.metricLastSave.textContent = state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "لا يوجد";
+      elements.metricLastSave.textContent = state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "ظ„ط§ ظٹظˆط¬ط¯";
       elements.heroInsight.textContent =
         net > 0
-          ? "وضعك العام لصالحك، لكن تابع من هم أعلى عليك لتحصيل أسرع."
+          ? "ظˆط¶ط¹ظƒ ط§ظ„ط¹ط§ظ… ظ„طµط§ظ„ط­ظƒطŒ ظ„ظƒظ† طھط§ط¨ط¹ ظ…ظ† ظ‡ظ… ط£ط¹ظ„ظ‰ ط¹ظ„ظٹظƒ ظ„طھط­طµظٹظ„ ط£ط³ط±ط¹."
           : net < 0
-            ? "عندك التزامات أكثر الآن، فابدأ بأكبر مبلغ يحتاج دفع."
-            : "الصافي متوازن حاليًا، والأولوية الآن لتنظيم الحركة القادمة بهدوء.";
+            ? "ط¹ظ†ط¯ظƒ ط§ظ„طھط²ط§ظ…ط§طھ ط£ظƒط«ط± ط§ظ„ط¢ظ†طŒ ظپط§ط¨ط¯ط£ ط¨ط£ظƒط¨ط± ظ…ط¨ظ„ط؛ ظٹط­طھط§ط¬ ط¯ظپط¹."
+            : "ط§ظ„طµط§ظپظٹ ظ…طھظˆط§ط²ظ† ط­ط§ظ„ظٹظ‹ط§طŒ ظˆط§ظ„ط£ظˆظ„ظˆظٹط© ط§ظ„ط¢ظ† ظ„طھظ†ط¸ظٹظ… ط§ظ„ط­ط±ظƒط© ط§ظ„ظ‚ط§ط¯ظ…ط© ط¨ظ‡ط¯ظˆط،.";
 
       elements.welcomeCardSlot.innerHTML = (!state.meta.hasSeenWelcome && state.people.length === 0 && state.transactions.length === 0) ? `
         <div class="welcome-card">
           <div class="stack" style="gap: 4px;">
-            <p class="eyebrow">بداية مرتبة</p>
-            <h3>لنبدأ بطريقة سهلة</h3>
-            <p class="muted">أضف أول شخص ثم أول حركة، وبعدها سيبدأ التطبيق يحسب لك كل شيء تلقائيًا ويحفظه مباشرة على الجهاز.</p>
+            <p class="eyebrow">ط¨ط¯ط§ظٹط© ظ…ط±طھط¨ط©</p>
+            <h3>ظ„ظ†ط¨ط¯ط£ ط¨ط·ط±ظٹظ‚ط© ط³ظ‡ظ„ط©</h3>
+            <p class="muted">ط£ط¶ظپ ط£ظˆظ„ ط´ط®طµ ط«ظ… ط£ظˆظ„ ط­ط±ظƒط©طŒ ظˆط¨ط¹ط¯ظ‡ط§ ط³ظٹط¨ط¯ط£ ط§ظ„طھط·ط¨ظٹظ‚ ظٹط­ط³ط¨ ظ„ظƒ ظƒظ„ ط´ظٹط، طھظ„ظ‚ط§ط¦ظٹظ‹ط§ ظˆظٹط­ظپط¸ظ‡ ظ…ط¨ط§ط´ط±ط© ط¹ظ„ظ‰ ط§ظ„ط¬ظ‡ط§ط².</p>
           </div>
           <div class="actions-grid">
             <button class="action-card" id="welcomeAddPersonButton" type="button">
-              <strong>أضف أول شخص</strong>
-              <small>ابدأ بالاسم فقط والباقي اختياري</small>
+              <strong>ط£ط¶ظپ ط£ظˆظ„ ط´ط®طµ</strong>
+              <small>ط§ط¨ط¯ط£ ط¨ط§ظ„ط§ط³ظ… ظپظ‚ط· ظˆط§ظ„ط¨ط§ظ‚ظٹ ط§ط®طھظٹط§ط±ظٹ</small>
             </button>
             <button class="action-card" id="welcomeDemoButton" type="button">
-              <strong>جرّب بيانات جاهزة</strong>
-              <small>مفيد إذا أردت مشاهدة الفكرة بسرعة</small>
+              <strong>ط¬ط±ظ‘ط¨ ط¨ظٹط§ظ†ط§طھ ط¬ط§ظ‡ط²ط©</strong>
+              <small>ظ…ظپظٹط¯ ط¥ط°ط§ ط£ط±ط¯طھ ظ…ط´ط§ظ‡ط¯ط© ط§ظ„ظپظƒط±ط© ط¨ط³ط±ط¹ط©</small>
             </button>
           </div>
         </div>
       ` : "";
 
       elements.summaryGrid.innerHTML = [
-        createSummaryCard("إجمالي إلي", formatAmount(totalClaims), "المبالغ التي ما زالت لك", "green"),
-        createSummaryCard("إجمالي عليّ", formatAmount(totalDebts), "الالتزامات الحالية", "red"),
-        createSummaryCard("الصافي", formatAmount(Math.abs(net)), net > 0 ? "وضعك لصالحك" : net < 0 ? "تحتاج متابعة" : "متوازن", "gold"),
-        createSummaryCard("الحسابات المسكرة", String(balances.filter((item) => item.net === 0).length), "جاهزة ومقفلة", "blue")
+        createSummaryCard("ط¥ط¬ظ…ط§ظ„ظٹ ط¥ظ„ظٹ", formatAmount(totalClaims), "ط§ظ„ظ…ط¨ط§ظ„ط؛ ط§ظ„طھظٹ ظ…ط§ ط²ط§ظ„طھ ظ„ظƒ", "green"),
+        createSummaryCard("ط¥ط¬ظ…ط§ظ„ظٹ ط¹ظ„ظٹظ‘", formatAmount(totalDebts), "ط§ظ„ط§ظ„طھط²ط§ظ…ط§طھ ط§ظ„ط­ط§ظ„ظٹط©", "red"),
+        createSummaryCard("ط§ظ„طµط§ظپظٹ", formatAmount(Math.abs(net)), net > 0 ? "ظˆط¶ط¹ظƒ ظ„طµط§ظ„ط­ظƒ" : net < 0 ? "طھط­طھط§ط¬ ظ…طھط§ط¨ط¹ط©" : "ظ…طھظˆط§ط²ظ†", "gold"),
+        createSummaryCard("ط§ظ„ط­ط³ط§ط¨ط§طھ ط§ظ„ظ…ط³ظƒط±ط©", String(balances.filter((item) => item.net === 0).length), "ط¬ط§ظ‡ط²ط© ظˆظ…ظ‚ظپظ„ط©", "blue")
       ].join("");
 
       if (priorities.length === 0) {
-        elements.priorityList.innerHTML = createEmpty("كل الحسابات مسكرة الآن", "وهذا ممتاز. أول حركة جديدة ستظهر هنا.");
+        elements.priorityList.innerHTML = createEmpty("ظƒظ„ ط§ظ„ط­ط³ط§ط¨ط§طھ ظ…ط³ظƒط±ط© ط§ظ„ط¢ظ†", "ظˆظ‡ط°ط§ ظ…ظ…طھط§ط². ط£ظˆظ„ ط­ط±ظƒط© ط¬ط¯ظٹط¯ط© ط³طھط¸ظ‡ط± ظ‡ظ†ط§.");
       } else {
         elements.priorityList.innerHTML = priorities.map((person, index) => `
           <button class="priority-card" data-person-open="${person.id}">
@@ -1257,16 +1263,16 @@
               <strong class="person-name">${escapeHtml(person.name)}</strong>
             </div>
             <div class="inline-row" style="justify-content: space-between; align-items: center;">
-              <span class="muted">${getBalanceLabel(person.net)} • ${getBalanceRole(person.net)}</span>
+              <span class="muted">${getBalanceLabel(person.net)} â€¢ ${getBalanceRole(person.net)}</span>
               <strong>${formatAmount(Math.abs(person.net))}</strong>
             </div>
-            <p class="muted">${person.transactionsCount} حركة${person.lastTransactionDate ? ` • آخر حركة ${formatDisplayDate(person.lastTransactionDate)}` : ""}</p>
+            <p class="muted">${person.transactionsCount} ط­ط±ظƒط©${person.lastTransactionDate ? ` â€¢ ط¢ط®ط± ط­ط±ظƒط© ${formatDisplayDate(person.lastTransactionDate)}` : ""}</p>
           </button>
         `).join("");
       }
 
       if (recentTransactions.length === 0) {
-        elements.recentTransactionsList.innerHTML = createEmpty("لا توجد حركات بعد", "ابدأ بإضافة أول حركة وستظهر هنا مباشرة.");
+        elements.recentTransactionsList.innerHTML = createEmpty("ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط§طھ ط¨ط¹ط¯", "ط§ط¨ط¯ط£ ط¨ط¥ط¶ط§ظپط© ط£ظˆظ„ ط­ط±ظƒط© ظˆط³طھط¸ظ‡ط± ظ‡ظ†ط§ ظ…ط¨ط§ط´ط±ط©.");
       } else {
         elements.recentTransactionsList.innerHTML = recentTransactions.map((item) => {
           const person = state.people.find((entry) => entry.id === item.personId);
@@ -1274,7 +1280,7 @@
             <button class="transaction-card" data-transaction-edit="${item.id}">
               <div class="person-head">
                 <span class="type-pill balance-pill ${getTone(item.type)}">${getTransactionLabel(item.type)}</span>
-                <strong class="person-name">${escapeHtml(person?.name ?? "شخص غير معروف")}</strong>
+                <strong class="person-name">${escapeHtml(person?.name ?? "ط´ط®طµ ط؛ظٹط± ظ…ط¹ط±ظˆظپ")}</strong>
               </div>
               <div class="inline-row" style="justify-content: space-between; align-items: center;">
                 <span class="muted">${formatDisplayDate(item.date)}</span>
@@ -1314,14 +1320,14 @@
       elements.resetPeopleFilters.hidden = !(ui.searchQuery.trim() || ui.personFilter !== "all" || ui.personSort !== "recent");
 
       elements.peopleSummaryGrid.innerHTML = [
-        createPanelCard("الظاهرون الآن", String(filtered.length)),
-        createPanelCard("الحسابات المفتوحة", String(openCount)),
-        createPanelCard("إجمالي الدائن", formatAmount(claimsTotal)),
-        createPanelCard("إجمالي المدين", formatAmount(debtsTotal))
+        createPanelCard("ط§ظ„ط¸ط§ظ‡ط±ظˆظ† ط§ظ„ط¢ظ†", String(filtered.length)),
+        createPanelCard("ط§ظ„ط­ط³ط§ط¨ط§طھ ط§ظ„ظ…ظپطھظˆط­ط©", String(openCount)),
+        createPanelCard("ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط¯ط§ط¦ظ†", formatAmount(claimsTotal)),
+        createPanelCard("ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط¯ظٹظ†", formatAmount(debtsTotal))
       ].join("");
 
       if (filtered.length === 0) {
-        elements.peopleList.innerHTML = createEmpty("لا يوجد نتائج", "جرّب تغيير البحث أو الفلتر، أو أضف شخصًا جديدًا.");
+        elements.peopleList.innerHTML = createEmpty("ظ„ط§ ظٹظˆط¬ط¯ ظ†طھط§ط¦ط¬", "ط¬ط±ظ‘ط¨ طھط؛ظٹظٹط± ط§ظ„ط¨ط­ط« ط£ظˆ ط§ظ„ظپظ„طھط±طŒ ط£ظˆ ط£ط¶ظپ ط´ط®طµظ‹ط§ ط¬ط¯ظٹط¯ظ‹ط§.");
       } else {
         elements.peopleList.innerHTML = filtered.map((person) => `
           <button class="person-card" data-person-open="${person.id}">
@@ -1330,11 +1336,11 @@
               <strong class="person-name">${escapeHtml(person.name)}</strong>
             </div>
             <div class="inline-row" style="justify-content: space-between; align-items: center;">
-              <span class="muted">الحالة: ${getBalanceRole(person.net)}</span>
+              <span class="muted">ط§ظ„ط­ط§ظ„ط©: ${getBalanceRole(person.net)}</span>
               <strong class="person-amount">${formatAmount(Math.abs(person.net))}</strong>
             </div>
-            <p class="muted">${person.transactionsCount} حركة${person.phone ? ` • ${escapeHtml(person.phone)}` : ""}</p>
-            ${person.lastTransactionDate ? `<p class="muted">آخر حركة: ${formatDisplayDate(person.lastTransactionDate)}</p>` : ""}
+            <p class="muted">${person.transactionsCount} ط­ط±ظƒط©${person.phone ? ` â€¢ ${escapeHtml(person.phone)}` : ""}</p>
+            ${person.lastTransactionDate ? `<p class="muted">ط¢ط®ط± ط­ط±ظƒط©: ${formatDisplayDate(person.lastTransactionDate)}</p>` : ""}
             ${person.note ? `<p class="muted">${escapeHtml(person.note)}</p>` : ""}
           </button>
         `).join("");
@@ -1366,23 +1372,23 @@
       elements.reportInsight.textContent = reportData.insight;
 
       elements.reportsGrid.innerHTML = [
-        createPanelCard("عدد الحركات", String(reportData.transactions.length)),
-        createPanelCard("صافي الفترة", formatAmount(Math.abs(reportData.netFlow))),
-        createPanelCard("الأكثر نشاطًا", reportData.mostActive?.name ?? "لا يوجد"),
-        createPanelCard("آخر نشاط", reportData.lastActivityDate ? formatDisplayDate(reportData.lastActivityDate) : "لا يوجد"),
-        createPanelCard("سلفته", formatAmount(reportData.lent)),
-        createPanelCard("رجعلي", formatAmount(reportData.collected)),
-        createPanelCard("استلفت", formatAmount(reportData.borrowed)),
-        createPanelCard("دفعت", formatAmount(reportData.paid))
+        createPanelCard("ط¹ط¯ط¯ ط§ظ„ط­ط±ظƒط§طھ", String(reportData.transactions.length)),
+        createPanelCard("طµط§ظپظٹ ط§ظ„ظپطھط±ط©", formatAmount(Math.abs(reportData.netFlow))),
+        createPanelCard("ط§ظ„ط£ظƒط«ط± ظ†ط´ط§ط·ظ‹ط§", reportData.mostActive?.name ?? "ظ„ط§ ظٹظˆط¬ط¯"),
+        createPanelCard("ط¢ط®ط± ظ†ط´ط§ط·", reportData.lastActivityDate ? formatDisplayDate(reportData.lastActivityDate) : "ظ„ط§ ظٹظˆط¬ط¯"),
+        createPanelCard("ط³ظ„ظپطھظ‡", formatAmount(reportData.lent)),
+        createPanelCard("ط±ط¬ط¹ظ„ظٹ", formatAmount(reportData.collected)),
+        createPanelCard("ط§ط³طھظ„ظپطھ", formatAmount(reportData.borrowed)),
+        createPanelCard("ط¯ظپط¹طھ", formatAmount(reportData.paid))
       ].join("");
 
       elements.topClaimsList.innerHTML = reportData.topClaims.length === 0
-        ? createEmpty("لا يوجد حاليًا أحد إلك عليه مبلغ", "غيّر الفترة إذا أردت قراءة زاوية ثانية.")
-        : reportData.topClaims.map((person) => personRowHtml(person.id, person.name, "يمكنك فتحه ومراجعة الحركات معه", formatAmount(person.net))).join("");
+        ? createEmpty("ظ„ط§ ظٹظˆط¬ط¯ ط­ط§ظ„ظٹظ‹ط§ ط£ط­ط¯ ط¥ظ„ظƒ ط¹ظ„ظٹظ‡ ظ…ط¨ظ„ط؛", "ط؛ظٹظ‘ط± ط§ظ„ظپطھط±ط© ط¥ط°ط§ ط£ط±ط¯طھ ظ‚ط±ط§ط،ط© ط²ط§ظˆظٹط© ط«ط§ظ†ظٹط©.")
+        : reportData.topClaims.map((person) => personRowHtml(person.id, person.name, "ظٹظ…ظƒظ†ظƒ ظپطھط­ظ‡ ظˆظ…ط±ط§ط¬ط¹ط© ط§ظ„ط­ط±ظƒط§طھ ظ…ط¹ظ‡", formatAmount(person.net))).join("");
 
       elements.topDebtsList.innerHTML = reportData.topDebts.length === 0
-        ? createEmpty("لا يوجد حاليًا التزامات مفتوحة عليك", "هذا يعني أن هذه الفترة أخف عليك.")
-        : reportData.topDebts.map((person) => personRowHtml(person.id, person.name, "يفضل ترتيب دفعة قريبة إذا أمكن", formatAmount(Math.abs(person.net)))).join("");
+        ? createEmpty("ظ„ط§ ظٹظˆط¬ط¯ ط­ط§ظ„ظٹظ‹ط§ ط§ظ„طھط²ط§ظ…ط§طھ ظ…ظپطھظˆط­ط© ط¹ظ„ظٹظƒ", "ظ‡ط°ط§ ظٹط¹ظ†ظٹ ط£ظ† ظ‡ط°ظ‡ ط§ظ„ظپطھط±ط© ط£ط®ظپ ط¹ظ„ظٹظƒ.")
+        : reportData.topDebts.map((person) => personRowHtml(person.id, person.name, "ظٹظپط¶ظ„ طھط±طھظٹط¨ ط¯ظپط¹ط© ظ‚ط±ظٹط¨ط© ط¥ط°ط§ ط£ظ…ظƒظ†", formatAmount(Math.abs(person.net)))).join("");
 
       bindPeopleOpen();
       document.querySelectorAll("[data-action^='report-range:']").forEach((button) => {
@@ -1395,11 +1401,11 @@
 
     function renderSettings() {
       const statusItems = [
-        { label: "الحفظ المحلي", value: ui.saveState === "saving" ? "جاري الحفظ" : ui.saveState === "error" ? "في مشكلة" : "محفوظ" },
-        { label: "عدد الأشخاص", value: String(state.people.length) },
-        { label: "عدد الحركات", value: String(state.transactions.length) },
-        { label: "آخر حفظ محلي", value: state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "بانتظار أول حفظ" },
-        { label: "آخر نسخة مصدرة", value: state.settings.lastExportedAt ? formatDisplayDateTime(state.settings.lastExportedAt) : "لم يتم بعد" }
+        { label: "ط§ظ„ط­ظپط¸ ط§ظ„ظ…ط­ظ„ظٹ", value: ui.saveState === "saving" ? "ط¬ط§ط±ظٹ ط§ظ„ط­ظپط¸" : ui.saveState === "error" ? "ظپظٹ ظ…ط´ظƒظ„ط©" : "ظ…ط­ظپظˆط¸" },
+        { label: "ط¹ط¯ط¯ ط§ظ„ط£ط´ط®ط§طµ", value: String(state.people.length) },
+        { label: "ط¹ط¯ط¯ ط§ظ„ط­ط±ظƒط§طھ", value: String(state.transactions.length) },
+        { label: "ط¢ط®ط± ط­ظپط¸ ظ…ط­ظ„ظٹ", value: state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "ط¨ط§ظ†طھط¸ط§ط± ط£ظˆظ„ ط­ظپط¸" },
+        { label: "ط¢ط®ط± ظ†ط³ط®ط© ظ…طµط¯ط±ط©", value: state.settings.lastExportedAt ? formatDisplayDateTime(state.settings.lastExportedAt) : "ظ„ظ… ظٹطھظ… ط¨ط¹ط¯" }
       ];
 
       elements.statusList.innerHTML = statusItems.map((item) => `
@@ -1425,8 +1431,8 @@
 
     function renderPersonModal() {
       const isEditing = Boolean(ui.editingPersonId);
-      elements.personModalEyebrow.textContent = isEditing ? "تعديل بيانات" : "شخص جديد";
-      elements.personModalTitle.textContent = isEditing ? "تعديل الشخص" : "إضافة شخص";
+      elements.personModalEyebrow.textContent = isEditing ? "طھط¹ط¯ظٹظ„ ط¨ظٹط§ظ†ط§طھ" : "ط´ط®طµ ط¬ط¯ظٹط¯";
+      elements.personModalTitle.textContent = isEditing ? "طھط¹ط¯ظٹظ„ ط§ظ„ط´ط®طµ" : "ط¥ط¶ط§ظپط© ط´ط®طµ";
     }
 
     function renderTransactionModal() {
@@ -1443,14 +1449,14 @@
         ? applyTransactionOnNet(baseNet, ui.transactionType, parsedAmount)
         : baseNet;
 
-      elements.transactionModalEyebrow.textContent = ui.editingTransactionId ? "تعديل حركة" : "حركة جديدة";
-      elements.transactionModalTitle.textContent = ui.editingTransactionId ? "تعديل الحركة" : "إضافة حركة";
+      elements.transactionModalEyebrow.textContent = ui.editingTransactionId ? "طھط¹ط¯ظٹظ„ ط­ط±ظƒط©" : "ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©";
+      elements.transactionModalTitle.textContent = ui.editingTransactionId ? "طھط¹ط¯ظٹظ„ ط§ظ„ط­ط±ظƒط©" : "ط¥ط¶ط§ظپط© ط­ط±ظƒط©";
       elements.transactionPersonRow.innerHTML = balances.map((entry) => createTinyChip(entry.name, ui.transactionPersonId === entry.id, `transaction-person:${entry.id}`)).join("");
       elements.transactionTypeRow.innerHTML = transactionTypes.map((option) => createTinyChip(option.label, ui.transactionType === option.value, `transaction-type:${option.value}`)).join("");
       elements.quickAmountRow.innerHTML = quickAmountOptions.map((value) => createTinyChip(formatAmount(value), false, `quick-amount:${value}`)).join("");
       elements.quickDateRow.innerHTML = [
-        createTinyChip("اليوم", false, "quick-date:today"),
-        createTinyChip("أمس", false, "quick-date:yesterday")
+        createTinyChip("ط§ظ„ظٹظˆظ…", false, "quick-date:today"),
+        createTinyChip("ط£ظ…ط³", false, "quick-date:yesterday")
       ].join("");
       elements.quickNoteRow.innerHTML = quickNoteOptions.map((note) => createTinyChip(note, false, `quick-note:${note}`)).join("");
       elements.transactionAmountInput.value = ui.transactionAmount;
@@ -1458,13 +1464,13 @@
       elements.transactionNoteInput.value = ui.transactionNote;
 
       elements.transactionPreviewCard.innerHTML = person ? `
-        <h4>معاينة حساب ${escapeHtml(person.name)}</h4>
-        <p class="note">الوضع الحالي: ${getBalanceLabel(baseNet)} • ${formatAmount(Math.abs(baseNet))}</p>
-        <p class="note">بعد الحفظ: ${getBalanceLabel(projectedNet)} • ${formatAmount(Math.abs(projectedNet))}</p>
+        <h4>ظ…ط¹ط§ظٹظ†ط© ط­ط³ط§ط¨ ${escapeHtml(person.name)}</h4>
+        <p class="note">ط§ظ„ظˆط¶ط¹ ط§ظ„ط­ط§ظ„ظٹ: ${getBalanceLabel(baseNet)} â€¢ ${formatAmount(Math.abs(baseNet))}</p>
+        <p class="note">ط¨ط¹ط¯ ط§ظ„ط­ظپط¸: ${getBalanceLabel(projectedNet)} â€¢ ${formatAmount(Math.abs(projectedNet))}</p>
         <p class="tiny-help">${getTransactionTypeHint(ui.transactionType)}</p>
       ` : `
-        <h4>اختر شخصًا للمعاينة</h4>
-        <p class="tiny-help">حدد الشخص أولًا، وبعدها سترى الرصيد قبل وبعد الحركة.</p>
+        <h4>ط§ط®طھط± ط´ط®طµظ‹ط§ ظ„ظ„ظ…ط¹ط§ظٹظ†ط©</h4>
+        <p class="tiny-help">ط­ط¯ط¯ ط§ظ„ط´ط®طµ ط£ظˆظ„ظ‹ط§طŒ ظˆط¨ط¹ط¯ظ‡ط§ ط³طھط±ظ‰ ط§ظ„ط±طµظٹط¯ ظ‚ط¨ظ„ ظˆط¨ط¹ط¯ ط§ظ„ط­ط±ظƒط©.</p>
       `;
 
       document.querySelectorAll("[data-action^='transaction-person:']").forEach((button) => {
@@ -1507,7 +1513,7 @@
       document.querySelectorAll("[data-action^='quick-note:']").forEach((button) => {
         button.addEventListener("click", () => {
           const note = button.dataset.action.replace("quick-note:", "");
-          ui.transactionNote = ui.transactionNote.trim() ? `${ui.transactionNote} • ${note}` : note;
+          ui.transactionNote = ui.transactionNote.trim() ? `${ui.transactionNote} â€¢ ${note}` : note;
           renderTransactionModal();
         });
       });
@@ -1534,10 +1540,10 @@
       };
       const lastTransaction = transactions[0] ?? null;
       const suggestion = net > 0
-        ? "ذكره بدفعة قريبة أو سجّل أي مبلغ رجعلك مباشرة."
+        ? "ط°ظƒط±ظ‡ ط¨ط¯ظپط¹ط© ظ‚ط±ظٹط¨ط© ط£ظˆ ط³ط¬ظ‘ظ„ ط£ظٹ ظ…ط¨ظ„ط؛ ط±ط¬ط¹ظ„ظƒ ظ…ط¨ط§ط´ط±ط©."
         : net < 0
-          ? "إذا دفعت له أي جزء، سجله فورًا حتى يبقى الرصيد صحيحًا."
-          : "الحساب مسكر حاليًا. فقط راقب أي حركة جديدة وسجلها مباشرة.";
+          ? "ط¥ط°ط§ ط¯ظپط¹طھ ظ„ظ‡ ط£ظٹ ط¬ط²ط،طŒ ط³ط¬ظ„ظ‡ ظپظˆط±ظ‹ط§ ط­طھظ‰ ظٹط¨ظ‚ظ‰ ط§ظ„ط±طµظٹط¯ طµط­ظٹط­ظ‹ط§."
+          : "ط§ظ„ط­ط³ط§ط¨ ظ…ط³ظƒط± ط­ط§ظ„ظٹظ‹ط§. ظپظ‚ط· ط±ط§ظ‚ط¨ ط£ظٹ ط­ط±ظƒط© ط¬ط¯ظٹط¯ط© ظˆط³ط¬ظ„ظ‡ط§ ظ…ط¨ط§ط´ط±ط©.";
 
       const filteredTransactions = transactions.filter((item) => {
         const query = ui.personDetailSearch.trim().toLowerCase();
@@ -1552,31 +1558,31 @@
 
       elements.detailPersonName.textContent = person.name;
       elements.detailHero.innerHTML = `
-        <p class="eyebrow">الرصيد الحالي</p>
+        <p class="eyebrow">ط§ظ„ط±طµظٹط¯ ط§ظ„ط­ط§ظ„ظٹ</p>
         <h3 class="person-name">${getBalanceLabel(net)}</h3>
-        <p class="muted">التصنيف المالي: ${getBalanceRole(net)}</p>
+        <p class="muted">ط§ظ„طھطµظ†ظٹظپ ط§ظ„ظ…ط§ظ„ظٹ: ${getBalanceRole(net)}</p>
         <div class="detail-amount">${formatAmount(Math.abs(net))}</div>
-        <p class="note">الخطوة التالية: ${suggestion}</p>
-        ${lastTransaction ? `<p class="note">آخر حركة: ${getTransactionLabel(lastTransaction.type)} • ${formatDisplayDate(lastTransaction.date)}</p>` : ""}
+        <p class="note">ط§ظ„ط®ط·ظˆط© ط§ظ„طھط§ظ„ظٹط©: ${suggestion}</p>
+        ${lastTransaction ? `<p class="note">ط¢ط®ط± ط­ط±ظƒط©: ${getTransactionLabel(lastTransaction.type)} â€¢ ${formatDisplayDate(lastTransaction.date)}</p>` : ""}
         ${person.note ? `<p class="note">${escapeHtml(person.note)}</p>` : ""}
-        ${person.phone ? `<p class="note">الهاتف: ${escapeHtml(person.phone)}</p>` : ""}
+        ${person.phone ? `<p class="note">ط§ظ„ظ‡ط§طھظپ: ${escapeHtml(person.phone)}</p>` : ""}
       `;
 
       elements.detailStats.innerHTML = [
-        detailStatHtml("أعطيته بالمجموع", formatAmount(stats.lent), "green"),
-        detailStatHtml("رجعلي بالمجموع", formatAmount(stats.collected), "blue"),
-        detailStatHtml("أخذت منه بالمجموع", formatAmount(stats.borrowed), "red"),
-        detailStatHtml("دفعته إله بالمجموع", formatAmount(stats.paid), "gold")
+        detailStatHtml("ط£ط¹ط·ظٹطھظ‡ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.lent), "green"),
+        detailStatHtml("ط±ط¬ط¹ظ„ظٹ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.collected), "blue"),
+        detailStatHtml("ط£ط®ط°طھ ظ…ظ†ظ‡ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.borrowed), "red"),
+        detailStatHtml("ط¯ظپط¹طھظ‡ ط¥ظ„ظ‡ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.paid), "gold")
       ].join("");
 
-      elements.detailTransactionsSubtitle.textContent = `${filteredTransactions.length} من أصل ${transactions.length} حركة`;
+      elements.detailTransactionsSubtitle.textContent = `${filteredTransactions.length} ظ…ظ† ط£طµظ„ ${transactions.length} ط­ط±ظƒط©`;
       elements.detailSearchInput.value = ui.personDetailSearch;
       elements.detailFilterRow.innerHTML = createDetailFilterChips();
 
       if (transactions.length === 0) {
-        elements.detailTransactionsList.innerHTML = createEmpty("لا توجد حركات لهذا الشخص بعد", "أضف أول حركة من الزر الموجود فوق.");
+        elements.detailTransactionsList.innerHTML = createEmpty("ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط§طھ ظ„ظ‡ط°ط§ ط§ظ„ط´ط®طµ ط¨ط¹ط¯", "ط£ط¶ظپ ط£ظˆظ„ ط­ط±ظƒط© ظ…ظ† ط§ظ„ط²ط± ط§ظ„ظ…ظˆط¬ظˆط¯ ظپظˆظ‚.");
       } else if (filteredTransactions.length === 0) {
-        elements.detailTransactionsList.innerHTML = createEmpty("لا توجد نتائج مطابقة", "غيّر البحث أو الفلتر الحالي.");
+        elements.detailTransactionsList.innerHTML = createEmpty("ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ ظ…ط·ط§ط¨ظ‚ط©", "ط؛ظٹظ‘ط± ط§ظ„ط¨ط­ط« ط£ظˆ ط§ظ„ظپظ„طھط± ط§ظ„ط­ط§ظ„ظٹ.");
       } else {
         elements.detailTransactionsList.innerHTML = filteredTransactions.map((item) => {
           const balanceAfter = timelineBalances.get(item.id) ?? 0;
@@ -1587,10 +1593,10 @@
                 <strong>${formatAmount(item.amount)}</strong>
               </div>
               <p class="muted">${formatDisplayDate(item.date)}</p>
-              <p class="note">الرصيد بعد هذه الحركة: ${formatAmount(Math.abs(balanceAfter))} • ${getBalanceLabel(balanceAfter)} • ${getBalanceRole(balanceAfter)}</p>
+              <p class="note">ط§ظ„ط±طµظٹط¯ ط¨ط¹ط¯ ظ‡ط°ظ‡ ط§ظ„ط­ط±ظƒط©: ${formatAmount(Math.abs(balanceAfter))} â€¢ ${getBalanceLabel(balanceAfter)} â€¢ ${getBalanceRole(balanceAfter)}</p>
               ${item.note ? `<p class="muted">${escapeHtml(item.note)}</p>` : ""}
               <div class="inline-row" style="justify-content: end;">
-                <button class="chip danger" type="button" data-transaction-delete="${item.id}">حذف الحركة</button>
+                <button class="chip danger" type="button" data-transaction-delete="${item.id}">ط­ط°ظپ ط§ظ„ط­ط±ظƒط©</button>
               </div>
             </button>
           `;
@@ -1611,7 +1617,7 @@
     function savePerson() {
       const name = elements.personNameInput.value.trim();
       if (!name) {
-        alert("اكتب اسم الشخص قبل الحفظ.");
+        alert("ط§ظƒطھط¨ ط§ط³ظ… ط§ظ„ط´ط®طµ ظ‚ط¨ظ„ ط§ظ„ط­ظپط¸.");
         return;
       }
 
@@ -1638,24 +1644,24 @@
       state.meta.hasSeenWelcome = true;
       persistState();
       renderApp();
-      showToast(ui.editingPersonId ? "تم تعديل الشخص وحفظه." : "تمت إضافة الشخص وحفظه.");
+      showToast(ui.editingPersonId ? "طھظ… طھط¹ط¯ظٹظ„ ط§ظ„ط´ط®طµ ظˆط­ظپط¸ظ‡." : "طھظ…طھ ط¥ط¶ط§ظپط© ط§ظ„ط´ط®طµ ظˆط­ظپط¸ظ‡.");
     }
 
     function saveTransaction() {
       if (!ui.transactionPersonId) {
-        alert("اختر شخصًا قبل حفظ الحركة.");
+        alert("ط§ط®طھط± ط´ط®طµظ‹ط§ ظ‚ط¨ظ„ ط­ظپط¸ ط§ظ„ط­ط±ظƒط©.");
         return;
       }
 
       const amount = parseAmountInput(ui.transactionAmount);
       if (!Number.isFinite(amount) || amount <= 0) {
-        alert("أدخل مبلغًا صحيحًا أكبر من صفر.");
+        alert("ط£ط¯ط®ظ„ ظ…ط¨ظ„ط؛ظ‹ط§ طµط­ظٹط­ظ‹ط§ ط£ظƒط¨ط± ظ…ظ† طµظپط±.");
         return;
       }
 
       const normalizedDate = normalizeTransactionDateInput(ui.transactionDate);
       if (!normalizedDate) {
-        alert("اكتب التاريخ بهذا الشكل: 2026-07-21 أو 21/07/2026");
+        alert("ط§ظƒطھط¨ ط§ظ„طھط§ط±ظٹط® ط¨ظ‡ط°ط§ ط§ظ„ط´ظƒظ„: 2026-07-21 ط£ظˆ 21/07/2026");
         return;
       }
 
@@ -1688,7 +1694,7 @@
       persistState();
       renderApp();
       openModal("personDetailModal");
-      showToast(ui.editingTransactionId ? "تم تعديل الحركة وحفظها." : "تمت إضافة الحركة وحفظها.");
+      showToast(ui.editingTransactionId ? "طھظ… طھط¹ط¯ظٹظ„ ط§ظ„ط­ط±ظƒط© ظˆط­ظپط¸ظ‡ط§." : "طھظ…طھ ط¥ط¶ط§ظپط© ط§ظ„ط­ط±ظƒط© ظˆط­ظپط¸ظ‡ط§.");
     }
 
     function openPersonModal(personId = null) {
@@ -1736,36 +1742,36 @@
     function deletePerson(personId) {
       const person = state.people.find((entry) => entry.id === personId);
       if (!person) return;
-      if (!confirm(`هل تريد حذف ${person.name} وكل الحركات المرتبطة به؟`)) return;
+      if (!confirm(`ظ‡ظ„ طھط±ظٹط¯ ط­ط°ظپ ${person.name} ظˆظƒظ„ ط§ظ„ط­ط±ظƒط§طھ ط§ظ„ظ…ط±طھط¨ط·ط© ط¨ظ‡طں`)) return;
       state.people = state.people.filter((entry) => entry.id !== personId);
       state.transactions = state.transactions.filter((entry) => entry.personId !== personId);
       ui.selectedPersonId = null;
       closeModal("personDetailModal");
       persistState();
       renderApp();
-      showToast("تم حذف الشخص وكل حركاته.");
+      showToast("طھظ… ط­ط°ظپ ط§ظ„ط´ط®طµ ظˆظƒظ„ ط­ط±ظƒط§طھظ‡.");
     }
 
     function deleteTransaction(transactionId) {
-      if (!confirm("هل تريد حذف هذه الحركة نهائيًا؟")) return;
+      if (!confirm("ظ‡ظ„ طھط±ظٹط¯ ط­ط°ظپ ظ‡ط°ظ‡ ط§ظ„ط­ط±ظƒط© ظ†ظ‡ط§ط¦ظٹظ‹ط§طں")) return;
       state.transactions = state.transactions.filter((entry) => entry.id !== transactionId);
       persistState();
       renderApp();
-      showToast("تم حذف الحركة.");
+      showToast("طھظ… ط­ط°ظپ ط§ظ„ط­ط±ظƒط©.");
     }
 
     function restoreDemoData() {
-      if (!confirm("سيتم استبدال البيانات الحالية ببيانات تجريبية. هل تريد المتابعة؟")) return;
+      if (!confirm("ط³ظٹطھظ… ط§ط³طھط¨ط¯ط§ظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ط­ط§ظ„ظٹط© ط¨ط¨ظٹط§ظ†ط§طھ طھط¬ط±ظٹط¨ظٹط©. ظ‡ظ„ طھط±ظٹط¯ ط§ظ„ظ…طھط§ط¨ط¹ط©طں")) return;
       state.people = JSON.parse(JSON.stringify(demoPeople));
       state.transactions = JSON.parse(JSON.stringify(demoTransactions));
       state.meta.hasSeenWelcome = true;
       persistState();
       renderApp();
-      showToast("تمت إعادة البيانات التجريبية.");
+      showToast("طھظ…طھ ط¥ط¹ط§ط¯ط© ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„طھط¬ط±ظٹط¨ظٹط©.");
     }
 
     function clearAllData() {
-      if (!confirm("سيتم حذف كل الأشخاص والحركات من الجهاز. هل أنت متأكد؟")) return;
+      if (!confirm("ط³ظٹطھظ… ط­ط°ظپ ظƒظ„ ط§ظ„ط£ط´ط®ط§طµ ظˆط§ظ„ط­ط±ظƒط§طھ ظ…ظ† ط§ظ„ط¬ظ‡ط§ط². ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯طں")) return;
       state.people = [];
       state.transactions = [];
       ui.selectedPersonId = null;
@@ -1773,7 +1779,7 @@
       persistState();
       renderApp();
       closeModal("personDetailModal");
-      showToast("تم مسح كل البيانات من هذا الجهاز.");
+      showToast("طھظ… ظ…ط³ط­ ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ظ…ظ† ظ‡ط°ط§ ط§ظ„ط¬ظ‡ط§ط².");
     }
 
     function exportBackup() {
@@ -1782,7 +1788,7 @@
       state.settings.lastExportedAt = new Date().toISOString();
       persistState();
       renderSettings();
-      showToast("تم تصدير النسخة الاحتياطية بنجاح.");
+      showToast("طھظ… طھطµط¯ظٹط± ط§ظ„ظ†ط³ط®ط© ط§ظ„ط§ط­طھظٹط§ط·ظٹط© ط¨ظ†ط¬ط§ط­.");
     }
 
     function exportReport() {
@@ -1792,20 +1798,20 @@
       const net = totalClaims - totalDebts;
 
       const lines = [
-        "تقرير تطبيق إلي وعليّ",
-        `التاريخ: ${formatDisplayDate(todayString())}`,
+        "طھظ‚ط±ظٹط± طھط·ط¨ظٹظ‚ ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘",
+        `ط§ظ„طھط§ط±ظٹط®: ${formatDisplayDate(todayString())}`,
         "",
-        `إجمالي إلي: ${formatAmount(totalClaims)}`,
-        `إجمالي عليّ: ${formatAmount(totalDebts)}`,
-        `الصافي: ${formatAmount(Math.abs(net))} ${net > 0 ? "(لصالحي)" : net < 0 ? "(عليّ)" : "(متوازن)"}`,
+        `ط¥ط¬ظ…ط§ظ„ظٹ ط¥ظ„ظٹ: ${formatAmount(totalClaims)}`,
+        `ط¥ط¬ظ…ط§ظ„ظٹ ط¹ظ„ظٹظ‘: ${formatAmount(totalDebts)}`,
+        `ط§ظ„طµط§ظپظٹ: ${formatAmount(Math.abs(net))} ${net > 0 ? "(ظ„طµط§ظ„ط­ظٹ)" : net < 0 ? "(ط¹ظ„ظٹظ‘)" : "(ظ…طھظˆط§ط²ظ†)"}`,
         "",
-        "الأشخاص:",
+        "ط§ظ„ط£ط´ط®ط§طµ:",
         ...balances.map((person) => `- ${person.name}: ${getBalanceLabel(person.net)} ${formatAmount(Math.abs(person.net))}`),
         "",
-        "آخر الحركات:",
+        "ط¢ط®ط± ط§ظ„ط­ط±ظƒط§طھ:",
         ...sortTransactionsDesc(state.transactions).slice(0, 8).map((item) => {
           const person = state.people.find((entry) => entry.id === item.personId);
-          return `- ${person?.name ?? "شخص غير معروف"} | ${getTransactionLabel(item.type)} | ${formatAmount(item.amount)} | ${formatDisplayDate(item.date)}${item.note ? ` | ${item.note}` : ""}`;
+          return `- ${person?.name ?? "ط´ط®طµ ط؛ظٹط± ظ…ط¹ط±ظˆظپ"} | ${getTransactionLabel(item.type)} | ${formatAmount(item.amount)} | ${formatDisplayDate(item.date)}${item.note ? ` | ${item.note}` : ""}`;
         })
       ];
 
@@ -1813,7 +1819,7 @@
       state.settings.lastExportedAt = new Date().toISOString();
       persistState();
       renderSettings();
-      showToast("تم تصدير التقرير النصي.");
+      showToast("طھظ… طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط± ط§ظ„ظ†طµظٹ.");
     }
 
     async function importBackup(event) {
@@ -1824,11 +1830,11 @@
         const raw = await file.text();
         const parsed = JSON.parse(raw);
         if (!Array.isArray(parsed.people) || !Array.isArray(parsed.transactions) || !parsed.settings) {
-          alert("هذا الملف لا يبدو نسخة صحيحة من التطبيق.");
+          alert("ظ‡ط°ط§ ط§ظ„ظ…ظ„ظپ ظ„ط§ ظٹط¨ط¯ظˆ ظ†ط³ط®ط© طµط­ظٹط­ط© ظ…ظ† ط§ظ„طھط·ط¨ظٹظ‚.");
           return;
         }
 
-        if (!confirm("سيتم استبدال البيانات الحالية بالنسخة المستوردة. هل تريد المتابعة؟")) {
+        if (!confirm("ط³ظٹطھظ… ط§ط³طھط¨ط¯ط§ظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ط­ط§ظ„ظٹط© ط¨ط§ظ„ظ†ط³ط®ط© ط§ظ„ظ…ط³طھظˆط±ط¯ط©. ظ‡ظ„ طھط±ظٹط¯ ط§ظ„ظ…طھط§ط¨ط¹ط©طں")) {
           return;
         }
 
@@ -1837,30 +1843,23 @@
           ...parsed,
           settings: {
             ...defaultState.settings,
-            ...(parsed.settings || {}),
-            exchangeRates: {
-              ...defaultState.settings.exchangeRates,
-              ...(parsed.settings?.exchangeRates || {})
-            },
-            exchangeRatesMeta: {
-              ...defaultState.settings.exchangeRatesMeta,
-              ...(parsed.settings?.exchangeRatesMeta || {})
-            }
+            dateStyle: parsed.settings?.dateStyle || defaultState.settings.dateStyle,
+            lastExportedAt: parsed.settings?.lastExportedAt || null
           },
           meta: { ...defaultState.meta, ...(parsed.meta || {}), lastLocalSaveAt: new Date().toISOString() }
         };
         persistState();
         renderApp();
-        showToast("تم استيراد النسخة الاحتياطية بنجاح.");
+        showToast("طھظ… ط§ط³طھظٹط±ط§ط¯ ط§ظ„ظ†ط³ط®ط© ط§ظ„ط§ط­طھظٹط§ط·ظٹط© ط¨ظ†ط¬ط§ط­.");
       } catch {
-        alert("تعذر قراءة الملف. تأكد أنه JSON صحيح من نفس التطبيق.");
+        alert("طھط¹ط°ط± ظ‚ط±ط§ط،ط© ط§ظ„ظ…ظ„ظپ. طھط£ظƒط¯ ط£ظ†ظ‡ JSON طµط­ظٹط­ ظ…ظ† ظ†ظپط³ ط§ظ„طھط·ط¨ظٹظ‚.");
       } finally {
         event.target.value = "";
       }
     }
 
     function showAddToHomeInfo() {
-      showToast("على الآيفون: افتح الرابط في Safari ثم Share ثم Add to Home Screen.");
+      showToast("ط¹ظ„ظ‰ ط§ظ„ط¢ظٹظپظˆظ†: ط§ظپطھط­ ط§ظ„ط±ط§ط¨ط· ظپظٹ Safari ط«ظ… Share ط«ظ… Add to Home Screen.");
     }
 
     function resetPersonForm() {
@@ -1942,17 +1941,17 @@
       const borrowed = transactions.filter((item) => item.type === "borrowedFromHim").reduce((sum, item) => sum + item.amount, 0);
       const paid = transactions.filter((item) => item.type === "paidToHim").reduce((sum, item) => sum + item.amount, 0);
       const netFlow = lent + paid - collected - borrowed;
-      const subtitle = ui.reportRange === "month" ? currentMonth : ui.reportRange === "30days" ? "آخر 30 يوم" : "كل البيانات";
+      const subtitle = ui.reportRange === "month" ? currentMonth : ui.reportRange === "30days" ? "ط¢ط®ط± 30 ظٹظˆظ…" : "ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ";
       const mostActive = [...reportBalances].sort((a, b) => b.transactionsCount - a.transactionsCount)[0] ?? null;
       const lastActivityDate = sortTransactionsDesc(transactions)[0]?.date ?? null;
       const insight =
         transactions.length === 0
-          ? "لا توجد حركة في هذه الفترة بعد."
+          ? "ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط© ظپظٹ ظ‡ط°ظ‡ ط§ظ„ظپطھط±ط© ط¨ط¹ط¯."
           : netFlow > 0
-            ? "الفترة الحالية تميل لصالحك أكثر من الالتزامات."
+            ? "ط§ظ„ظپطھط±ط© ط§ظ„ط­ط§ظ„ظٹط© طھظ…ظٹظ„ ظ„طµط§ظ„ط­ظƒ ط£ظƒط«ط± ظ…ظ† ط§ظ„ط§ظ„طھط²ط§ظ…ط§طھ."
             : netFlow < 0
-              ? "الفترة الحالية فيها التزامات أكثر وتحتاج متابعة."
-              : "الفترة الحالية متوازنة تقريبًا بين الداخل والخارج.";
+              ? "ط§ظ„ظپطھط±ط© ط§ظ„ط­ط§ظ„ظٹط© ظپظٹظ‡ط§ ط§ظ„طھط²ط§ظ…ط§طھ ط£ظƒط«ط± ظˆطھط­طھط§ط¬ ظ…طھط§ط¨ط¹ط©."
+              : "ط§ظ„ظپطھط±ط© ط§ظ„ط­ط§ظ„ظٹط© ظ…طھظˆط§ط²ظ†ط© طھظ‚ط±ظٹط¨ظ‹ط§ ط¨ظٹظ† ط§ظ„ط¯ط§ط®ظ„ ظˆط§ظ„ط®ط§ط±ط¬.";
 
       return {
         subtitle,
@@ -1972,21 +1971,6 @@
 
     function getSelectedPerson() {
       return state.people.find((person) => person.id === ui.selectedPersonId) ?? null;
-    }
-
-    function createRateField(code, label, value) {
-      return `
-        <div class="stack" style="gap: 8px;">
-          <label class="helper">1 ${label} = كم شيكل؟</label>
-          <input
-            class="text-input"
-            data-rate-code="${code}"
-            value="${escapeHtml(String(value ?? ""))}"
-            inputmode="decimal"
-            placeholder="أدخل السعر"
-          />
-        </div>
-      `;
     }
 
     function createSummaryCard(label, value, hint, tone) {
@@ -2010,7 +1994,7 @@
     }
 
     function createDetailFilterChips() {
-      const options = [{ value: "all", label: "الكل" }, ...transactionTypes.map((item) => ({ value: item.value, label: item.label }))];
+      const options = [{ value: "all", label: "ط§ظ„ظƒظ„" }, ...transactionTypes.map((item) => ({ value: item.value, label: item.label }))];
       return options.map((option) => createFilterChip(option.label, ui.personDetailFilter === option.value, `detail-filter:${option.value}`)).join("");
     }
 
@@ -2092,7 +2076,6 @@
             transactions: Array.isArray(legacyParsed.transactions) ? legacyParsed.transactions : [],
             settings: {
               ...structuredClone(defaultState).settings,
-              currency: legacyParsed.settings?.currency || structuredClone(defaultState).settings.currency,
               dateStyle: legacyParsed.settings?.dateStyle || structuredClone(defaultState).settings.dateStyle,
               lastExportedAt: legacyParsed.settings?.lastExportedAt || null
             },
@@ -2103,69 +2086,35 @@
           };
         }
         const parsed = JSON.parse(raw);
-        const loaded = {
+        return {
           ...structuredClone(defaultState),
           ...parsed,
           settings: {
             ...structuredClone(defaultState).settings,
-            ...(parsed.settings || {}),
-            exchangeRates: {
-              ...structuredClone(defaultState).settings.exchangeRates,
-              ...(parsed.settings?.exchangeRates || {})
-            },
-            exchangeRatesMeta: {
-              ...structuredClone(defaultState).settings.exchangeRatesMeta,
-              ...(parsed.settings?.exchangeRatesMeta || {})
-            }
+            dateStyle: parsed.settings?.dateStyle || structuredClone(defaultState).settings.dateStyle,
+            lastExportedAt: parsed.settings?.lastExportedAt || null
           },
           meta: { ...structuredClone(defaultState).meta, ...(parsed.meta || {}) }
         };
-        return sanitizeLoadedState(loaded);
       } catch {
         return structuredClone(defaultState);
       }
     }
 
-    function sanitizeLoadedState(loaded) {
-      const meta = loaded.settings?.exchangeRatesMeta || {};
-      const schemaVersion = Number(meta.schemaVersion || 0);
-      if (schemaVersion >= 2) {
-        return loaded;
-      }
-
-      loaded.settings.exchangeRates = {
-        USD: null,
-        JOD: null,
-        EUR: null
-      };
-      loaded.settings.exchangeRatesMeta = {
-        ...structuredClone(defaultState).settings.exchangeRatesMeta,
-        schemaVersion: 2,
-        source: "none",
-        error: "legacy_cleared"
-      };
-      return loaded;
-    }
-
     function updateSavePill() {
       const text = ui.saveState === "saving"
-        ? "جاري الحفظ"
+        ? "ط¬ط§ط±ظٹ ط§ظ„ط­ظپط¸"
         : ui.saveState === "error"
-          ? "في مشكلة"
+          ? "ظپظٹ ظ…ط´ظƒظ„ط©"
           : state.meta.lastLocalSaveAt
-            ? `محفوظ ${formatDisplayDateTime(state.meta.lastLocalSaveAt)}`
-            : "بانتظار أول حفظ";
+            ? `ظ…ط­ظپظˆط¸ ${formatDisplayDateTime(state.meta.lastLocalSaveAt)}`
+            : "ط¨ط§ظ†طھط¸ط§ط± ط£ظˆظ„ ط­ظپط¸";
       elements.saveStatePill.textContent = text;
       elements.saveStatePill.dataset.state = ui.saveState;
     }
 
     function formatAmount(value) {
-      return `${new Intl.NumberFormat("ar").format(value)} شيكل`;
-    }
-
-    function formatAmountByCurrency(value, currencyCode) {
-      const suffix = currencyCode === "ILS" ? "شيكل" : currencyCode;
-      return `${new Intl.NumberFormat("ar").format(value)} ${suffix}`;
+      return `${new Intl.NumberFormat("ar").format(value)} ط´ظٹظƒظ„`;
     }
 
     function formatDisplayDate(date) {
@@ -2222,15 +2171,15 @@
     }
 
     function getBalanceLabel(net) {
-      if (net > 0) return "إلك عليه";
-      if (net < 0) return "عليك إله";
-      return "الحساب مسكر";
+      if (net > 0) return "ط¥ظ„ظƒ ط¹ظ„ظٹظ‡";
+      if (net < 0) return "ط¹ظ„ظٹظƒ ط¥ظ„ظ‡";
+      return "ط§ظ„ط­ط³ط§ط¨ ظ…ط³ظƒط±";
     }
 
     function getBalanceRole(net) {
-      if (net > 0) return "دائن";
-      if (net < 0) return "مدين";
-      return "مسكر";
+      if (net > 0) return "ط¯ط§ط¦ظ†";
+      if (net < 0) return "ظ…ط¯ظٹظ†";
+      return "ظ…ط³ظƒط±";
     }
 
     function getTransactionLabel(type) {
@@ -2238,10 +2187,10 @@
     }
 
     function getTransactionTypeHint(type) {
-      if (type === "lentToHim") return "يزيد المبلغ الذي لك عليه.";
-      if (type === "collectedFromHim") return "ينقص المبلغ الذي لك عليه.";
-      if (type === "borrowedFromHim") return "يزيد المبلغ الذي عليك إله.";
-      if (type === "paidToHim") return "ينقص المبلغ الذي عليك إله.";
+      if (type === "lentToHim") return "ظٹط²ظٹط¯ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ظ„ظƒ ط¹ظ„ظٹظ‡.";
+      if (type === "collectedFromHim") return "ظٹظ†ظ‚طµ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ظ„ظƒ ط¹ظ„ظٹظ‡.";
+      if (type === "borrowedFromHim") return "ظٹط²ظٹط¯ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ط¹ظ„ظٹظƒ ط¥ظ„ظ‡.";
+      if (type === "paidToHim") return "ظٹظ†ظ‚طµ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ط¹ظ„ظٹظƒ ط¥ظ„ظ‡.";
       return "";
     }
 
@@ -2257,88 +2206,6 @@
 
     function createId(prefix) {
       return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
-    }
-
-    async function fetchMarketRates(force = false) {
-      if (ui.ratesLoading) return;
-      const lastFetchedAt = state.settings.exchangeRatesMeta?.lastFetchedAt;
-      const recentlyFetched = lastFetchedAt && (Date.now() - new Date(lastFetchedAt).getTime()) < 30 * 60 * 1000;
-      if (!force && recentlyFetched) return;
-
-      ui.ratesLoading = true;
-      if (ui.activeTab === "settings") renderSettings();
-
-      try {
-        const response = await fetch("https://api.frankfurter.dev/v1/latest?base=ILS&symbols=USD,JOD,EUR", {
-          headers: { Accept: "application/json" }
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-        const payload = await response.json();
-        const rates = payload?.rates || {};
-        const nextRates = {
-          USD: Number.isFinite(Number(rates.USD)) && Number(rates.USD) > 0 ? 1 / Number(rates.USD) : null,
-          JOD: Number.isFinite(Number(rates.JOD)) && Number(rates.JOD) > 0 ? 1 / Number(rates.JOD) : null,
-          EUR: Number.isFinite(Number(rates.EUR)) && Number(rates.EUR) > 0 ? 1 / Number(rates.EUR) : null
-        };
-
-        if (!nextRates.USD || !nextRates.JOD || !nextRates.EUR) {
-          throw new Error("Missing rates");
-        }
-
-        state.settings.exchangeRates = nextRates;
-        state.settings.exchangeRatesMeta = {
-          schemaVersion: 2,
-          source: "frankfurter",
-          lastFetchedAt: payload?.date ? `${payload.date}T00:00:00` : new Date().toISOString(),
-          lastAttemptAt: new Date().toISOString(),
-          error: null
-        };
-        persistState();
-        if (ui.activeTab === "settings") renderSettings();
-        showToast("تم جلب سعر العملات بنجاح.");
-      } catch {
-        state.settings.exchangeRatesMeta = {
-          schemaVersion: 2,
-          ...(state.settings.exchangeRatesMeta || {}),
-          lastAttemptAt: new Date().toISOString(),
-          error: "fetch_failed"
-        };
-        persistState();
-        if (ui.activeTab === "settings") renderSettings();
-        showToast("تعذر جلب السعر الآن.");
-      } finally {
-        ui.ratesLoading = false;
-        if (ui.activeTab === "settings") renderSettings();
-      }
-    }
-
-    function renderConverterResult() {
-      if (!elements.converterResult) return;
-      const amount = parseAmountInput(ui.converterAmount);
-      const rate = Number(state.settings.exchangeRates?.[ui.converterCurrency] ?? 0);
-      if (!Number.isFinite(amount) || amount <= 0 || !Number.isFinite(rate) || rate <= 0) {
-        elements.converterResult.textContent = "حدّث السعر أولًا";
-        return;
-      }
-      elements.converterResult.textContent = formatAmountByCurrency(amount * rate, "ILS");
-    }
-
-    function getExchangeRatesStatusText() {
-      if (ui.ratesLoading) return "جارٍ جلب السعر الرسمي...";
-      const meta = state.settings.exchangeRatesMeta || {};
-      if (meta.source === "frankfurter" && meta.lastFetchedAt) {
-        return `آخر سعر مجلوب من Frankfurter: ${formatDisplayDate(meta.lastFetchedAt.slice(0, 10))}`;
-      }
-      if (meta.source === "manual") {
-        return "الأسعار الحالية يدوية.";
-      }
-      if (meta.error === "fetch_failed") {
-        return "تعذر جلب السعر الآن. جرّب زر التحديث مرة ثانية.";
-      }
-      return "بانتظار أول جلب من المصدر.";
     }
 
     function getTransactionSortValue(item) {
@@ -2418,3 +2285,4 @@
   </script>
 </body>
 </html>
+
