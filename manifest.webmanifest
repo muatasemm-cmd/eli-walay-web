@@ -1,0 +1,19 @@
+{
+  "name": "إلي وعليّ | آيفون",
+  "short_name": "إلي وعليّ",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4efe7",
+  "theme_color": "#1f221b",
+  "lang": "ar",
+  "dir": "rtl",
+  "description": "نسخة ويب ثابتة من إلي وعليّ، تحفظ محليًا على الجهاز وتدعم النسخ الاحتياطي JSON.",
+  "icons": [
+    {
+      "src": "./app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
