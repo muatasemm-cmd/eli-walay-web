@@ -1,8 +1,8 @@
-const CACHE_NAME = "eli-walay-web-v4";
+const CACHE_NAME = "eli-walay-web-v5";
 const CORE = [
   "./",
   "./index.html",
-  "./iphone-v4.html",
+  "./iphone-v5.html",
   "./manifest.webmanifest",
   "./app-icon.svg",
   "./service-worker.js"
@@ -35,7 +35,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => caches.match("./iphone-v4.html"));
+        .catch(() => caches.match("./iphone-v5.html"));
     })
   );
 });
