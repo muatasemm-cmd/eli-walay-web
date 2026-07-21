@@ -1,0 +1,2314 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘ | ط¢ظٹظپظˆظ† | v8</title>
+  <meta name="theme-color" content="#1f221b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘" />
+  <meta name="description" content="ظ†ط³ط®ط© ظˆظٹط¨ ط«ط§ط¨طھط© ظ…ظ† ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘ ظ„ظ„ط¢ظٹظپظˆظ†طŒ ط¨ط­ظپط¸ ظ…ط­ظ„ظٹ ظˆظ†ط³ط®ط© ط§ط­طھظٹط§ط·ظٹط©." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./app-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./app-icon.svg" />
+  <style>
+    :root {
+      --bg: #f4efe7;
+      --surface: rgba(255, 250, 243, 0.92);
+      --surface-strong: #fffaf3;
+      --surface-soft: #f6efe4;
+      --line: #e5dac8;
+      --text: #191714;
+      --muted: #70685c;
+      --green: #1d6c5e;
+      --green-soft: #dceee6;
+      --red: #a14439;
+      --red-soft: #f7dfd9;
+      --gold: #a06c2d;
+      --gold-soft: #f0e3c3;
+      --blue: #305a8f;
+      --blue-soft: #dde8f7;
+      --dark: #1f221b;
+      --shadow: 0 16px 34px rgba(25, 23, 20, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "SF Pro Display", "Segoe UI", Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(240, 227, 195, 0.72), transparent 26%),
+        radial-gradient(circle at left center, rgba(220, 238, 230, 0.7), transparent 22%),
+        linear-gradient(180deg, #faf5ee 0%, #f3ece4 52%, #faf7f1 100%);
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .app-shell {
+      max-width: 560px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding:
+        calc(env(safe-area-inset-top, 0px) + 16px)
+        16px
+        calc(env(safe-area-inset-bottom, 0px) + 108px);
+    }
+
+    .stack,
+    .section-stack,
+    .panel-grid,
+    .summary-grid,
+    .actions-grid,
+    .metrics-grid,
+    .list-stack,
+    .modal-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .surface,
+    .hero,
+    .card,
+    .topbar,
+    .empty-block,
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .topbar,
+    .hero,
+    .card,
+    .empty-block,
+    .modal-card {
+      padding: 18px;
+    }
+
+    .topbar {
+      margin-bottom: 16px;
+      background:
+        radial-gradient(circle at top left, rgba(221, 232, 247, 0.8), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(250, 244, 235, 0.92));
+    }
+
+    .topbar-head,
+    .hero-head,
+    .section-head,
+    .person-head,
+    .detail-head,
+    .inline-row,
+    .status-row,
+    .bottom-nav {
+      display: flex;
+      gap: 12px;
+    }
+
+    .topbar-head,
+    .hero-head,
+    .section-head,
+    .detail-head,
+    .status-row {
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    h1, h2, h3, h4 {
+      letter-spacing: -0.03em;
+      font-weight: 900;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .version-badge,
+    .save-pill,
+    .chip,
+    .balance-pill,
+    .filter-chip,
+    .tiny-chip,
+    .type-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: none;
+      transition: 180ms ease;
+    }
+
+    .version-badge,
+    .save-pill,
+    .chip,
+    .filter-chip,
+    .tiny-chip {
+      padding: 9px 14px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .version-badge {
+      background: linear-gradient(135deg, rgba(29, 108, 94, 0.12), rgba(48, 90, 143, 0.14));
+      color: var(--dark);
+      font-size: 0.82rem;
+    }
+
+    .save-pill {
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 0.78rem;
+    }
+
+    .save-pill[data-state="saving"] {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    .save-pill[data-state="error"] {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at top right, rgba(240, 227, 195, 0.55), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(248, 241, 229, 0.92));
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle,
+    .subtitle,
+    .helper,
+    .note {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .metrics-grid,
+    .summary-grid,
+    .actions-grid,
+    .panel-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .metric,
+    .summary-card,
+    .action-card,
+    .panel-card {
+      background: var(--surface-soft);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(229, 218, 200, 0.9);
+      padding: 16px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .metric span,
+    .summary-card span,
+    .panel-card span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .metric strong,
+    .summary-card strong,
+    .panel-card strong {
+      font-size: 1.4rem;
+      font-weight: 900;
+    }
+
+    .summary-card[data-tone="green"] { background: var(--green-soft); }
+    .summary-card[data-tone="red"] { background: var(--red-soft); }
+    .summary-card[data-tone="gold"] { background: var(--gold-soft); }
+    .summary-card[data-tone="blue"] { background: var(--blue-soft); }
+
+    .action-card {
+      cursor: pointer;
+      text-align: right;
+    }
+
+    .action-card strong {
+      font-size: 1rem;
+    }
+
+    .action-card small {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .section-head h2,
+    .section-head h3 {
+      font-size: 1.35rem;
+    }
+
+    .section-head p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .chip,
+    .filter-chip,
+    .tiny-chip {
+      background: #efe7db;
+      color: var(--muted);
+    }
+
+    .chip-dark { background: #e4d9c5; color: var(--text); }
+    .filter-chip.active,
+    .tiny-chip.active {
+      background: var(--dark);
+      color: #fff8ed;
+    }
+
+    .chip.primary {
+      background: linear-gradient(135deg, var(--green), #2d8a79);
+      color: #fffdf8;
+    }
+
+    .chip.warning {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    .chip.danger {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .filters-row,
+    .chips-row,
+    .tabs-row {
+      display: flex;
+      gap: 10px;
+      overflow: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .filters-row::-webkit-scrollbar,
+    .chips-row::-webkit-scrollbar,
+    .tabs-row::-webkit-scrollbar { display: none; }
+
+    .text-input,
+    .textarea {
+      width: 100%;
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      background: rgba(255, 255, 255, 0.88);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .person-card,
+    .transaction-card,
+    .priority-card,
+    .status-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      border-radius: 24px;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .person-head {
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .person-name {
+      font-size: 1.28rem;
+      font-weight: 900;
+    }
+
+    .person-amount,
+    .detail-amount {
+      font-size: 2.1rem;
+      font-weight: 900;
+    }
+
+    .balance-pill {
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .balance-pill.green { background: var(--green-soft); color: var(--green); }
+    .balance-pill.red { background: var(--red-soft); color: var(--red); }
+    .balance-pill.gold { background: var(--gold-soft); color: var(--gold); }
+
+    .muted {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      right: 50%;
+      transform: translateX(50%);
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+      width: min(540px, calc(100% - 24px));
+      padding: 12px;
+      background: rgba(31, 34, 27, 0.96);
+      border-radius: 30px;
+      box-shadow: 0 16px 30px rgba(31, 34, 27, 0.26);
+      z-index: 30;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-item {
+      flex: 1;
+      min-height: 58px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 248, 237, 0.72);
+      cursor: pointer;
+      border-radius: 22px;
+      display: grid;
+      gap: 4px;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 248, 237, 0.12);
+      color: #fff8ed;
+    }
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(25, 23, 20, 0.38);
+      display: grid;
+      place-items: end center;
+      padding: 18px;
+      z-index: 60;
+    }
+
+    .modal-card {
+      width: min(560px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+    }
+
+    .modal-head,
+    .detail-head {
+      margin-bottom: 10px;
+    }
+
+    .modal-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .button {
+      border: none;
+      border-radius: 20px;
+      padding: 15px 16px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--green), #2d8a79);
+      color: #fffdf8;
+    }
+
+    .button.secondary {
+      background: #f3ecdf;
+      color: var(--text);
+    }
+
+    .button.danger {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .preview-card,
+    .detail-hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,241,229,0.94));
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      border-radius: 22px;
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .detail-hero {
+      margin-bottom: 14px;
+    }
+
+    .detail-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .detail-stat {
+      border-radius: 20px;
+      padding: 14px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .detail-stat.green { background: var(--green-soft); }
+    .detail-stat.blue { background: var(--blue-soft); }
+    .detail-stat.red { background: var(--red-soft); }
+    .detail-stat.gold { background: var(--gold-soft); }
+
+    .detail-stat span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .detail-stat strong {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
+
+    .empty-block {
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    .welcome-card {
+      background: linear-gradient(135deg, rgba(221, 232, 247, 0.92), rgba(240, 227, 195, 0.9));
+      border-radius: 26px;
+      border: 1px solid rgba(229, 218, 200, 0.92);
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .toast-wrap {
+      position: fixed;
+      inset-inline: 0;
+      top: calc(env(safe-area-inset-top, 0px) + 12px);
+      display: grid;
+      justify-items: center;
+      z-index: 80;
+      pointer-events: none;
+      padding: 0 16px;
+    }
+
+    .toast {
+      min-width: min(440px, calc(100vw - 32px));
+      background: rgba(31, 34, 27, 0.96);
+      color: #fff8ed;
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: 0 16px 30px rgba(31, 34, 27, 0.22);
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+      text-align: right;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .empty-block h3 {
+      margin-bottom: 8px;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-card {
+      cursor: default;
+    }
+
+    .tiny-help {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 560px) {
+      .metrics-grid,
+      .summary-grid,
+      .actions-grid,
+      .panel-grid,
+      .detail-stats,
+      .modal-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .person-amount,
+      .detail-amount {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-head">
+        <div class="stack" style="gap: 6px;">
+          <p class="eyebrow">ظ†ط³ط®ط© ظˆظٹط¨ ط«ط§ط¨طھط© ظ„ظ„ط¢ظٹظپظˆظ†</p>
+          <h1>ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘</h1>
+          <p class="subtitle">ط¯ظٹظˆظ†ظƒطŒ ظ…ط³طھط­ظ‚ط§طھظƒطŒ ظˆط­ط±ظƒط§طھظƒ ظƒظ„ظ‡ط§ ظپظٹ ظ…ظƒط§ظ† ظˆط§ط­ط¯. طھط­ظپط¸ ظ…ط­ظ„ظٹظ‹ط§ ظˆطھظپطھط­ ظƒط±ط§ط¨ط· ط«ط§ط¨طھ ظ…ظ† Safari.</p>
+        </div>
+        <div class="stack" style="justify-items: end; gap: 8px;">
+          <span class="version-badge">v7</span>
+          <span class="save-pill" id="saveStatePill" data-state="idle">ط¨ط§ظ†طھط¸ط§ط± ط£ظˆظ„ ط­ظپط¸</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="section-stack">
+      <section class="screen active" id="screen-home">
+        <div class="hero">
+          <div class="hero-head">
+            <div class="stack" style="gap: 8px;">
+              <p class="eyebrow">ظ„ظˆط­ط© ط§ظ„ظٹظˆظ…</p>
+              <h2 class="hero-title">ط§ط¨ط¯ط£ ظ…ظ† ط§ظ„طµط­ظٹط­</h2>
+              <p class="hero-subtitle" id="heroInsight">ظƒظ„ ط´ظٹط، طھط­طھ ط§ظ„ط³ظٹط·ط±ط©طŒ ظˆظ…ط¬ط±ط¯ ظ„ظ…ط³طھظٹظ† طھظƒظپظٹط§ظ† ظ„ط¥ط¶ط§ظپط© ط£ظٹ ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©.</p>
+            </div>
+            <div class="stack" style="justify-items: end; gap: 10px;">
+              <button class="chip primary" id="quickAddTransaction">ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©</button>
+              <button class="chip chip-dark" id="quickAddPerson">ط´ط®طµ ط¬ط¯ظٹط¯</button>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric">
+              <span>ط¹ط¯ط¯ ط§ظ„ط£ط´ط®ط§طµ</span>
+              <strong id="metricPeople">0</strong>
+            </div>
+            <div class="metric">
+              <span>ط­ط³ط§ط¨ط§طھ ظ…ظپطھظˆط­ط©</span>
+              <strong id="metricOpen">0</strong>
+            </div>
+            <div class="metric">
+              <span>ط¹ط¯ط¯ ط§ظ„ط­ط±ظƒط§طھ</span>
+              <strong id="metricTransactions">0</strong>
+            </div>
+            <div class="metric">
+              <span>ط¢ط®ط± ط­ظپط¸</span>
+              <strong id="metricLastSave">ظ„ط§ ظٹظˆط¬ط¯</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="welcomeCardSlot"></div>
+        <div class="summary-grid" id="summaryGrid"></div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط£ظˆظ„ظˆظٹط© ط§ظ„ظٹظˆظ…</h2>
+              <p>ظ‡ط°ظ‡ ط£ظƒط«ط± ط§ظ„ط­ط§ظ„ط§طھ ط§ظ„طھظٹ طھط­طھط§ط¬ ظ…طھط§ط¨ط¹ط© ط§ظ„ط¢ظ†</p>
+            </div>
+          </div>
+          <div class="list-stack" id="priorityList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط¢ط®ط± ط§ظ„ط­ط±ظƒط§طھ</h2>
+              <p>ظƒظ„ ط¬ط¯ظٹط¯ ظ…ط³ط¬ظ„ ظ…ط¨ط§ط´ط±ط©</p>
+            </div>
+          </div>
+          <div class="list-stack" id="recentTransactionsList"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-people">
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط§ظ„ط£ط´ط®ط§طµ</h2>
+              <p>ط§ط¨ط­ط«طŒ ظپظ„طھط±طŒ ظˆط±طھط¨ ظƒظ…ط§ ظٹظ†ط§ط³ط¨ظƒ</p>
+            </div>
+            <button class="chip primary" id="peopleAddButton">+ ط´ط®طµ</button>
+          </div>
+
+          <div class="field-grid">
+            <input class="text-input" id="peopleSearch" placeholder="ط§ط¨ط­ط« ط¨ط§ظ„ط§ط³ظ… ط£ظˆ ط§ظ„ظ…ظ„ط§ط­ط¸ط© ط£ظˆ ط§ظ„ظ‡ط§طھظپ" enterkeyhint="search" autocapitalize="off" />
+            <div class="filters-row" id="peopleFilterRow"></div>
+            <div class="filters-row" id="peopleSortRow"></div>
+            <button class="chip chip-dark" id="resetPeopleFilters" hidden>ط¥ط¹ط§ط¯ط© ط¶ط¨ط· ط§ظ„ط¨ط­ط« ظˆط§ظ„ظپط±ط²</button>
+          </div>
+        </div>
+
+        <div class="panel-grid" id="peopleSummaryGrid"></div>
+        <div class="list-stack" id="peopleList"></div>
+      </section>
+
+      <section class="screen" id="screen-reports">
+        <div class="hero">
+          <div class="stack" style="gap: 8px;">
+            <p class="eyebrow">طھظ‚ط§ط±ظٹط± ط°ظƒظٹط©</p>
+            <h2 class="hero-title" style="font-size: 2.1rem;">ط´ظˆظپ ط§ظ„طµظˆط±ط© ظƒط§ظ…ظ„ط©</h2>
+            <p class="hero-subtitle">ط¨ط¯ظ„ ظ…ط§ طھطھط¹ط¨ طھط¬ظ…ط¹ ط§ظ„ط£ط±ظ‚ط§ظ…طŒ ط§ظ„طھط·ط¨ظٹظ‚ ظٹظ„ط®طµ ط§ظ„ظپطھط±ط© ظˆظٹظ‚ظˆظ„ ظ„ظƒ ط£ظٹظ† طھط±ظƒط².</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ظ…ظ„ط®طµ ط§ظ„طھظ‚ط§ط±ظٹط±</h2>
+              <p id="reportsSubtitle">ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ</p>
+            </div>
+          </div>
+          <div class="filters-row" id="reportRangeRow"></div>
+          <p class="note" id="reportInsight">ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط© ظپظٹ ظ‡ط°ظ‡ ط§ظ„ظپطھط±ط© ط¨ط¹ط¯.</p>
+          <div class="panel-grid" id="reportsGrid"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط£ط¹ظ„ظ‰ ظ†ط§ط³ ط¥ظ„ظƒ ط¹ظ„ظٹظ‡ظ…</h2>
+              <p>ط±طھط¨ ط§ظ„طھط­طµظٹظ„ ظ…ظ† ط§ظ„ط£ط¹ظ„ظ‰</p>
+            </div>
+          </div>
+          <div class="list-stack" id="topClaimsList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط£ط¹ظ„ظ‰ ظ†ط§ط³ ط¹ظ„ظٹظƒ ط¥ظ„ظ‡ظ…</h2>
+              <p>ظ‡ط°ظ‡ ط§ظ„ظ…ط¨ط§ظ„ط؛ طھط­طھط§ط¬ طھط±طھظٹط¨ ط¯ظپط¹</p>
+            </div>
+          </div>
+          <div class="list-stack" id="topDebtsList"></div>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-settings">
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط­ط§ظ„ط© ط§ظ„طھط·ط¨ظٹظ‚</h2>
+              <p>ظ…ط¹ظ„ظˆظ…ط§طھ ط³ط±ظٹط¹ط©</p>
+            </div>
+          </div>
+          <div class="status-list" id="statusList"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط·ط±ظٹظ‚ط© ط¹ط±ط¶ ط§ظ„طھط§ط±ظٹط®</h2>
+              <p>ط§ط®طھط± ط§ظ„ط´ظƒظ„ ط§ظ„ط°ظٹ طھظپط¶ظ„ظ‡</p>
+            </div>
+          </div>
+          <div class="filters-row" id="dateStyleRow"></div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ظ†ط³ط® ظˆظ†ط³ط® ط§ط­طھظٹط§ط·ظٹ</h2>
+              <p>ظ„ظ„ط­ظ…ط§ظٹط©طŒ ط´ط§ط±ظƒ ظ…ظ„ظپ ط§ط­طھظٹط§ط·ظٹ ط¨ظٹظ† ظپطھط±ط© ظˆظپطھط±ط©</p>
+            </div>
+          </div>
+          <div class="actions-grid">
+            <button class="action-card" id="exportReportButton" type="button">
+              <strong>طھطµط¯ظٹط± طھظ‚ط±ظٹط± ظ†طµظٹ</strong>
+              <small>ظ„ظ„ظ…ط´ط§ط±ظƒط© ط£ظˆ ط§ظ„ط·ط¨ط§ط¹ط© ط§ظ„ط³ط±ظٹط¹ط©</small>
+            </button>
+            <button class="action-card" id="exportBackupButton" type="button">
+              <strong>طھطµط¯ظٹط± JSON</strong>
+              <small>ظ†ط³ط®ط© ط§ط­طھظٹط§ط·ظٹط© ظƒط§ظ…ظ„ط©</small>
+            </button>
+            <button class="action-card" id="importBackupButton" type="button">
+              <strong>ط§ط³طھظٹط±ط§ط¯ JSON</strong>
+              <small>ط¥ط±ط¬ط§ط¹ ظ†ط³ط®ط© ظ…ط­ظپظˆط¸ط©</small>
+            </button>
+            <button class="action-card" id="addToHomeInfoButton" type="button">
+              <strong>ظƒظٹظپ ط£ط¶ظٹظپظ‡ ظ„ظ„ط´ط§ط´ط©</strong>
+              <small>ط®ط·ظˆط§طھ Safari ط§ظ„ط³ط±ظٹط¹ط©</small>
+            </button>
+          </div>
+          <input id="backupFileInput" type="file" accept=".json,application/json" hidden />
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>ط£ط¯ظˆط§طھ ط³ط±ظٹط¹ط©</h2>
+              <p>ظ„ظ„ط¥ط¯ط§ط±ط© ظپظ‚ط·</p>
+            </div>
+          </div>
+          <div class="actions-grid">
+            <button class="action-card" id="restoreDemoButton" type="button">
+              <strong>ط¨ظٹط§ظ†ط§طھ طھط¬ط±ظٹط¨ظٹط©</strong>
+              <small>ظ„ظ„طھط¬ط±ط¨ط© ط£ظˆ ط§ظ„ط´ط±ط­</small>
+            </button>
+            <button class="action-card" id="clearAllButton" type="button">
+              <strong>ظ…ط³ط­ ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ</strong>
+              <small>طھظ†ط¸ظٹظپ ط§ظ„طھط·ط¨ظٹظ‚ ط¨ط§ظ„ظƒط§ظ…ظ„</small>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" id="bottomNav"></nav>
+  <div class="toast-wrap"><div class="toast" id="toast"></div></div>
+
+  <div class="overlay" id="personModal" hidden>
+    <div class="modal-card">
+      <div class="detail-head">
+        <div class="stack" style="gap: 4px;">
+          <p class="eyebrow" id="personModalEyebrow">ط´ط®طµ ط¬ط¯ظٹط¯</p>
+          <h3 id="personModalTitle">ط¥ط¶ط§ظپط© ط´ط®طµ</h3>
+        </div>
+        <button class="chip chip-dark" data-close="personModal">ط¥ط؛ظ„ط§ظ‚</button>
+      </div>
+      <div class="modal-stack">
+        <input class="text-input" id="personNameInput" placeholder="ط§ط³ظ… ط§ظ„ط´ط®طµ" enterkeyhint="next" autocapitalize="words" />
+        <input class="text-input" id="personPhoneInput" placeholder="ط±ظ‚ظ… ط§ظ„ظ‡ط§طھظپ ط§ط®طھظٹط§ط±ظٹ" inputmode="tel" enterkeyhint="next" />
+        <textarea class="textarea" id="personNoteInput" placeholder="ظ…ظ„ط§ط­ط¸ط© ظ‚طµظٹط±ط©" enterkeyhint="done"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="button primary" id="savePersonButton" type="button">ط­ظپط¸</button>
+        <button class="button secondary" data-close="personModal" type="button">ط¥ظ„ط؛ط§ط،</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="transactionModal" hidden>
+    <div class="modal-card">
+      <div class="detail-head">
+        <div class="stack" style="gap: 4px;">
+          <p class="eyebrow" id="transactionModalEyebrow">ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©</p>
+          <h3 id="transactionModalTitle">ط¥ط¶ط§ظپط© ط­ط±ظƒط©</h3>
+        </div>
+        <button class="chip chip-dark" data-close="transactionModal">ط¥ط؛ظ„ط§ظ‚</button>
+      </div>
+
+      <div class="modal-stack">
+        <div class="filters-row" id="transactionPersonRow"></div>
+        <div class="filters-row" id="transactionTypeRow"></div>
+        <div class="preview-card" id="transactionPreviewCard"></div>
+
+        <div class="stack" style="gap: 10px;">
+          <label class="helper">ط§ظ„ظ…ط¨ظ„ط؛</label>
+          <div class="chips-row" id="quickAmountRow"></div>
+          <input class="text-input" id="transactionAmountInput" placeholder="ط§ظ„ظ…ط¨ظ„ط؛" inputmode="decimal" enterkeyhint="next" />
+        </div>
+
+        <div class="stack" style="gap: 10px;">
+          <label class="helper">ط§ظ„طھط§ط±ظٹط®</label>
+          <div class="chips-row" id="quickDateRow"></div>
+          <input class="text-input" id="transactionDateInput" type="date" inputmode="numeric" enterkeyhint="done" />
+        </div>
+
+        <div class="stack" style="gap: 10px;">
+          <label class="helper">ظ…ظ„ط§ط­ط¸ط§طھ ط³ط±ظٹط¹ط©</label>
+          <div class="chips-row" id="quickNoteRow"></div>
+          <textarea class="textarea" id="transactionNoteInput" placeholder="ظ…ظ„ط§ط­ط¸ط© ط§ط®طھظٹط§ط±ظٹط©" enterkeyhint="done"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="button primary" id="saveTransactionButton" type="button">ط­ظپط¸ ط§ظ„ط­ط±ظƒط©</button>
+        <button class="button secondary" data-close="transactionModal" type="button">ط¥ظ„ط؛ط§ط،</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="personDetailModal" hidden>
+    <div class="modal-card">
+      <div class="detail-head">
+        <div class="stack" style="gap: 4px;">
+          <p class="eyebrow" id="detailEyebrow">طھظپط§طµظٹظ„ ط§ظ„ط´ط®طµ</p>
+          <h3 id="detailPersonName">-</h3>
+        </div>
+        <button class="chip chip-dark" data-close="personDetailModal">ط¥ط؛ظ„ط§ظ‚</button>
+      </div>
+
+      <div class="detail-hero" id="detailHero"></div>
+      <div class="detail-stats" id="detailStats"></div>
+
+      <div class="actions-grid">
+        <button class="action-card" id="detailAddTransactionButton" type="button">
+          <strong>ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©</strong>
+          <small>ط£ط¶ظپ ط¯ظپط¹ط© ط£ظˆ ط¯ظٹظ†ظ‹ط§ ظپظˆط±ظ‹ط§</small>
+        </button>
+        <button class="action-card" id="detailEditPersonButton" type="button">
+          <strong>طھط¹ط¯ظٹظ„ ط§ظ„ط´ط®طµ</strong>
+          <small>ط¹ط¯ظ‘ظ„ ط§ظ„ط§ط³ظ… ط£ظˆ ط§ظ„ظ…ظ„ط§ط­ط¸ط©</small>
+        </button>
+      </div>
+
+      <div class="card" style="margin-top: 14px; padding: 0; background: transparent; border: none; box-shadow: none;">
+        <div class="stack" style="gap: 12px;">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h4>ط³ط¬ظ„ ط§ظ„ط­ط±ظƒط§طھ</h4>
+              <p id="detailTransactionsSubtitle">0 ط­ط±ظƒط©</p>
+            </div>
+          </div>
+          <input class="text-input" id="detailSearchInput" placeholder="ط§ط¨ط­ط« ط¨ط§ظ„ظ…ظ„ط§ط­ط¸ط© ط£ظˆ ط§ظ„طھط§ط±ظٹط® ط£ظˆ ط§ظ„ظ…ط¨ظ„ط؛" enterkeyhint="search" autocapitalize="off" />
+          <div class="filters-row" id="detailFilterRow"></div>
+          <div class="list-stack" id="detailTransactionsList"></div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="button danger" id="detailDeletePersonButton" type="button">ط­ط°ظپ ط§ظ„ط´ط®طµ ظ…ط¹ ظƒظ„ ط­ط±ظƒط§طھظ‡</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "eli-walay-web-v7";
+    const LEGACY_STORAGE_KEY = "eli-walay-web-v1";
+
+    const transactionTypes = [
+      { value: "lentToHim", label: "ط³ظ„ظپطھظ‡", tone: "green" },
+      { value: "collectedFromHim", label: "ط±ط¬ط¹ظ„ظٹ", tone: "blue" },
+      { value: "borrowedFromHim", label: "ط§ط³طھظ„ظپطھ ظ…ظ†ظ‡", tone: "red" },
+      { value: "paidToHim", label: "ط¯ظپط¹طھ ظ„ظ‡", tone: "gold" }
+    ];
+
+    const dateStyles = [
+      { value: "arabic", label: "ظٹظˆظ…/ط´ظ‡ط±/ط³ظ†ط©" },
+      { value: "iso", label: "ط±ظ‚ظ…ظٹ YYYY-MM-DD" }
+    ];
+
+    const personFilters = [
+      { value: "all", label: "ط§ظ„ظƒظ„" },
+      { value: "claims", label: "ط¥ظ„ظٹ" },
+      { value: "debts", label: "ط¹ظ„ظٹظ‘" },
+      { value: "closed", label: "ظ…ط³ظƒط±" }
+    ];
+
+    const personSorts = [
+      { value: "recent", label: "ط§ظ„ط£ط­ط¯ط«" },
+      { value: "largest", label: "ط§ظ„ط£ظƒط¨ط± ظ…ط¨ظ„ط؛ظ‹ط§" },
+      { value: "mostTransactions", label: "ط§ظ„ط£ظƒط«ط± ط­ط±ظƒط©" },
+      { value: "name", label: "ط§ظ„ط§ط³ظ…" }
+    ];
+
+    const reportRanges = [
+      { value: "month", label: "ظ‡ط°ط§ ط§ظ„ط´ظ‡ط±" },
+      { value: "30days", label: "ط¢ط®ط± 30 ظٹظˆظ…" },
+      { value: "all", label: "ظƒظ„ ط§ظ„ظˆظ‚طھ" }
+    ];
+
+    const quickAmountOptions = [50, 100, 200, 500];
+    const quickNoteOptions = ["ط¯ظپط¹ط© ط¬ط²ط¦ظٹط©", "ط³ظ„ظپط© ط¬ط¯ظٹط¯ط©", "طھط³ظˆظٹط©", "ظ…ظˆط¹ط¯ ظ„ط§ط­ظ‚"];
+
+    const demoPeople = [
+      { id: "person-1", name: "ط£ط­ظ…ط¯", phone: "0599000001", note: "ظٹطھط¹ط§ظ…ظ„ ظ…ط¹ظٹ ط¨ط´ظƒظ„ ط´ط¨ظ‡ ط£ط³ط¨ظˆط¹ظٹ", createdAt: "2026-07-18" },
+      { id: "person-2", name: "ط³ط§ظ…ط±", phone: "0599000002", note: "ظ…ظ‡ظ… ط£ط¹ط±ظپ ظˆط¶ط¹ظ‡ ط¨ط³ط±ط¹ط©", createdAt: "2026-07-17" },
+      { id: "person-3", name: "ط®ط§ظ„ط¯", note: "ط؛ط§ظ„ط¨ظ‹ط§ ظٹط±ط¬ط¹ ط§ظ„ظ…ط¨ظ„ط؛ ط¢ط®ط± ط§ظ„ط´ظ‡ط±", createdAt: "2026-07-16" }
+    ];
+
+    const demoTransactions = [
+      { id: "tx-1", personId: "person-1", type: "lentToHim", amount: 500, date: "2026-07-19", note: "ط³ظ„ظپط© ط£ظˆظ„ظ‰", createdAt: "2026-07-19T10:00:00" },
+      { id: "tx-2", personId: "person-1", type: "collectedFromHim", amount: 150, date: "2026-07-20", note: "ط¯ظپط¹ط© ط¬ط²ط¦ظٹط©", createdAt: "2026-07-20T09:00:00" },
+      { id: "tx-3", personId: "person-2", type: "borrowedFromHim", amount: 400, date: "2026-07-18", note: "ط§ط³طھظ„ظپطھ ظ…ظ†ظ‡ ظ„ظ…طµظ„ط­ط© ط·ط§ط±ط¦ط©", createdAt: "2026-07-18T14:20:00" },
+      { id: "tx-4", personId: "person-2", type: "paidToHim", amount: 100, date: "2026-07-19", note: "ط¯ظپط¹ط© ط£ظˆظ„ظ‰", createdAt: "2026-07-19T18:20:00" }
+    ];
+
+    const defaultState = {
+      people: [],
+      transactions: [],
+      settings: {
+        dateStyle: "arabic",
+        lastExportedAt: null
+      },
+      meta: {
+        hasSeenWelcome: false,
+        lastLocalSaveAt: null
+      }
+    };
+
+    const ui = {
+      activeTab: "home",
+      searchQuery: "",
+      personFilter: "all",
+      personSort: "recent",
+      reportRange: "all",
+      selectedPersonId: null,
+      personDetailSearch: "",
+      personDetailFilter: "all",
+      editingPersonId: null,
+      editingTransactionId: null,
+      transactionPersonId: null,
+      transactionType: "lentToHim",
+      transactionAmount: "",
+      transactionDate: todayString(),
+      transactionNote: "",
+      saveState: "idle"
+    };
+
+    let state = loadState();
+
+    const elements = {
+      saveStatePill: document.getElementById("saveStatePill"),
+      heroInsight: document.getElementById("heroInsight"),
+      metricPeople: document.getElementById("metricPeople"),
+      metricOpen: document.getElementById("metricOpen"),
+      metricTransactions: document.getElementById("metricTransactions"),
+      metricLastSave: document.getElementById("metricLastSave"),
+      summaryGrid: document.getElementById("summaryGrid"),
+      welcomeCardSlot: document.getElementById("welcomeCardSlot"),
+      priorityList: document.getElementById("priorityList"),
+      recentTransactionsList: document.getElementById("recentTransactionsList"),
+      peopleList: document.getElementById("peopleList"),
+      peopleSearch: document.getElementById("peopleSearch"),
+      peopleFilterRow: document.getElementById("peopleFilterRow"),
+      peopleSortRow: document.getElementById("peopleSortRow"),
+      resetPeopleFilters: document.getElementById("resetPeopleFilters"),
+      peopleSummaryGrid: document.getElementById("peopleSummaryGrid"),
+      reportsSubtitle: document.getElementById("reportsSubtitle"),
+      reportRangeRow: document.getElementById("reportRangeRow"),
+      reportInsight: document.getElementById("reportInsight"),
+      reportsGrid: document.getElementById("reportsGrid"),
+      topClaimsList: document.getElementById("topClaimsList"),
+      topDebtsList: document.getElementById("topDebtsList"),
+      statusList: document.getElementById("statusList"),
+      dateStyleRow: document.getElementById("dateStyleRow"),
+      backupFileInput: document.getElementById("backupFileInput"),
+      personModal: document.getElementById("personModal"),
+      personModalEyebrow: document.getElementById("personModalEyebrow"),
+      personModalTitle: document.getElementById("personModalTitle"),
+      personNameInput: document.getElementById("personNameInput"),
+      personPhoneInput: document.getElementById("personPhoneInput"),
+      personNoteInput: document.getElementById("personNoteInput"),
+      transactionModal: document.getElementById("transactionModal"),
+      transactionModalEyebrow: document.getElementById("transactionModalEyebrow"),
+      transactionModalTitle: document.getElementById("transactionModalTitle"),
+      transactionPersonRow: document.getElementById("transactionPersonRow"),
+      transactionTypeRow: document.getElementById("transactionTypeRow"),
+      transactionPreviewCard: document.getElementById("transactionPreviewCard"),
+      quickAmountRow: document.getElementById("quickAmountRow"),
+      transactionAmountInput: document.getElementById("transactionAmountInput"),
+      quickDateRow: document.getElementById("quickDateRow"),
+      transactionDateInput: document.getElementById("transactionDateInput"),
+      quickNoteRow: document.getElementById("quickNoteRow"),
+      transactionNoteInput: document.getElementById("transactionNoteInput"),
+      personDetailModal: document.getElementById("personDetailModal"),
+      detailPersonName: document.getElementById("detailPersonName"),
+      detailHero: document.getElementById("detailHero"),
+      detailStats: document.getElementById("detailStats"),
+      detailTransactionsSubtitle: document.getElementById("detailTransactionsSubtitle"),
+      detailSearchInput: document.getElementById("detailSearchInput"),
+      detailFilterRow: document.getElementById("detailFilterRow"),
+      detailTransactionsList: document.getElementById("detailTransactionsList"),
+      bottomNav: document.getElementById("bottomNav"),
+      toast: document.getElementById("toast")
+    };
+
+    bindStaticEvents();
+    renderApp();
+    registerServiceWorker();
+
+    function bindStaticEvents() {
+      document.getElementById("quickAddTransaction").addEventListener("click", () => openTransactionModal());
+      document.getElementById("quickAddPerson").addEventListener("click", () => openPersonModal());
+      document.getElementById("peopleAddButton").addEventListener("click", () => openPersonModal());
+      document.getElementById("savePersonButton").addEventListener("click", savePerson);
+      document.getElementById("saveTransactionButton").addEventListener("click", saveTransaction);
+      document.getElementById("restoreDemoButton").addEventListener("click", restoreDemoData);
+      document.getElementById("clearAllButton").addEventListener("click", clearAllData);
+      document.getElementById("exportBackupButton").addEventListener("click", exportBackup);
+      document.getElementById("exportReportButton").addEventListener("click", exportReport);
+      document.getElementById("importBackupButton").addEventListener("click", () => elements.backupFileInput.click());
+      document.getElementById("addToHomeInfoButton").addEventListener("click", showAddToHomeInfo);
+      bindPress(document.getElementById("detailAddTransactionButton"), () => {
+        blurActiveElement();
+        closeModal("personDetailModal");
+        openTransactionModal(ui.selectedPersonId);
+      });
+      bindPress(document.getElementById("detailEditPersonButton"), () => {
+        const person = getSelectedPerson();
+        if (person) {
+          blurActiveElement();
+          closeModal("personDetailModal");
+          openPersonModal(person.id);
+        }
+      });
+      document.getElementById("detailDeletePersonButton").addEventListener("click", () => {
+        const person = getSelectedPerson();
+        if (person) {
+          deletePerson(person.id);
+        }
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          const opened = [...document.querySelectorAll(".overlay")].find((overlay) => !overlay.hidden);
+          if (opened) {
+            blurActiveElement();
+            closeModal(opened.id);
+          }
+        }
+      });
+
+      document.querySelectorAll("[data-close]").forEach((button) => {
+        button.addEventListener("click", () => {
+          blurActiveElement();
+          closeModal(button.getAttribute("data-close"));
+        });
+      });
+
+      document.querySelectorAll(".overlay").forEach((overlay) => {
+        overlay.addEventListener("click", (event) => {
+          if (event.target === overlay) {
+            blurActiveElement();
+            closeModal(overlay.id);
+          }
+        });
+      });
+
+      document.querySelectorAll(".modal-card").forEach((card) => {
+        card.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      });
+
+      elements.peopleSearch.addEventListener("input", (event) => {
+        ui.searchQuery = event.target.value;
+        renderPeople();
+      });
+
+      elements.resetPeopleFilters.addEventListener("click", () => {
+        ui.searchQuery = "";
+        ui.personFilter = "all";
+        ui.personSort = "recent";
+        elements.peopleSearch.value = "";
+        renderPeople();
+      });
+
+      elements.detailSearchInput.addEventListener("input", (event) => {
+        ui.personDetailSearch = event.target.value;
+        renderPersonDetail();
+      });
+
+      elements.transactionAmountInput.addEventListener("input", (event) => {
+        ui.transactionAmount = normalizeAmountInput(event.target.value);
+        event.target.value = ui.transactionAmount;
+        renderTransactionPreview();
+      });
+
+      elements.transactionDateInput.addEventListener("input", (event) => {
+        ui.transactionDate = event.target.value;
+      });
+
+      elements.transactionNoteInput.addEventListener("input", (event) => {
+        ui.transactionNote = event.target.value;
+      });
+
+      elements.backupFileInput.addEventListener("change", importBackup);
+      window.addEventListener("beforeunload", persistState);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState !== "visible") {
+          persistState();
+        }
+      });
+    }
+
+    function bindPress(element, handler) {
+      if (!element) return;
+      let touchHandled = false;
+
+      element.addEventListener("touchend", (event) => {
+        touchHandled = true;
+        event.preventDefault();
+        event.stopPropagation();
+        handler(event);
+        window.setTimeout(() => {
+          touchHandled = false;
+        }, 350);
+      }, { passive: false });
+
+      element.addEventListener("click", (event) => {
+        if (touchHandled) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        handler(event);
+      });
+    }
+
+    function renderApp() {
+      renderNav();
+      renderHome();
+      renderPeople();
+      renderReports();
+      renderSettings();
+      renderPersonModal();
+      renderTransactionModal();
+      renderPersonDetail();
+      updateSavePill();
+    }
+
+    function renderNav() {
+      const items = [
+        { key: "home", label: "ط§ظ„ط±ط¦ظٹط³ظٹط©" },
+        { key: "people", label: "ط§ظ„ط£ط´ط®ط§طµ" },
+        { key: "reports", label: "ط§ظ„طھظ‚ط§ط±ظٹط±" },
+        { key: "settings", label: "ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ" }
+      ];
+
+      elements.bottomNav.innerHTML = items.map((item) => `
+        <button class="nav-item ${ui.activeTab === item.key ? "active" : ""}" data-tab="${item.key}">
+          <span>${item.label}</span>
+        </button>
+      `).join("");
+
+      elements.bottomNav.querySelectorAll("[data-tab]").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.activeTab = button.dataset.tab;
+          document.querySelectorAll(".screen").forEach((screen) => {
+            screen.classList.toggle("active", screen.id === `screen-${ui.activeTab}`);
+          });
+          renderNav();
+        });
+      });
+    }
+
+    function renderHome() {
+      const balances = getPeopleWithBalances();
+      const openAccounts = balances.filter((person) => person.net !== 0);
+      const totalClaims = balances.filter((person) => person.net > 0).reduce((sum, person) => sum + person.net, 0);
+      const totalDebts = balances.filter((person) => person.net < 0).reduce((sum, person) => sum + Math.abs(person.net), 0);
+      const net = totalClaims - totalDebts;
+      const priorities = [...openAccounts].sort((a, b) => Math.abs(b.net) - Math.abs(a.net)).slice(0, 3);
+      const recentTransactions = sortTransactionsDesc(state.transactions).slice(0, 5);
+
+      elements.metricPeople.textContent = String(state.people.length);
+      elements.metricOpen.textContent = String(openAccounts.length);
+      elements.metricTransactions.textContent = String(state.transactions.length);
+      elements.metricLastSave.textContent = state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "ظ„ط§ ظٹظˆط¬ط¯";
+      elements.heroInsight.textContent =
+        net > 0
+          ? "ظˆط¶ط¹ظƒ ط§ظ„ط¹ط§ظ… ظ„طµط§ظ„ط­ظƒطŒ ظ„ظƒظ† طھط§ط¨ط¹ ظ…ظ† ظ‡ظ… ط£ط¹ظ„ظ‰ ط¹ظ„ظٹظƒ ظ„طھط­طµظٹظ„ ط£ط³ط±ط¹."
+          : net < 0
+            ? "ط¹ظ†ط¯ظƒ ط§ظ„طھط²ط§ظ…ط§طھ ط£ظƒط«ط± ط§ظ„ط¢ظ†طŒ ظپط§ط¨ط¯ط£ ط¨ط£ظƒط¨ط± ظ…ط¨ظ„ط؛ ظٹط­طھط§ط¬ ط¯ظپط¹."
+            : "ط§ظ„طµط§ظپظٹ ظ…طھظˆط§ط²ظ† ط­ط§ظ„ظٹظ‹ط§طŒ ظˆط§ظ„ط£ظˆظ„ظˆظٹط© ط§ظ„ط¢ظ† ظ„طھظ†ط¸ظٹظ… ط§ظ„ط­ط±ظƒط© ط§ظ„ظ‚ط§ط¯ظ…ط© ط¨ظ‡ط¯ظˆط،.";
+
+      elements.welcomeCardSlot.innerHTML = (!state.meta.hasSeenWelcome && state.people.length === 0 && state.transactions.length === 0) ? `
+        <div class="welcome-card">
+          <div class="stack" style="gap: 4px;">
+            <p class="eyebrow">ط¨ط¯ط§ظٹط© ظ…ط±طھط¨ط©</p>
+            <h3>ظ„ظ†ط¨ط¯ط£ ط¨ط·ط±ظٹظ‚ط© ط³ظ‡ظ„ط©</h3>
+            <p class="muted">ط£ط¶ظپ ط£ظˆظ„ ط´ط®طµ ط«ظ… ط£ظˆظ„ ط­ط±ظƒط©طŒ ظˆط¨ط¹ط¯ظ‡ط§ ط³ظٹط¨ط¯ط£ ط§ظ„طھط·ط¨ظٹظ‚ ظٹط­ط³ط¨ ظ„ظƒ ظƒظ„ ط´ظٹط، طھظ„ظ‚ط§ط¦ظٹظ‹ط§ ظˆظٹط­ظپط¸ظ‡ ظ…ط¨ط§ط´ط±ط© ط¹ظ„ظ‰ ط§ظ„ط¬ظ‡ط§ط².</p>
+          </div>
+          <div class="actions-grid">
+            <button class="action-card" id="welcomeAddPersonButton" type="button">
+              <strong>ط£ط¶ظپ ط£ظˆظ„ ط´ط®طµ</strong>
+              <small>ط§ط¨ط¯ط£ ط¨ط§ظ„ط§ط³ظ… ظپظ‚ط· ظˆط§ظ„ط¨ط§ظ‚ظٹ ط§ط®طھظٹط§ط±ظٹ</small>
+            </button>
+            <button class="action-card" id="welcomeDemoButton" type="button">
+              <strong>ط¬ط±ظ‘ط¨ ط¨ظٹط§ظ†ط§طھ ط¬ط§ظ‡ط²ط©</strong>
+              <small>ظ…ظپظٹط¯ ط¥ط°ط§ ط£ط±ط¯طھ ظ…ط´ط§ظ‡ط¯ط© ط§ظ„ظپظƒط±ط© ط¨ط³ط±ط¹ط©</small>
+            </button>
+          </div>
+        </div>
+      ` : "";
+
+      elements.summaryGrid.innerHTML = [
+        createSummaryCard("ط¥ط¬ظ…ط§ظ„ظٹ ط¥ظ„ظٹ", formatAmount(totalClaims), "ط§ظ„ظ…ط¨ط§ظ„ط؛ ط§ظ„طھظٹ ظ…ط§ ط²ط§ظ„طھ ظ„ظƒ", "green"),
+        createSummaryCard("ط¥ط¬ظ…ط§ظ„ظٹ ط¹ظ„ظٹظ‘", formatAmount(totalDebts), "ط§ظ„ط§ظ„طھط²ط§ظ…ط§طھ ط§ظ„ط­ط§ظ„ظٹط©", "red"),
+        createSummaryCard("ط§ظ„طµط§ظپظٹ", formatAmount(Math.abs(net)), net > 0 ? "ظˆط¶ط¹ظƒ ظ„طµط§ظ„ط­ظƒ" : net < 0 ? "طھط­طھط§ط¬ ظ…طھط§ط¨ط¹ط©" : "ظ…طھظˆط§ط²ظ†", "gold"),
+        createSummaryCard("ط§ظ„ط­ط³ط§ط¨ط§طھ ط§ظ„ظ…ط³ظƒط±ط©", String(balances.filter((item) => item.net === 0).length), "ط¬ط§ظ‡ط²ط© ظˆظ…ظ‚ظپظ„ط©", "blue")
+      ].join("");
+
+      if (priorities.length === 0) {
+        elements.priorityList.innerHTML = createEmpty("ظƒظ„ ط§ظ„ط­ط³ط§ط¨ط§طھ ظ…ط³ظƒط±ط© ط§ظ„ط¢ظ†", "ظˆظ‡ط°ط§ ظ…ظ…طھط§ط². ط£ظˆظ„ ط­ط±ظƒط© ط¬ط¯ظٹط¯ط© ط³طھط¸ظ‡ط± ظ‡ظ†ط§.");
+      } else {
+        elements.priorityList.innerHTML = priorities.map((person, index) => `
+          <button class="priority-card" data-person-open="${person.id}">
+            <div class="person-head">
+              <span class="tiny-chip active">${index + 1}</span>
+              <strong class="person-name">${escapeHtml(person.name)}</strong>
+            </div>
+            <div class="inline-row" style="justify-content: space-between; align-items: center;">
+              <span class="muted">${getBalanceLabel(person.net)} â€¢ ${getBalanceRole(person.net)}</span>
+              <strong>${formatAmount(Math.abs(person.net))}</strong>
+            </div>
+            <p class="muted">${person.transactionsCount} ط­ط±ظƒط©${person.lastTransactionDate ? ` â€¢ ط¢ط®ط± ط­ط±ظƒط© ${formatDisplayDate(person.lastTransactionDate)}` : ""}</p>
+          </button>
+        `).join("");
+      }
+
+      if (recentTransactions.length === 0) {
+        elements.recentTransactionsList.innerHTML = createEmpty("ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط§طھ ط¨ط¹ط¯", "ط§ط¨ط¯ط£ ط¨ط¥ط¶ط§ظپط© ط£ظˆظ„ ط­ط±ظƒط© ظˆط³طھط¸ظ‡ط± ظ‡ظ†ط§ ظ…ط¨ط§ط´ط±ط©.");
+      } else {
+        elements.recentTransactionsList.innerHTML = recentTransactions.map((item) => {
+          const person = state.people.find((entry) => entry.id === item.personId);
+          return `
+            <button class="transaction-card" data-transaction-edit="${item.id}">
+              <div class="person-head">
+                <span class="type-pill balance-pill ${getTone(item.type)}">${getTransactionLabel(item.type)}</span>
+                <strong class="person-name">${escapeHtml(person?.name ?? "ط´ط®طµ ط؛ظٹط± ظ…ط¹ط±ظˆظپ")}</strong>
+              </div>
+              <div class="inline-row" style="justify-content: space-between; align-items: center;">
+                <span class="muted">${formatDisplayDate(item.date)}</span>
+                <strong>${formatAmount(item.amount)}</strong>
+              </div>
+              ${item.note ? `<p class="muted">${escapeHtml(item.note)}</p>` : ""}
+            </button>
+          `;
+        }).join("");
+      }
+
+      bindPeopleOpen();
+      bindTransactionEdit();
+      document.getElementById("welcomeAddPersonButton")?.addEventListener("click", () => {
+        state.meta.hasSeenWelcome = true;
+        persistState();
+        renderHome();
+        openPersonModal();
+      });
+      document.getElementById("welcomeDemoButton")?.addEventListener("click", () => {
+        state.meta.hasSeenWelcome = true;
+        persistState();
+        restoreDemoData();
+      });
+    }
+
+    function renderPeople() {
+      const balances = getPeopleWithBalances();
+      const filtered = getFilteredPeople(balances);
+      const openCount = filtered.filter((person) => person.net !== 0).length;
+      const claimsTotal = filtered.filter((person) => person.net > 0).reduce((sum, person) => sum + person.net, 0);
+      const debtsTotal = filtered.filter((person) => person.net < 0).reduce((sum, person) => sum + Math.abs(person.net), 0);
+
+      elements.peopleSearch.value = ui.searchQuery;
+      elements.peopleFilterRow.innerHTML = personFilters.map((option) => createFilterChip(option.label, ui.personFilter === option.value, `people-filter:${option.value}`)).join("");
+      elements.peopleSortRow.innerHTML = personSorts.map((option) => createFilterChip(option.label, ui.personSort === option.value, `people-sort:${option.value}`)).join("");
+      elements.resetPeopleFilters.hidden = !(ui.searchQuery.trim() || ui.personFilter !== "all" || ui.personSort !== "recent");
+
+      elements.peopleSummaryGrid.innerHTML = [
+        createPanelCard("ط§ظ„ط¸ط§ظ‡ط±ظˆظ† ط§ظ„ط¢ظ†", String(filtered.length)),
+        createPanelCard("ط§ظ„ط­ط³ط§ط¨ط§طھ ط§ظ„ظ…ظپطھظˆط­ط©", String(openCount)),
+        createPanelCard("ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ط¯ط§ط¦ظ†", formatAmount(claimsTotal)),
+        createPanelCard("ط¥ط¬ظ…ط§ظ„ظٹ ط§ظ„ظ…ط¯ظٹظ†", formatAmount(debtsTotal))
+      ].join("");
+
+      if (filtered.length === 0) {
+        elements.peopleList.innerHTML = createEmpty("ظ„ط§ ظٹظˆط¬ط¯ ظ†طھط§ط¦ط¬", "ط¬ط±ظ‘ط¨ طھط؛ظٹظٹط± ط§ظ„ط¨ط­ط« ط£ظˆ ط§ظ„ظپظ„طھط±طŒ ط£ظˆ ط£ط¶ظپ ط´ط®طµظ‹ط§ ط¬ط¯ظٹط¯ظ‹ط§.");
+      } else {
+        elements.peopleList.innerHTML = filtered.map((person) => `
+          <button class="person-card" data-person-open="${person.id}">
+            <div class="person-head">
+              <span class="balance-pill ${getToneByNet(person.net)}">${getBalanceLabel(person.net)}</span>
+              <strong class="person-name">${escapeHtml(person.name)}</strong>
+            </div>
+            <div class="inline-row" style="justify-content: space-between; align-items: center;">
+              <span class="muted">ط§ظ„ط­ط§ظ„ط©: ${getBalanceRole(person.net)}</span>
+              <strong class="person-amount">${formatAmount(Math.abs(person.net))}</strong>
+            </div>
+            <p class="muted">${person.transactionsCount} ط­ط±ظƒط©${person.phone ? ` â€¢ ${escapeHtml(person.phone)}` : ""}</p>
+            ${person.lastTransactionDate ? `<p class="muted">ط¢ط®ط± ط­ط±ظƒط©: ${formatDisplayDate(person.lastTransactionDate)}</p>` : ""}
+            ${person.note ? `<p class="muted">${escapeHtml(person.note)}</p>` : ""}
+          </button>
+        `).join("");
+      }
+
+      bindPeopleOpen();
+
+      document.querySelectorAll("[data-action^='people-filter:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.personFilter = button.dataset.action.split(":")[1];
+          renderPeople();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='people-sort:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.personSort = button.dataset.action.split(":")[1];
+          renderPeople();
+        });
+      });
+    }
+
+    function renderReports() {
+      const balances = getPeopleWithBalances();
+      const reportData = getReportData(balances);
+
+      elements.reportsSubtitle.textContent = reportData.subtitle;
+      elements.reportRangeRow.innerHTML = reportRanges.map((option) => createFilterChip(option.label, ui.reportRange === option.value, `report-range:${option.value}`)).join("");
+      elements.reportInsight.textContent = reportData.insight;
+
+      elements.reportsGrid.innerHTML = [
+        createPanelCard("ط¹ط¯ط¯ ط§ظ„ط­ط±ظƒط§طھ", String(reportData.transactions.length)),
+        createPanelCard("طµط§ظپظٹ ط§ظ„ظپطھط±ط©", formatAmount(Math.abs(reportData.netFlow))),
+        createPanelCard("ط§ظ„ط£ظƒط«ط± ظ†ط´ط§ط·ظ‹ط§", reportData.mostActive?.name ?? "ظ„ط§ ظٹظˆط¬ط¯"),
+        createPanelCard("ط¢ط®ط± ظ†ط´ط§ط·", reportData.lastActivityDate ? formatDisplayDate(reportData.lastActivityDate) : "ظ„ط§ ظٹظˆط¬ط¯"),
+        createPanelCard("ط³ظ„ظپطھظ‡", formatAmount(reportData.lent)),
+        createPanelCard("ط±ط¬ط¹ظ„ظٹ", formatAmount(reportData.collected)),
+        createPanelCard("ط§ط³طھظ„ظپطھ", formatAmount(reportData.borrowed)),
+        createPanelCard("ط¯ظپط¹طھ", formatAmount(reportData.paid))
+      ].join("");
+
+      elements.topClaimsList.innerHTML = reportData.topClaims.length === 0
+        ? createEmpty("ظ„ط§ ظٹظˆط¬ط¯ ط­ط§ظ„ظٹظ‹ط§ ط£ط­ط¯ ط¥ظ„ظƒ ط¹ظ„ظٹظ‡ ظ…ط¨ظ„ط؛", "ط؛ظٹظ‘ط± ط§ظ„ظپطھط±ط© ط¥ط°ط§ ط£ط±ط¯طھ ظ‚ط±ط§ط،ط© ط²ط§ظˆظٹط© ط«ط§ظ†ظٹط©.")
+        : reportData.topClaims.map((person) => personRowHtml(person.id, person.name, "ظٹظ…ظƒظ†ظƒ ظپطھط­ظ‡ ظˆظ…ط±ط§ط¬ط¹ط© ط§ظ„ط­ط±ظƒط§طھ ظ…ط¹ظ‡", formatAmount(person.net))).join("");
+
+      elements.topDebtsList.innerHTML = reportData.topDebts.length === 0
+        ? createEmpty("ظ„ط§ ظٹظˆط¬ط¯ ط­ط§ظ„ظٹظ‹ط§ ط§ظ„طھط²ط§ظ…ط§طھ ظ…ظپطھظˆط­ط© ط¹ظ„ظٹظƒ", "ظ‡ط°ط§ ظٹط¹ظ†ظٹ ط£ظ† ظ‡ط°ظ‡ ط§ظ„ظپطھط±ط© ط£ط®ظپ ط¹ظ„ظٹظƒ.")
+        : reportData.topDebts.map((person) => personRowHtml(person.id, person.name, "ظٹظپط¶ظ„ طھط±طھظٹط¨ ط¯ظپط¹ط© ظ‚ط±ظٹط¨ط© ط¥ط°ط§ ط£ظ…ظƒظ†", formatAmount(Math.abs(person.net)))).join("");
+
+      bindPeopleOpen();
+      document.querySelectorAll("[data-action^='report-range:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.reportRange = button.dataset.action.split(":")[1];
+          renderReports();
+        });
+      });
+    }
+
+    function renderSettings() {
+      const statusItems = [
+        { label: "ط§ظ„ط­ظپط¸ ط§ظ„ظ…ط­ظ„ظٹ", value: ui.saveState === "saving" ? "ط¬ط§ط±ظٹ ط§ظ„ط­ظپط¸" : ui.saveState === "error" ? "ظپظٹ ظ…ط´ظƒظ„ط©" : "ظ…ط­ظپظˆط¸" },
+        { label: "ط¹ط¯ط¯ ط§ظ„ط£ط´ط®ط§طµ", value: String(state.people.length) },
+        { label: "ط¹ط¯ط¯ ط§ظ„ط­ط±ظƒط§طھ", value: String(state.transactions.length) },
+        { label: "ط¢ط®ط± ط­ظپط¸ ظ…ط­ظ„ظٹ", value: state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "ط¨ط§ظ†طھط¸ط§ط± ط£ظˆظ„ ط­ظپط¸" },
+        { label: "ط¢ط®ط± ظ†ط³ط®ط© ظ…طµط¯ط±ط©", value: state.settings.lastExportedAt ? formatDisplayDateTime(state.settings.lastExportedAt) : "ظ„ظ… ظٹطھظ… ط¨ط¹ط¯" }
+      ];
+
+      elements.statusList.innerHTML = statusItems.map((item) => `
+        <div class="status-card">
+          <div class="status-row">
+            <strong>${escapeHtml(item.value)}</strong>
+            <span class="muted">${escapeHtml(item.label)}</span>
+          </div>
+        </div>
+      `).join("");
+
+      elements.dateStyleRow.innerHTML = dateStyles.map((option) => createFilterChip(option.label, state.settings.dateStyle === option.value, `date-style:${option.value}`)).join("");
+
+      document.querySelectorAll("[data-action^='date-style:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.settings.dateStyle = button.dataset.action.split(":")[1];
+          persistState();
+          renderApp();
+        });
+      });
+
+    }
+
+    function renderPersonModal() {
+      const isEditing = Boolean(ui.editingPersonId);
+      elements.personModalEyebrow.textContent = isEditing ? "طھط¹ط¯ظٹظ„ ط¨ظٹط§ظ†ط§طھ" : "ط´ط®طµ ط¬ط¯ظٹط¯";
+      elements.personModalTitle.textContent = isEditing ? "طھط¹ط¯ظٹظ„ ط§ظ„ط´ط®طµ" : "ط¥ط¶ط§ظپط© ط´ط®طµ";
+    }
+
+    function renderTransactionModal() {
+      const balances = getPeopleWithBalances();
+      const person = balances.find((entry) => entry.id === ui.transactionPersonId) ?? null;
+      const editableOriginal = ui.editingTransactionId
+        ? state.transactions.find((entry) => entry.id === ui.editingTransactionId)
+        : null;
+      const baseTransactions = person ? state.transactions.filter((entry) => entry.personId === person.id) : [];
+      const currentNet = person ? computeNetBalance(baseTransactions) : 0;
+      const baseNet = editableOriginal ? applyTransactionOnNet(currentNet, editableOriginal.type, -editableOriginal.amount) : currentNet;
+      const parsedAmount = parseAmountInput(ui.transactionAmount);
+      const projectedNet = Number.isFinite(parsedAmount) && parsedAmount > 0
+        ? applyTransactionOnNet(baseNet, ui.transactionType, parsedAmount)
+        : baseNet;
+
+      elements.transactionModalEyebrow.textContent = ui.editingTransactionId ? "طھط¹ط¯ظٹظ„ ط­ط±ظƒط©" : "ط­ط±ظƒط© ط¬ط¯ظٹط¯ط©";
+      elements.transactionModalTitle.textContent = ui.editingTransactionId ? "طھط¹ط¯ظٹظ„ ط§ظ„ط­ط±ظƒط©" : "ط¥ط¶ط§ظپط© ط­ط±ظƒط©";
+      elements.transactionPersonRow.innerHTML = balances.map((entry) => createTinyChip(entry.name, ui.transactionPersonId === entry.id, `transaction-person:${entry.id}`)).join("");
+      elements.transactionTypeRow.innerHTML = transactionTypes.map((option) => createTinyChip(option.label, ui.transactionType === option.value, `transaction-type:${option.value}`)).join("");
+      elements.quickAmountRow.innerHTML = quickAmountOptions.map((value) => createTinyChip(formatAmount(value), false, `quick-amount:${value}`)).join("");
+      elements.quickDateRow.innerHTML = [
+        createTinyChip("ط§ظ„ظٹظˆظ…", false, "quick-date:today"),
+        createTinyChip("ط£ظ…ط³", false, "quick-date:yesterday")
+      ].join("");
+      elements.quickNoteRow.innerHTML = quickNoteOptions.map((note) => createTinyChip(note, false, `quick-note:${note}`)).join("");
+      elements.transactionAmountInput.value = ui.transactionAmount;
+      elements.transactionDateInput.value = ui.transactionDate;
+      elements.transactionNoteInput.value = ui.transactionNote;
+
+      elements.transactionPreviewCard.innerHTML = person ? `
+        <h4>ظ…ط¹ط§ظٹظ†ط© ط­ط³ط§ط¨ ${escapeHtml(person.name)}</h4>
+        <p class="note">ط§ظ„ظˆط¶ط¹ ط§ظ„ط­ط§ظ„ظٹ: ${getBalanceLabel(baseNet)} â€¢ ${formatAmount(Math.abs(baseNet))}</p>
+        <p class="note">ط¨ط¹ط¯ ط§ظ„ط­ظپط¸: ${getBalanceLabel(projectedNet)} â€¢ ${formatAmount(Math.abs(projectedNet))}</p>
+        <p class="tiny-help">${getTransactionTypeHint(ui.transactionType)}</p>
+      ` : `
+        <h4>ط§ط®طھط± ط´ط®طµظ‹ط§ ظ„ظ„ظ…ط¹ط§ظٹظ†ط©</h4>
+        <p class="tiny-help">ط­ط¯ط¯ ط§ظ„ط´ط®طµ ط£ظˆظ„ظ‹ط§طŒ ظˆط¨ط¹ط¯ظ‡ط§ ط³طھط±ظ‰ ط§ظ„ط±طµظٹط¯ ظ‚ط¨ظ„ ظˆط¨ط¹ط¯ ط§ظ„ط­ط±ظƒط©.</p>
+      `;
+
+      document.querySelectorAll("[data-action^='transaction-person:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionPersonId = button.dataset.action.split(":")[1];
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='transaction-type:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionType = button.dataset.action.split(":")[1];
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='quick-amount:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionAmount = normalizeAmountInput(button.dataset.action.split(":")[1]);
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action='quick-date:today']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.transactionDate = todayString();
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action='quick-date:yesterday']").forEach((button) => {
+        button.addEventListener("click", () => {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          ui.transactionDate = yesterday.toISOString().slice(0, 10);
+          renderTransactionModal();
+        });
+      });
+
+      document.querySelectorAll("[data-action^='quick-note:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          const note = button.dataset.action.replace("quick-note:", "");
+          ui.transactionNote = ui.transactionNote.trim() ? `${ui.transactionNote} â€¢ ${note}` : note;
+          renderTransactionModal();
+        });
+      });
+    }
+
+    function renderTransactionPreview() {
+      renderTransactionModal();
+    }
+
+    function renderPersonDetail() {
+      const person = getSelectedPerson();
+      if (!person) {
+        return;
+      }
+
+      const transactions = sortTransactionsDesc(state.transactions.filter((item) => item.personId === person.id));
+      const timelineBalances = getTimelineBalances(transactions);
+      const net = computeNetBalance(transactions);
+      const stats = {
+        lent: transactions.filter((item) => item.type === "lentToHim").reduce((sum, item) => sum + item.amount, 0),
+        collected: transactions.filter((item) => item.type === "collectedFromHim").reduce((sum, item) => sum + item.amount, 0),
+        borrowed: transactions.filter((item) => item.type === "borrowedFromHim").reduce((sum, item) => sum + item.amount, 0),
+        paid: transactions.filter((item) => item.type === "paidToHim").reduce((sum, item) => sum + item.amount, 0)
+      };
+      const lastTransaction = transactions[0] ?? null;
+      const suggestion = net > 0
+        ? "ط°ظƒط±ظ‡ ط¨ط¯ظپط¹ط© ظ‚ط±ظٹط¨ط© ط£ظˆ ط³ط¬ظ‘ظ„ ط£ظٹ ظ…ط¨ظ„ط؛ ط±ط¬ط¹ظ„ظƒ ظ…ط¨ط§ط´ط±ط©."
+        : net < 0
+          ? "ط¥ط°ط§ ط¯ظپط¹طھ ظ„ظ‡ ط£ظٹ ط¬ط²ط،طŒ ط³ط¬ظ„ظ‡ ظپظˆط±ظ‹ط§ ط­طھظ‰ ظٹط¨ظ‚ظ‰ ط§ظ„ط±طµظٹط¯ طµط­ظٹط­ظ‹ط§."
+          : "ط§ظ„ط­ط³ط§ط¨ ظ…ط³ظƒط± ط­ط§ظ„ظٹظ‹ط§. ظپظ‚ط· ط±ط§ظ‚ط¨ ط£ظٹ ط­ط±ظƒط© ط¬ط¯ظٹط¯ط© ظˆط³ط¬ظ„ظ‡ط§ ظ…ط¨ط§ط´ط±ط©.";
+
+      const filteredTransactions = transactions.filter((item) => {
+        const query = ui.personDetailSearch.trim().toLowerCase();
+        const matchesQuery = !query ||
+          getTransactionLabel(item.type).toLowerCase().includes(query) ||
+          item.date.includes(query) ||
+          String(item.amount).includes(query) ||
+          (item.note ?? "").toLowerCase().includes(query);
+        if (!matchesQuery) return false;
+        return ui.personDetailFilter === "all" ? true : item.type === ui.personDetailFilter;
+      });
+
+      elements.detailPersonName.textContent = person.name;
+      elements.detailHero.innerHTML = `
+        <p class="eyebrow">ط§ظ„ط±طµظٹط¯ ط§ظ„ط­ط§ظ„ظٹ</p>
+        <h3 class="person-name">${getBalanceLabel(net)}</h3>
+        <p class="muted">ط§ظ„طھطµظ†ظٹظپ ط§ظ„ظ…ط§ظ„ظٹ: ${getBalanceRole(net)}</p>
+        <div class="detail-amount">${formatAmount(Math.abs(net))}</div>
+        <p class="note">ط§ظ„ط®ط·ظˆط© ط§ظ„طھط§ظ„ظٹط©: ${suggestion}</p>
+        ${lastTransaction ? `<p class="note">ط¢ط®ط± ط­ط±ظƒط©: ${getTransactionLabel(lastTransaction.type)} â€¢ ${formatDisplayDate(lastTransaction.date)}</p>` : ""}
+        ${person.note ? `<p class="note">${escapeHtml(person.note)}</p>` : ""}
+        ${person.phone ? `<p class="note">ط§ظ„ظ‡ط§طھظپ: ${escapeHtml(person.phone)}</p>` : ""}
+      `;
+
+      elements.detailStats.innerHTML = [
+        detailStatHtml("ط£ط¹ط·ظٹطھظ‡ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.lent), "green"),
+        detailStatHtml("ط±ط¬ط¹ظ„ظٹ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.collected), "blue"),
+        detailStatHtml("ط£ط®ط°طھ ظ…ظ†ظ‡ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.borrowed), "red"),
+        detailStatHtml("ط¯ظپط¹طھظ‡ ط¥ظ„ظ‡ ط¨ط§ظ„ظ…ط¬ظ…ظˆط¹", formatAmount(stats.paid), "gold")
+      ].join("");
+
+      elements.detailTransactionsSubtitle.textContent = `${filteredTransactions.length} ظ…ظ† ط£طµظ„ ${transactions.length} ط­ط±ظƒط©`;
+      elements.detailSearchInput.value = ui.personDetailSearch;
+      elements.detailFilterRow.innerHTML = createDetailFilterChips();
+
+      if (transactions.length === 0) {
+        elements.detailTransactionsList.innerHTML = createEmpty("ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط§طھ ظ„ظ‡ط°ط§ ط§ظ„ط´ط®طµ ط¨ط¹ط¯", "ط£ط¶ظپ ط£ظˆظ„ ط­ط±ظƒط© ظ…ظ† ط§ظ„ط²ط± ط§ظ„ظ…ظˆط¬ظˆط¯ ظپظˆظ‚.");
+      } else if (filteredTransactions.length === 0) {
+        elements.detailTransactionsList.innerHTML = createEmpty("ظ„ط§ طھظˆط¬ط¯ ظ†طھط§ط¦ط¬ ظ…ط·ط§ط¨ظ‚ط©", "ط؛ظٹظ‘ط± ط§ظ„ط¨ط­ط« ط£ظˆ ط§ظ„ظپظ„طھط± ط§ظ„ط­ط§ظ„ظٹ.");
+      } else {
+        elements.detailTransactionsList.innerHTML = filteredTransactions.map((item) => {
+          const balanceAfter = timelineBalances.get(item.id) ?? 0;
+          return `
+            <button class="transaction-card" data-transaction-edit="${item.id}">
+              <div class="person-head">
+                <span class="balance-pill ${getTone(item.type)}">${getTransactionLabel(item.type)}</span>
+                <strong>${formatAmount(item.amount)}</strong>
+              </div>
+              <p class="muted">${formatDisplayDate(item.date)}</p>
+              <p class="note">ط§ظ„ط±طµظٹط¯ ط¨ط¹ط¯ ظ‡ط°ظ‡ ط§ظ„ط­ط±ظƒط©: ${formatAmount(Math.abs(balanceAfter))} â€¢ ${getBalanceLabel(balanceAfter)} â€¢ ${getBalanceRole(balanceAfter)}</p>
+              ${item.note ? `<p class="muted">${escapeHtml(item.note)}</p>` : ""}
+              <div class="inline-row" style="justify-content: end;">
+                <button class="chip danger" type="button" data-transaction-delete="${item.id}">ط­ط°ظپ ط§ظ„ط­ط±ظƒط©</button>
+              </div>
+            </button>
+          `;
+        }).join("");
+      }
+
+      document.querySelectorAll("[data-action^='detail-filter:']").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.personDetailFilter = button.dataset.action.split(":")[1];
+          renderPersonDetail();
+        });
+      });
+
+      bindTransactionEdit();
+      bindTransactionDelete();
+    }
+
+    function savePerson() {
+      const name = elements.personNameInput.value.trim();
+      if (!name) {
+        alert("ط§ظƒطھط¨ ط§ط³ظ… ط§ظ„ط´ط®طµ ظ‚ط¨ظ„ ط§ظ„ط­ظپط¸.");
+        return;
+      }
+
+      if (ui.editingPersonId) {
+        state.people = state.people.map((person) => person.id === ui.editingPersonId ? {
+          ...person,
+          name,
+          phone: elements.personPhoneInput.value.trim() || undefined,
+          note: elements.personNoteInput.value.trim() || undefined
+        } : person);
+      } else {
+        state.people.unshift({
+          id: createId("person"),
+          name,
+          phone: elements.personPhoneInput.value.trim() || undefined,
+          note: elements.personNoteInput.value.trim() || undefined,
+          createdAt: todayString()
+        });
+      }
+
+      blurActiveElement();
+      closeModal("personModal");
+      resetPersonForm();
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      showToast(ui.editingPersonId ? "طھظ… طھط¹ط¯ظٹظ„ ط§ظ„ط´ط®طµ ظˆط­ظپط¸ظ‡." : "طھظ…طھ ط¥ط¶ط§ظپط© ط§ظ„ط´ط®طµ ظˆط­ظپط¸ظ‡.");
+    }
+
+    function saveTransaction() {
+      if (!ui.transactionPersonId) {
+        alert("ط§ط®طھط± ط´ط®طµظ‹ط§ ظ‚ط¨ظ„ ط­ظپط¸ ط§ظ„ط­ط±ظƒط©.");
+        return;
+      }
+
+      const amount = parseAmountInput(ui.transactionAmount);
+      if (!Number.isFinite(amount) || amount <= 0) {
+        alert("ط£ط¯ط®ظ„ ظ…ط¨ظ„ط؛ظ‹ط§ طµط­ظٹط­ظ‹ط§ ط£ظƒط¨ط± ظ…ظ† طµظپط±.");
+        return;
+      }
+
+      const normalizedDate = normalizeTransactionDateInput(ui.transactionDate);
+      if (!normalizedDate) {
+        alert("ط§ظƒطھط¨ ط§ظ„طھط§ط±ظٹط® ط¨ظ‡ط°ط§ ط§ظ„ط´ظƒظ„: 2026-07-21 ط£ظˆ 21/07/2026");
+        return;
+      }
+
+      if (ui.editingTransactionId) {
+        state.transactions = state.transactions.map((item) => item.id === ui.editingTransactionId ? {
+          ...item,
+          personId: ui.transactionPersonId,
+          type: ui.transactionType,
+          amount,
+          date: normalizedDate,
+          note: ui.transactionNote.trim() || undefined
+        } : item);
+      } else {
+        state.transactions.unshift({
+          id: createId("tx"),
+          personId: ui.transactionPersonId,
+          type: ui.transactionType,
+          amount,
+          date: normalizedDate,
+          note: ui.transactionNote.trim() || undefined,
+          createdAt: new Date().toISOString()
+        });
+      }
+
+      ui.selectedPersonId = ui.transactionPersonId;
+      blurActiveElement();
+      closeModal("transactionModal");
+      resetTransactionForm();
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      openModal("personDetailModal");
+      showToast(ui.editingTransactionId ? "طھظ… طھط¹ط¯ظٹظ„ ط§ظ„ط­ط±ظƒط© ظˆط­ظپط¸ظ‡ط§." : "طھظ…طھ ط¥ط¶ط§ظپط© ط§ظ„ط­ط±ظƒط© ظˆط­ظپط¸ظ‡ط§.");
+    }
+
+    function openPersonModal(personId = null) {
+      ui.editingPersonId = personId;
+      if (personId) {
+        const person = state.people.find((entry) => entry.id === personId);
+        elements.personNameInput.value = person?.name ?? "";
+        elements.personPhoneInput.value = person?.phone ?? "";
+        elements.personNoteInput.value = person?.note ?? "";
+      } else {
+        resetPersonForm();
+      }
+      renderPersonModal();
+      openModal("personModal");
+      requestAnimationFrame(() => elements.personNameInput.focus());
+    }
+
+    function openTransactionModal(personId = null, transactionId = null) {
+      ui.editingTransactionId = transactionId;
+      if (transactionId) {
+        const item = state.transactions.find((entry) => entry.id === transactionId);
+        if (!item) return;
+        ui.transactionPersonId = item.personId;
+        ui.transactionType = item.type;
+        ui.transactionAmount = String(item.amount);
+        ui.transactionDate = item.date;
+        ui.transactionNote = item.note ?? "";
+      } else {
+        resetTransactionForm(personId ?? ui.selectedPersonId);
+      }
+
+      renderTransactionModal();
+      openModal("transactionModal");
+      requestAnimationFrame(() => elements.transactionAmountInput.focus());
+    }
+
+    function openPersonDetail(personId) {
+      ui.selectedPersonId = personId;
+      ui.personDetailSearch = "";
+      ui.personDetailFilter = "all";
+      renderPersonDetail();
+      openModal("personDetailModal");
+    }
+
+    function deletePerson(personId) {
+      const person = state.people.find((entry) => entry.id === personId);
+      if (!person) return;
+      if (!confirm(`ظ‡ظ„ طھط±ظٹط¯ ط­ط°ظپ ${person.name} ظˆظƒظ„ ط§ظ„ط­ط±ظƒط§طھ ط§ظ„ظ…ط±طھط¨ط·ط© ط¨ظ‡طں`)) return;
+      state.people = state.people.filter((entry) => entry.id !== personId);
+      state.transactions = state.transactions.filter((entry) => entry.personId !== personId);
+      ui.selectedPersonId = null;
+      closeModal("personDetailModal");
+      persistState();
+      renderApp();
+      showToast("طھظ… ط­ط°ظپ ط§ظ„ط´ط®طµ ظˆظƒظ„ ط­ط±ظƒط§طھظ‡.");
+    }
+
+    function deleteTransaction(transactionId) {
+      if (!confirm("ظ‡ظ„ طھط±ظٹط¯ ط­ط°ظپ ظ‡ط°ظ‡ ط§ظ„ط­ط±ظƒط© ظ†ظ‡ط§ط¦ظٹظ‹ط§طں")) return;
+      state.transactions = state.transactions.filter((entry) => entry.id !== transactionId);
+      persistState();
+      renderApp();
+      showToast("طھظ… ط­ط°ظپ ط§ظ„ط­ط±ظƒط©.");
+    }
+
+    function restoreDemoData() {
+      if (!confirm("ط³ظٹطھظ… ط§ط³طھط¨ط¯ط§ظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ط­ط§ظ„ظٹط© ط¨ط¨ظٹط§ظ†ط§طھ طھط¬ط±ظٹط¨ظٹط©. ظ‡ظ„ طھط±ظٹط¯ ط§ظ„ظ…طھط§ط¨ط¹ط©طں")) return;
+      state.people = JSON.parse(JSON.stringify(demoPeople));
+      state.transactions = JSON.parse(JSON.stringify(demoTransactions));
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      showToast("طھظ…طھ ط¥ط¹ط§ط¯ط© ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„طھط¬ط±ظٹط¨ظٹط©.");
+    }
+
+    function clearAllData() {
+      if (!confirm("ط³ظٹطھظ… ط­ط°ظپ ظƒظ„ ط§ظ„ط£ط´ط®ط§طµ ظˆط§ظ„ط­ط±ظƒط§طھ ظ…ظ† ط§ظ„ط¬ظ‡ط§ط². ظ‡ظ„ ط£ظ†طھ ظ…طھط£ظƒط¯طں")) return;
+      state.people = [];
+      state.transactions = [];
+      ui.selectedPersonId = null;
+      state.meta.hasSeenWelcome = true;
+      persistState();
+      renderApp();
+      closeModal("personDetailModal");
+      showToast("طھظ… ظ…ط³ط­ ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ظ…ظ† ظ‡ط°ط§ ط§ظ„ط¬ظ‡ط§ط².");
+    }
+
+    function exportBackup() {
+      const payload = JSON.stringify(state, null, 2);
+      downloadFile(`eli-walay-backup-${Date.now()}.json`, payload, "application/json");
+      state.settings.lastExportedAt = new Date().toISOString();
+      persistState();
+      renderSettings();
+      showToast("طھظ… طھطµط¯ظٹط± ط§ظ„ظ†ط³ط®ط© ط§ظ„ط§ط­طھظٹط§ط·ظٹط© ط¨ظ†ط¬ط§ط­.");
+    }
+
+    function exportReport() {
+      const balances = getPeopleWithBalances();
+      const totalClaims = balances.filter((person) => person.net > 0).reduce((sum, person) => sum + person.net, 0);
+      const totalDebts = balances.filter((person) => person.net < 0).reduce((sum, person) => sum + Math.abs(person.net), 0);
+      const net = totalClaims - totalDebts;
+
+      const lines = [
+        "طھظ‚ط±ظٹط± طھط·ط¨ظٹظ‚ ط¥ظ„ظٹ ظˆط¹ظ„ظٹظ‘",
+        `ط§ظ„طھط§ط±ظٹط®: ${formatDisplayDate(todayString())}`,
+        "",
+        `ط¥ط¬ظ…ط§ظ„ظٹ ط¥ظ„ظٹ: ${formatAmount(totalClaims)}`,
+        `ط¥ط¬ظ…ط§ظ„ظٹ ط¹ظ„ظٹظ‘: ${formatAmount(totalDebts)}`,
+        `ط§ظ„طµط§ظپظٹ: ${formatAmount(Math.abs(net))} ${net > 0 ? "(ظ„طµط§ظ„ط­ظٹ)" : net < 0 ? "(ط¹ظ„ظٹظ‘)" : "(ظ…طھظˆط§ط²ظ†)"}`,
+        "",
+        "ط§ظ„ط£ط´ط®ط§طµ:",
+        ...balances.map((person) => `- ${person.name}: ${getBalanceLabel(person.net)} ${formatAmount(Math.abs(person.net))}`),
+        "",
+        "ط¢ط®ط± ط§ظ„ط­ط±ظƒط§طھ:",
+        ...sortTransactionsDesc(state.transactions).slice(0, 8).map((item) => {
+          const person = state.people.find((entry) => entry.id === item.personId);
+          return `- ${person?.name ?? "ط´ط®طµ ط؛ظٹط± ظ…ط¹ط±ظˆظپ"} | ${getTransactionLabel(item.type)} | ${formatAmount(item.amount)} | ${formatDisplayDate(item.date)}${item.note ? ` | ${item.note}` : ""}`;
+        })
+      ];
+
+      downloadFile(`eli-walay-report-${Date.now()}.txt`, lines.join("\n"), "text/plain;charset=utf-8");
+      state.settings.lastExportedAt = new Date().toISOString();
+      persistState();
+      renderSettings();
+      showToast("طھظ… طھطµط¯ظٹط± ط§ظ„طھظ‚ط±ظٹط± ط§ظ„ظ†طµظٹ.");
+    }
+
+    async function importBackup(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      try {
+        const raw = await file.text();
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed.people) || !Array.isArray(parsed.transactions) || !parsed.settings) {
+          alert("ظ‡ط°ط§ ط§ظ„ظ…ظ„ظپ ظ„ط§ ظٹط¨ط¯ظˆ ظ†ط³ط®ط© طµط­ظٹط­ط© ظ…ظ† ط§ظ„طھط·ط¨ظٹظ‚.");
+          return;
+        }
+
+        if (!confirm("ط³ظٹطھظ… ط§ط³طھط¨ط¯ط§ظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ ط§ظ„ط­ط§ظ„ظٹط© ط¨ط§ظ„ظ†ط³ط®ط© ط§ظ„ظ…ط³طھظˆط±ط¯ط©. ظ‡ظ„ طھط±ظٹط¯ ط§ظ„ظ…طھط§ط¨ط¹ط©طں")) {
+          return;
+        }
+
+        state = {
+          ...defaultState,
+          ...parsed,
+          settings: {
+            ...defaultState.settings,
+            dateStyle: parsed.settings?.dateStyle || defaultState.settings.dateStyle,
+            lastExportedAt: parsed.settings?.lastExportedAt || null
+          },
+          meta: { ...defaultState.meta, ...(parsed.meta || {}), lastLocalSaveAt: new Date().toISOString() }
+        };
+        persistState();
+        renderApp();
+        showToast("طھظ… ط§ط³طھظٹط±ط§ط¯ ط§ظ„ظ†ط³ط®ط© ط§ظ„ط§ط­طھظٹط§ط·ظٹط© ط¨ظ†ط¬ط§ط­.");
+      } catch {
+        alert("طھط¹ط°ط± ظ‚ط±ط§ط،ط© ط§ظ„ظ…ظ„ظپ. طھط£ظƒط¯ ط£ظ†ظ‡ JSON طµط­ظٹط­ ظ…ظ† ظ†ظپط³ ط§ظ„طھط·ط¨ظٹظ‚.");
+      } finally {
+        event.target.value = "";
+      }
+    }
+
+    function showAddToHomeInfo() {
+      showToast("ط¹ظ„ظ‰ ط§ظ„ط¢ظٹظپظˆظ†: ط§ظپطھط­ ط§ظ„ط±ط§ط¨ط· ظپظٹ Safari ط«ظ… Share ط«ظ… Add to Home Screen.");
+    }
+
+    function resetPersonForm() {
+      ui.editingPersonId = null;
+      elements.personNameInput.value = "";
+      elements.personPhoneInput.value = "";
+      elements.personNoteInput.value = "";
+    }
+
+    function resetTransactionForm(personId = null) {
+      ui.editingTransactionId = null;
+      ui.transactionPersonId = personId ?? getPeopleWithBalances()[0]?.id ?? null;
+      ui.transactionType = "lentToHim";
+      ui.transactionAmount = "";
+      ui.transactionDate = todayString();
+      ui.transactionNote = "";
+    }
+
+    function getPeopleWithBalances() {
+      return state.people.map((person) => {
+        const personTransactions = state.transactions.filter((item) => item.personId === person.id);
+        const lastTransactionDate = sortTransactionsDesc(personTransactions)[0]?.date ?? null;
+        return {
+          ...person,
+          net: computeNetBalance(personTransactions),
+          transactionsCount: personTransactions.length,
+          lastTransactionDate
+        };
+      }).sort((a, b) => {
+        if (b.transactionsCount !== a.transactionsCount) {
+          return b.transactionsCount - a.transactionsCount;
+        }
+        return a.name.localeCompare(b.name, "ar");
+      });
+    }
+
+    function getFilteredPeople(balances) {
+      return balances.filter((person) => {
+        const query = ui.searchQuery.trim().toLowerCase();
+        const matchesQuery = !query ||
+          person.name.toLowerCase().includes(query) ||
+          (person.phone ?? "").includes(query) ||
+          (person.note ?? "").toLowerCase().includes(query);
+        if (!matchesQuery) return false;
+        if (ui.personFilter === "claims") return person.net > 0;
+        if (ui.personFilter === "debts") return person.net < 0;
+        if (ui.personFilter === "closed") return person.net === 0;
+        return true;
+      }).sort((a, b) => {
+        if (ui.personSort === "largest") return Math.abs(b.net) - Math.abs(a.net);
+        if (ui.personSort === "mostTransactions") return b.transactionsCount - a.transactionsCount;
+        if (ui.personSort === "name") return a.name.localeCompare(b.name, "ar");
+        return b.createdAt.localeCompare(a.createdAt);
+      });
+    }
+
+    function getReportData(balances) {
+      const today = todayString();
+      const currentMonth = today.slice(0, 7);
+      const transactions = state.transactions.filter((item) => {
+        if (ui.reportRange === "all") return true;
+        if (ui.reportRange === "month") return item.date.startsWith(currentMonth);
+        const start = new Date(`${today}T12:00:00`);
+        start.setDate(start.getDate() - 29);
+        return item.date >= start.toISOString().slice(0, 10);
+      });
+
+      const reportBalances = state.people.map((person) => {
+        const items = transactions.filter((entry) => entry.personId === person.id);
+        return {
+          ...person,
+          net: computeNetBalance(items),
+          transactionsCount: items.length
+        };
+      }).filter((person) => person.transactionsCount > 0);
+
+      const lent = transactions.filter((item) => item.type === "lentToHim").reduce((sum, item) => sum + item.amount, 0);
+      const collected = transactions.filter((item) => item.type === "collectedFromHim").reduce((sum, item) => sum + item.amount, 0);
+      const borrowed = transactions.filter((item) => item.type === "borrowedFromHim").reduce((sum, item) => sum + item.amount, 0);
+      const paid = transactions.filter((item) => item.type === "paidToHim").reduce((sum, item) => sum + item.amount, 0);
+      const netFlow = lent + paid - collected - borrowed;
+      const subtitle = ui.reportRange === "month" ? currentMonth : ui.reportRange === "30days" ? "ط¢ط®ط± 30 ظٹظˆظ…" : "ظƒظ„ ط§ظ„ط¨ظٹط§ظ†ط§طھ";
+      const mostActive = [...reportBalances].sort((a, b) => b.transactionsCount - a.transactionsCount)[0] ?? null;
+      const lastActivityDate = sortTransactionsDesc(transactions)[0]?.date ?? null;
+      const insight =
+        transactions.length === 0
+          ? "ظ„ط§ طھظˆط¬ط¯ ط­ط±ظƒط© ظپظٹ ظ‡ط°ظ‡ ط§ظ„ظپطھط±ط© ط¨ط¹ط¯."
+          : netFlow > 0
+            ? "ط§ظ„ظپطھط±ط© ط§ظ„ط­ط§ظ„ظٹط© طھظ…ظٹظ„ ظ„طµط§ظ„ط­ظƒ ط£ظƒط«ط± ظ…ظ† ط§ظ„ط§ظ„طھط²ط§ظ…ط§طھ."
+            : netFlow < 0
+              ? "ط§ظ„ظپطھط±ط© ط§ظ„ط­ط§ظ„ظٹط© ظپظٹظ‡ط§ ط§ظ„طھط²ط§ظ…ط§طھ ط£ظƒط«ط± ظˆطھط­طھط§ط¬ ظ…طھط§ط¨ط¹ط©."
+              : "ط§ظ„ظپطھط±ط© ط§ظ„ط­ط§ظ„ظٹط© ظ…طھظˆط§ط²ظ†ط© طھظ‚ط±ظٹط¨ظ‹ط§ ط¨ظٹظ† ط§ظ„ط¯ط§ط®ظ„ ظˆط§ظ„ط®ط§ط±ط¬.";
+
+      return {
+        subtitle,
+        transactions,
+        lent,
+        collected,
+        borrowed,
+        paid,
+        netFlow,
+        mostActive,
+        lastActivityDate,
+        insight,
+        topClaims: reportBalances.filter((person) => person.net > 0).sort((a, b) => b.net - a.net).slice(0, 3),
+        topDebts: reportBalances.filter((person) => person.net < 0).sort((a, b) => a.net - b.net).slice(0, 3)
+      };
+    }
+
+    function getSelectedPerson() {
+      return state.people.find((person) => person.id === ui.selectedPersonId) ?? null;
+    }
+
+    function createSummaryCard(label, value, hint, tone) {
+      return `<div class="summary-card" data-tone="${tone}"><span>${label}</span><strong>${value}</strong><p class="muted">${hint}</p></div>`;
+    }
+
+    function createPanelCard(label, value) {
+      return `<div class="panel-card"><span>${label}</span><strong>${value}</strong></div>`;
+    }
+
+    function createEmpty(title, text) {
+      return `<div class="empty-block"><h3>${title}</h3><p class="muted">${text}</p></div>`;
+    }
+
+    function createFilterChip(label, isActive, action) {
+      return `<button class="filter-chip ${isActive ? "active" : ""}" data-action="${action}" type="button">${label}</button>`;
+    }
+
+    function createTinyChip(label, isActive, action) {
+      return `<button class="tiny-chip ${isActive ? "active" : ""}" data-action="${action}" type="button">${label}</button>`;
+    }
+
+    function createDetailFilterChips() {
+      const options = [{ value: "all", label: "ط§ظ„ظƒظ„" }, ...transactionTypes.map((item) => ({ value: item.value, label: item.label }))];
+      return options.map((option) => createFilterChip(option.label, ui.personDetailFilter === option.value, `detail-filter:${option.value}`)).join("");
+    }
+
+    function detailStatHtml(label, value, tone) {
+      return `<div class="detail-stat ${tone}"><span>${label}</span><strong>${value}</strong></div>`;
+    }
+
+    function personRowHtml(personId, name, subtitle, amount) {
+      return `
+        <button class="person-card" data-person-open="${personId}">
+          <div class="person-head">
+            <strong class="person-name">${escapeHtml(name)}</strong>
+            <strong>${amount}</strong>
+          </div>
+          <p class="muted">${escapeHtml(subtitle)}</p>
+        </button>
+      `;
+    }
+
+    function bindPeopleOpen() {
+      document.querySelectorAll("[data-person-open]").forEach((button) => {
+        button.addEventListener("click", () => openPersonDetail(button.dataset.personOpen));
+      });
+    }
+
+    function bindTransactionEdit() {
+      document.querySelectorAll("[data-transaction-edit]").forEach((button) => {
+        button.addEventListener("click", () => {
+          closeModal("personDetailModal");
+          openTransactionModal(null, button.dataset.transactionEdit);
+        });
+      });
+    }
+
+    function bindTransactionDelete() {
+      document.querySelectorAll("[data-transaction-delete]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          deleteTransaction(button.dataset.transactionDelete);
+        });
+      });
+    }
+
+    function openModal(id) {
+      document.getElementById(id).hidden = false;
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).hidden = true;
+      if (id === "personModal") resetPersonForm();
+      if (id === "transactionModal") resetTransactionForm(ui.selectedPersonId);
+    }
+
+    function persistState() {
+      ui.saveState = "saving";
+      updateSavePill();
+      try {
+        state.meta.lastLocalSaveAt = new Date().toISOString();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        ui.saveState = "saved";
+      } catch {
+        ui.saveState = "error";
+      }
+      updateSavePill();
+      if (ui.activeTab === "home") renderHome();
+      if (ui.activeTab === "settings") renderSettings();
+    }
+
+    function loadState() {
+      try {
+        let raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          const legacyRaw = localStorage.getItem(LEGACY_STORAGE_KEY);
+          if (!legacyRaw) return structuredClone(defaultState);
+          const legacyParsed = JSON.parse(legacyRaw);
+          return {
+            ...structuredClone(defaultState),
+            people: Array.isArray(legacyParsed.people) ? legacyParsed.people : [],
+            transactions: Array.isArray(legacyParsed.transactions) ? legacyParsed.transactions : [],
+            settings: {
+              ...structuredClone(defaultState).settings,
+              dateStyle: legacyParsed.settings?.dateStyle || structuredClone(defaultState).settings.dateStyle,
+              lastExportedAt: legacyParsed.settings?.lastExportedAt || null
+            },
+            meta: {
+              ...structuredClone(defaultState).meta,
+              ...(legacyParsed.meta || {})
+            }
+          };
+        }
+        const parsed = JSON.parse(raw);
+        return {
+          ...structuredClone(defaultState),
+          ...parsed,
+          settings: {
+            ...structuredClone(defaultState).settings,
+            dateStyle: parsed.settings?.dateStyle || structuredClone(defaultState).settings.dateStyle,
+            lastExportedAt: parsed.settings?.lastExportedAt || null
+          },
+          meta: { ...structuredClone(defaultState).meta, ...(parsed.meta || {}) }
+        };
+      } catch {
+        return structuredClone(defaultState);
+      }
+    }
+
+    function updateSavePill() {
+      const text = ui.saveState === "saving"
+        ? "ط¬ط§ط±ظٹ ط§ظ„ط­ظپط¸"
+        : ui.saveState === "error"
+          ? "ظپظٹ ظ…ط´ظƒظ„ط©"
+          : state.meta.lastLocalSaveAt
+            ? `ظ…ط­ظپظˆط¸ ${formatDisplayDateTime(state.meta.lastLocalSaveAt)}`
+            : "ط¨ط§ظ†طھط¸ط§ط± ط£ظˆظ„ ط­ظپط¸";
+      elements.saveStatePill.textContent = text;
+      elements.saveStatePill.dataset.state = ui.saveState;
+    }
+
+    function formatAmount(value) {
+      return `${new Intl.NumberFormat("ar").format(value)} ط´ظٹظƒظ„`;
+    }
+
+    function formatDisplayDate(date) {
+      if (!date) return "-";
+      if (state.settings.dateStyle === "iso") return date;
+      const [year, month, day] = date.split("-");
+      return `${Number(day)}/${month}/${year}`;
+    }
+
+    function formatDisplayDateTime(value) {
+      const date = new Date(value);
+      const day = date.getDate();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      return `${day}/${month}/${year} ${hours}:${minutes}`;
+    }
+
+    function normalizeTransactionDateInput(value) {
+      const trimmed = value.trim();
+      if (!trimmed) return null;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) return trimmed;
+      const match = trimmed.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if (!match) return null;
+      const day = Number(match[1]);
+      const month = Number(match[2]);
+      const year = match[3];
+      if (day < 1 || day > 31 || month < 1 || month > 12) return null;
+      return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    }
+
+    function normalizeAmountInput(value) {
+      return value.replace(",", ".").replace(/[^0-9.]/g, "");
+    }
+
+    function parseAmountInput(value) {
+      const normalized = normalizeAmountInput(value);
+      const parts = normalized.split(".");
+      const safe = parts.length <= 2 ? normalized : `${parts[0]}.${parts.slice(1).join("")}`;
+      return Number(safe);
+    }
+
+    function computeNetBalance(items) {
+      return items.reduce((total, item) => applyTransactionOnNet(total, item.type, item.amount), 0);
+    }
+
+    function applyTransactionOnNet(net, type, amount) {
+      if (type === "lentToHim") return net + amount;
+      if (type === "collectedFromHim") return net - amount;
+      if (type === "borrowedFromHim") return net - amount;
+      if (type === "paidToHim") return net + amount;
+      return net;
+    }
+
+    function getBalanceLabel(net) {
+      if (net > 0) return "ط¥ظ„ظƒ ط¹ظ„ظٹظ‡";
+      if (net < 0) return "ط¹ظ„ظٹظƒ ط¥ظ„ظ‡";
+      return "ط§ظ„ط­ط³ط§ط¨ ظ…ط³ظƒط±";
+    }
+
+    function getBalanceRole(net) {
+      if (net > 0) return "ط¯ط§ط¦ظ†";
+      if (net < 0) return "ظ…ط¯ظٹظ†";
+      return "ظ…ط³ظƒط±";
+    }
+
+    function getTransactionLabel(type) {
+      return transactionTypes.find((item) => item.value === type)?.label ?? type;
+    }
+
+    function getTransactionTypeHint(type) {
+      if (type === "lentToHim") return "ظٹط²ظٹط¯ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ظ„ظƒ ط¹ظ„ظٹظ‡.";
+      if (type === "collectedFromHim") return "ظٹظ†ظ‚طµ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ظ„ظƒ ط¹ظ„ظٹظ‡.";
+      if (type === "borrowedFromHim") return "ظٹط²ظٹط¯ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ط¹ظ„ظٹظƒ ط¥ظ„ظ‡.";
+      if (type === "paidToHim") return "ظٹظ†ظ‚طµ ط§ظ„ظ…ط¨ظ„ط؛ ط§ظ„ط°ظٹ ط¹ظ„ظٹظƒ ط¥ظ„ظ‡.";
+      return "";
+    }
+
+    function getTone(type) {
+      return transactionTypes.find((item) => item.value === type)?.tone ?? "gold";
+    }
+
+    function getToneByNet(net) {
+      if (net > 0) return "green";
+      if (net < 0) return "red";
+      return "gold";
+    }
+
+    function createId(prefix) {
+      return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
+    }
+
+    function getTransactionSortValue(item) {
+      return `${item.date || "0000-00-00"}T${item.createdAt || "0000-00-00T00:00:00"}`;
+    }
+
+    function sortTransactionsAsc(items) {
+      return [...items].sort((a, b) => getTransactionSortValue(a).localeCompare(getTransactionSortValue(b)));
+    }
+
+    function sortTransactionsDesc(items) {
+      return [...items].sort((a, b) => getTransactionSortValue(b).localeCompare(getTransactionSortValue(a)));
+    }
+
+    function getTimelineBalances(descTransactions) {
+      const balances = new Map();
+      let running = 0;
+      sortTransactionsAsc(descTransactions).forEach((item) => {
+        running = applyTransactionOnNet(running, item.type, item.amount);
+        balances.set(item.id, running);
+      });
+      return balances;
+    }
+
+    function blurActiveElement() {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+    }
+
+    let toastTimer = null;
+
+    function showToast(message) {
+      if (!elements.toast) return;
+      elements.toast.textContent = message;
+      elements.toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        elements.toast.classList.remove("show");
+      }, 2400);
+    }
+
+    function todayString() {
+      return new Date().toISOString().slice(0, 10);
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function structuredClone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function downloadFile(name, content, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function registerServiceWorker() {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      }
+    }
+  </script>
+</body>
+</html>
+
