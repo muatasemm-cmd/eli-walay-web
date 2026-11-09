@@ -1,11 +1,14 @@
-const CACHE_NAME = "eli-walay-web-v18";
+const CACHE_NAME = "eli-walay-iphone-web-v1";
 const CORE = [
   "./",
   "./index.html",
-  "./iphone-v18.html",
   "./manifest.webmanifest",
-  "./app-icon.svg",
-  "./service-worker.js"
+  "./app-icon.png",
+  "./fonts/Alexandria-400.ttf",
+  "./fonts/Alexandria-500.ttf",
+  "./fonts/Alexandria-600.ttf",
+  "./fonts/Alexandria-700.ttf",
+  "./fonts/Alexandria-800.ttf"
 ];
 
 self.addEventListener("install", (event) => {
@@ -16,7 +19,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
+      Promise.all(keys.filter((key) => key.startsWith("eli-walay-iphone-web-") && key !== CACHE_NAME).map((key) => caches.delete(key)))
     )
   );
   self.clients.claim();
@@ -24,18 +27,17 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.origin !== self.location.origin) return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return response;
-        })
-        .catch(() => caches.match("./iphone-v18.html"));
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request).then((cached) => cached || caches.match("./index.html")))
   );
 });

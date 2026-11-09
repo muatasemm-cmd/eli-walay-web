@@ -1,5 +1,5 @@
 {
-  "name": "إلي وعليّ | آيفون",
+  "name": "إلي وعليّ",
   "short_name": "إلي وعليّ",
   "start_url": "./index.html",
   "scope": "./",
@@ -8,12 +8,6 @@
   "theme_color": "#1f221b",
   "lang": "ar",
   "dir": "rtl",
-  "description": "نسخة ويب ثابتة من إلي وعليّ، تحفظ محليًا على الجهاز وتدعم النسخ الاحتياطي JSON.",
-  "icons": [
-    {
-      "src": "./app-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml"
-    }
-  ]
+  "description": "إدارة الحسابات والدفعات على الآيفون مع نسخ احتياطي واستعادة للبيانات.",
+  "icons": [{ "src": "./app-icon.png", "sizes": "1024x1024", "type": "image/png" }]
 }
