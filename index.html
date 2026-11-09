@@ -7,7 +7,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta name="theme-color" content="#1f221b" />
+  <meta name="theme-color" content="#2876b9" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="إلي وعليّ" />
@@ -1331,13 +1331,77 @@
     :root { --bg:#f1f6fc; --surface:#fff; --surface-strong:#fff; --surface-soft:#edf5ff; --line:#dce9f5; --text:#142131; --muted:#758396; --green:#2876b9; --green-soft:#e2f1ff; --blue:#2876b9; --blue-soft:#dfefff; --dark:#183a67; --shadow:0 16px 38px rgba(44,111,174,.10); --shadow-soft:0 7px 20px rgba(44,111,174,.07); }
     body { background:linear-gradient(180deg,#f5faff,#eaf4ff 48%,#f8fbff); }
     .topbar { background:rgba(255,255,255,.82); border-color:#e5eff8; backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
-    .brand-mark { background:linear-gradient(145deg,#65b7ec,#226ab4); }
+    .brand-mark { background:linear-gradient(145deg,#65b7ec,#226ab4); object-fit:cover; }
     .hero { background:linear-gradient(140deg,#244d92,#1e78b7 60%,#5db5e7); box-shadow:0 20px 42px rgba(27,99,170,.22); }
     .card,.person-card,.transaction-card,.status-card,.action-card { border-color:#e3edf7; box-shadow:var(--shadow-soft); }
     .bottom-nav { background:rgba(255,255,255,.88); border:1px solid #d9e6f2; backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); box-shadow:0 16px 36px rgba(25,72,123,.16); }
     .filter-chip.active,.tiny-chip.active,.chip.primary,.button.primary { background:#2876b9; color:white; }
     body[data-theme="dark"] { --bg:#101a28; --surface:#172538; --surface-strong:#1c2b40; --surface-soft:#243751; --line:#31465e; --text:#f4f8ff; --muted:#a9b9cd; --dark:#eaf4ff; background:#101a28; }
     body[data-theme="dark"] .topbar,body[data-theme="dark"] .bottom-nav { background:rgba(22,36,55,.94); border-color:#31465e; }
+    body[data-theme="dark"] .action-card,body[data-theme="dark"] .backup-step,
+    body[data-theme="dark"] .welcome-card,body[data-theme="dark"] .attention-card,
+    body[data-theme="dark"] .panel-card,body[data-theme="dark"] .summary-card,
+    body[data-theme="dark"] .status-card,body[data-theme="dark"] .person-card,
+    body[data-theme="dark"] .transaction-card,body[data-theme="dark"] .priority-card { background:#20334b; border-color:#36506c; color:#f4f8ff; }
+    body[data-theme="dark"] .transaction-meta-item,body[data-theme="dark"] .person-meta-item,
+    body[data-theme="dark"] .preview-item,body[data-theme="dark"] .field-card,
+    body[data-theme="dark"] .transaction-note-box { background:#17283e; border-color:#36506c; color:#f4f8ff; }
+    body[data-theme="dark"] .action-card strong,body[data-theme="dark"] .action-card small,
+    body[data-theme="dark"] .backup-step strong,body[data-theme="dark"] .backup-step .muted,
+    body[data-theme="dark"] .panel-card strong,body[data-theme="dark"] .status-card strong { color:#f4f8ff; }
+    body[data-theme="dark"] .nav-item.active { color:#83caff; }
+    body[data-theme="dark"] .button.secondary,body[data-theme="dark"] .chip-dark { background:#2a405c; color:#f4f8ff; }
+    body[data-theme="dark"] .open-inline-button.light { background:#2a405c; border-color:#4b6684; color:#f4f8ff; }
+    /* Match the compact SwiftUI presentation on iPhone. */
+    .app-shell { padding-inline:16px; }
+    .screen-head { background:var(--surface); border:1px solid var(--line); border-radius:27px; padding:19px; box-shadow:var(--shadow-soft); margin-bottom:16px; }
+    .screen-kicker { color:var(--blue); }
+    .screen-title { font-size:1.7rem; }
+    .screen-subtitle { font-size:.78rem; line-height:1.5; }
+    .topbar { background:transparent; border:0; box-shadow:none; padding:0 4px 12px; backdrop-filter:none; -webkit-backdrop-filter:none; }
+    .hero { border-radius:30px; }
+    .hero .hero-title,.hero .hero-subtitle,.hero .eyebrow { color:#fff; }
+    .hero .hero-subtitle { font-size:1.4rem; line-height:1.4; font-weight:800; max-width:18ch; }
+    #screen-home .hero .metrics-grid { display:none; }
+    .metric { background:rgba(255,255,255,.13); border:1px solid rgba(255,255,255,.18); box-shadow:none; }
+    .metric span { color:rgba(255,255,255,.78); }
+    .metric strong { color:#fff; }
+    .bottom-nav { padding:7px; border-radius:30px; }
+    .nav-item { min-height:58px; color:var(--muted); border-radius:23px; }
+    .nav-item.active { background:rgba(40,118,185,.12); color:#1f68aa; box-shadow:none; }
+    .nav-icon,.nav-item.active .nav-icon { background:transparent; font-size:1.15rem; }
+    .nav-icon svg { width:23px; height:23px; stroke:currentColor; fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+    .nav-label { font-size:.7rem; }
+    .report-transaction-button { display:block; width:100%; text-align:right; color:var(--text); font:inherit; cursor:pointer; }
+    #recordedPaymentList .transaction-card { display:flex; width:100%; justify-content:space-between; align-items:center; color:var(--text); font:inherit; cursor:pointer; }
+    #settingsHighlights { display:none; }
+    #screen-reports > .hero { display:none; }
+    details.card > summary, .report-extra > summary { cursor:pointer; font-weight:800; color:var(--text); padding:4px 0; }
+    details.card[open] > summary, .report-extra[open] > summary { margin-bottom:14px; }
+    @media (max-width:560px) {
+      .summary-grid,.metrics-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .topbar-head { flex-direction:row; }
+      .hero-head { flex-direction:column; }
+      .bottom-nav { width:calc(100% - 20px); }
+    }
+    @media (prefers-color-scheme:dark) {
+      body[data-theme="system"] { --bg:#101a28; --surface:#172538; --surface-strong:#1c2b40; --surface-soft:#243751; --line:#31465e; --text:#f4f8ff; --muted:#a9b9cd; --dark:#eaf4ff; background:#101a28; }
+      body[data-theme="system"] .topbar,body[data-theme="system"] .bottom-nav { background:rgba(22,36,55,.94); border-color:#31465e; }
+      body[data-theme="system"] .action-card,body[data-theme="system"] .backup-step,
+      body[data-theme="system"] .welcome-card,body[data-theme="system"] .attention-card,
+      body[data-theme="system"] .panel-card,body[data-theme="system"] .summary-card,
+      body[data-theme="system"] .status-card,body[data-theme="system"] .person-card,
+      body[data-theme="system"] .transaction-card,body[data-theme="system"] .priority-card { background:#20334b; border-color:#36506c; color:#f4f8ff; }
+      body[data-theme="system"] .transaction-meta-item,body[data-theme="system"] .person-meta-item,
+      body[data-theme="system"] .preview-item,body[data-theme="system"] .field-card,
+      body[data-theme="system"] .transaction-note-box { background:#17283e; border-color:#36506c; color:#f4f8ff; }
+      body[data-theme="system"] .action-card strong,body[data-theme="system"] .action-card small,
+      body[data-theme="system"] .backup-step strong,body[data-theme="system"] .backup-step .muted,
+      body[data-theme="system"] .panel-card strong,body[data-theme="system"] .status-card strong { color:#f4f8ff; }
+      body[data-theme="system"] .nav-item.active { color:#83caff; }
+      body[data-theme="system"] .button.secondary,body[data-theme="system"] .chip-dark { background:#2a405c; color:#f4f8ff; }
+      body[data-theme="system"] .open-inline-button.light { background:#2a405c; border-color:#4b6684; color:#f4f8ff; }
+    }
   </style>
 </head>
 <body>
@@ -1345,7 +1409,7 @@
     <header class="topbar">
       <div class="topbar-head">
         <div class="brand-row">
-          <div class="brand-mark">إ/ع</div>
+          <img class="brand-mark" src="./app-icon.png" alt="" />
           <div class="brand-copy">
             <p class="eyebrow">دفتر حساباتك</p>
             <h1>إلي وعليّ</h1>
@@ -1508,29 +1572,18 @@
           </div>
           <div class="filters-row" id="reportRangeRow"></div>
           <div class="filters-row" id="reportScopeRow"></div>
+          <div class="summary-grid" id="reportNativeSummary"></div>
+          <div class="section-head"><div class="stack"><h2>حسب الأولوية</h2><p>الأرصدة الأعلى تظهر أولًا</p></div></div>
+          <div class="list-stack" id="reportRankedPeople"></div>
+          <button class="button secondary" id="reportRankedMore" type="button" hidden>عرض 20 حسابًا آخر</button>
+          <details class="report-extra"><summary>تفاصيل التحليل</summary>
           <p class="note" id="reportInsight">لا توجد حركة في هذه الفترة بعد.</p>
           <div class="panel-grid" id="reportsGrid"></div>
+          </details>
         </div>
 
-        <div class="card">
-          <div class="section-head">
-            <div class="stack" style="gap: 4px;">
-              <h2>أعلى ناس إلك عليهم</h2>
-              <p>رتب التحصيل من الأعلى</p>
-            </div>
-          </div>
-          <div class="list-stack" id="topClaimsList"></div>
-        </div>
-
-        <div class="card">
-          <div class="section-head">
-            <div class="stack" style="gap: 4px;">
-              <h2>أعلى ناس عليك إلهم</h2>
-              <p>هذه المبالغ تحتاج ترتيب دفع</p>
-            </div>
-          </div>
-          <div class="list-stack" id="topDebtsList"></div>
-        </div>
+        <details class="card"><summary>أعلى ناس إلك عليهم</summary><div class="list-stack" id="topClaimsList"></div></details>
+        <details class="card"><summary>أعلى ناس عليك إلهم</summary><div class="list-stack" id="topDebtsList"></div></details>
         <div class="card">
           <div class="section-head"><div class="stack"><h2>سجل الحركات</h2><p>بحث وفلاتر بدل التمرير الطويل</p></div></div>
           <input class="text-input" id="reportTransactionSearch" placeholder="ابحث باسم أو ملاحظة أو مرجع" type="search" />
@@ -1549,15 +1602,9 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="section-head">
-            <div class="stack" style="gap: 4px;">
-              <h2>حالة التطبيق</h2>
-              <p>معلومات سريعة</p>
-            </div>
-          </div>
-          <div class="status-list" id="statusList"></div>
-        </div>
+        <div class="card" id="webStorageNotice"><strong>بياناتك على هذا الآيفون</strong><p class="note">نسخة الويب تحفظ البيانات داخل Safari على هذا الجهاز. بعد نقل بياناتك من التطبيق، احفظ ملف نسخة احتياطية في iCloud Drive وكرّر ذلك بعد التغييرات المهمة.</p></div>
+
+        <details class="card"><summary>حالة التطبيق</summary><div class="status-list" id="statusList"></div></details>
 
         <div class="panel-grid" id="settingsHighlights"></div>
 
@@ -1955,6 +2002,14 @@
     </div>
   </div>
 
+  <div class="overlay" id="recordedPaymentModal" hidden>
+    <div class="modal-card">
+      <div class="modal-toolbar"><div class="detail-head"><div class="modal-toolbar-main"><p class="eyebrow">المواعيد</p><h3>دفعة مسجلة</h3></div><button class="chip chip-dark detail-close-button" data-close="recordedPaymentModal" type="button">إغلاق</button></div></div>
+      <p class="note">اختر دفعة موجودة في الحركات. لن تُضاف حركة ثانية ولن يُخصم المبلغ مرتين.</p>
+      <div class="list-stack" id="recordedPaymentList"></div>
+    </div>
+  </div>
+
   <div class="privacy-shield" id="privacyShield" hidden><div><p class="eyebrow">إلي وعليّ</p><h2>بياناتك مخفية</h2><p class="muted">ارجع إلى التطبيق لعرض الحسابات.</p></div></div>
 
   <div class="overlay lock-screen" id="lockScreen" hidden>
@@ -2228,6 +2283,11 @@
       bottomNav: document.getElementById("bottomNav"),
       toast: document.getElementById("toast")
     };
+
+    let reportRankedCount = 20;
+    let reportTransactionCount = 20;
+    let suppressSnapshotOnce = false;
+    let toastTimer = null;
 
     bindStaticEvents();
     renderApp();
@@ -2890,13 +2950,24 @@
       maybeShowScheduleReminder();
     }
 
+    function navIcon(key) {
+      const paths = {
+        home: '<path d="m3 10 9-7 9 7v10h-6v-6H9v6H3z"/>',
+        people: '<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20v-2.5a5.5 5.5 0 0 1 11 0V20zM15 20v-2a4 4 0 0 1 6.5-3.1V20z"/>',
+        followup: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M7 14h3M14 14h3M7 18h3"/>',
+        reports: '<path d="M3 21h18M6 18V9h3v9M11 18V4h3v14M16 18v-6h3v6"/>',
+        settings: '<circle cx="12" cy="12" r="3"/><path d="m12 2 1 2.2 2.3.8 2.2-1 2 2-1 2.2.8 2.3L22 12l-2.7 1.5-.8 2.3 1 2.2-2 2-2.2-1-2.3.8L12 22l-1.5-2.7-2.3-.8-2.2 1-2-2 1-2.2-.8-2.3L2 12l2.2-1.5.8-2.3-1-2.2 2-2 2.2 1 2.3-.8z"/>'
+      };
+      return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[key]}</svg>`;
+    }
+
     function renderNav() {
       const items = [
-        { key: "home", label: "الرئيسية", icon: "⌂" },
-        { key: "people", label: "الأشخاص", icon: "◉" },
-        { key: "followup", label: "المواعيد", icon: "▦" },
-        { key: "reports", label: "التقارير", icon: "◔" },
-        { key: "settings", label: "الإعدادات", icon: "⚙" }
+        { key: "home", label: "الرئيسية", icon: navIcon("home") },
+        { key: "people", label: "الأشخاص", icon: navIcon("people") },
+        { key: "followup", label: "المواعيد", icon: navIcon("followup") },
+        { key: "reports", label: "التقارير", icon: navIcon("reports") },
+        { key: "settings", label: "الإعدادات", icon: navIcon("settings") }
       ];
 
       elements.bottomNav.innerHTML = items.map((item) => `
@@ -2939,16 +3010,9 @@
       elements.metricOpen.textContent = String(openAccounts.length);
       elements.metricTransactions.textContent = String(state.transactions.length);
       elements.metricLastSave.textContent = state.meta.lastLocalSaveAt ? getRelativeDateTimeLabel(state.meta.lastLocalSaveAt) : "لا يوجد";
-      elements.heroInsight.textContent =
-        riskPeople.length > 0
-          ? `عندك ${riskPeople.length} ${riskPeople.length === 1 ? "حساب" : "حسابات"} في منطقة خطر وتحتاج متابعة جدية اليوم.`
-          : followUpPeople.length > 0
-            ? `عندك ${followUpPeople.length} ${followUpPeople.length === 1 ? "حساب" : "حسابات"} تحتاج تواصل أو ترتيب حركة قريبة.`
-            : hasNetClaims && !hasNetDebts
-              ? "وضعك العام لصالحك، والآن ركّز على التحصيل بهدوء ومن حساباتك الأقدم."
-              : hasNetDebts
-                ? "عندك التزامات أكثر الآن، فابدأ بأكثر حساب يحتاج تسوية فعلية."
-                : "الصافي متوازن حاليًا، والأولوية الآن لتنظيم الحسابات النشطة فقط.";
+      elements.heroInsight.textContent = openAccounts.length === 0
+        ? "حساباتك مرتبة بالكامل"
+        : `${openAccounts.length} حسابات تحتاج متابعتك`;
 
       const shouldShowBackupAlert = state.people.length + state.transactions.length > 0 &&
         (!state.settings.lastExportedAt || (backupAge !== null && backupAge >= 5));
@@ -2958,9 +3022,13 @@
           <div class="stack" style="gap: 4px;">
             <p class="eyebrow">بداية مرتبة</p>
             <h3>لنبدأ بطريقة سهلة</h3>
-            <p class="muted">أضف أول شخص ثم أول حركة، وبعدها سيبدأ التطبيق يحسب لك كل شيء تلقائيًا ويحفظه مباشرة على الجهاز.</p>
+            <p class="muted">إذا عندك نسخة «إلي وعليّ» الأصلية، احفظ ملف البيانات منها ثم استورده هنا. أو ابدأ بحساب جديد.</p>
           </div>
           <div class="actions-grid">
+            <button class="action-card" id="welcomeImportButton" type="button">
+              <strong>استيراد بيانات الآيفون</strong>
+              <small>اختر ملف النسخة الاحتياطية JSON</small>
+            </button>
             <button class="action-card" id="welcomeAddPersonButton" type="button">
               <strong>أضف أول شخص</strong>
               <small>ابدأ بالاسم فقط والباقي اختياري</small>
@@ -3052,7 +3120,9 @@
             <div class="schedule-actions">
               <span class="muted">${schedule.note ? escapeHtml(schedule.note) : "بدون ملاحظة"}</span>
               <div class="section-mini-actions">
-                <button class="open-inline-button light" type="button" data-schedule-record="${schedule.id}">سجل الدفعة</button>
+                <button class="open-inline-button" type="button" data-schedule-link="${schedule.id}">دفعة مسجلة</button>
+                <button class="open-inline-button light" type="button" data-schedule-record="${schedule.id}">دفعة جديدة</button>
+                <button class="open-inline-button light" type="button" data-schedule-edit="${schedule.id}">تعديل الموعد</button>
                 <button class="open-inline-button" type="button" data-person-open-button="${schedule.personId}">فتح الحساب</button>
               </div>
             </div>
@@ -3139,6 +3209,7 @@
       bindPeopleOpen();
       bindTransactionEdit();
       bindScheduleActions();
+      document.getElementById("welcomeImportButton")?.addEventListener("click", () => elements.backupFileInput.click());
       document.getElementById("welcomeAddPersonButton")?.addEventListener("click", () => {
         state.meta.hasSeenWelcome = true;
         persistState();
@@ -3246,6 +3317,23 @@
       const reportData = getReportData(balances);
       const pageSize = 10;
 
+      const scoped = balances.filter((person) => ui.reportScope === "all" ||
+        (ui.reportScope === "personal" ? ["شخصي", "عائلة"].includes(person.category) : ["عمل", "مورد"].includes(person.category))
+      );
+      const ranked = [...scoped].sort((a, b) =>
+        Math.max(...b.balanceEntries.map((entry) => entry.abs), 0) - Math.max(...a.balanceEntries.map((entry) => entry.abs), 0)
+      );
+      document.getElementById("reportNativeSummary").innerHTML = [
+        createPanelCard("إلي", formatCurrencyTotalsMap(aggregatePeopleBalancesBySide(scoped, "claims")), "المبالغ المستحقة لك", "green"),
+        createPanelCard("عليّ", formatCurrencyTotalsMap(aggregatePeopleBalancesBySide(scoped, "debts")), "المبالغ المستحقة عليك", "red")
+      ].join("");
+      document.getElementById("reportRankedPeople").innerHTML = ranked.length ? ranked.slice(0, reportRankedCount).map((person) =>
+        personRowHtml(person.id, person.name, person.category || "شخصي", person.balanceSummary, "")
+      ).join("") : createEmpty("لا توجد بيانات", "ستظهر الحسابات هنا بعد تسجيل الحركات.");
+      const rankedMore = document.getElementById("reportRankedMore");
+      rankedMore.hidden = ranked.length <= reportRankedCount;
+      rankedMore.onclick = () => { reportRankedCount += 20; renderReports(); };
+
       elements.reportsSubtitle.textContent = reportData.subtitle;
       elements.reportRangeRow.innerHTML = reportRanges.map((option) => createFilterChip(option.label, ui.reportRange === option.value, `report-range:${option.value}`)).join("");
       elements.reportScopeRow.innerHTML = [{value:"all",label:"كل الحسابات"},{value:"personal",label:"شخصي"},{value:"business",label:"عمل"}].map((option) => createFilterChip(option.label, ui.reportScope === option.value, `report-scope:${option.value}`)).join("");
@@ -3311,7 +3399,9 @@
             <div class="schedule-actions">
               <span class="muted">${schedule.note ? escapeHtml(schedule.note) : "بدون ملاحظة"}</span>
               <div class="section-mini-actions">
-                <button class="open-inline-button light" type="button" data-schedule-record="${schedule.id}">سجل الدفعة</button>
+                <button class="open-inline-button" type="button" data-schedule-link="${schedule.id}">دفعة مسجلة</button>
+                <button class="open-inline-button light" type="button" data-schedule-record="${schedule.id}">دفعة جديدة</button>
+                <button class="open-inline-button light" type="button" data-schedule-edit="${schedule.id}">تعديل الموعد</button>
                 <button class="open-inline-button" type="button" data-person-open-button="${schedule.personId}">فتح الحساب</button>
               </div>
             </div>
@@ -3361,7 +3451,7 @@
           renderReports();
         });
       });
-      document.querySelectorAll("[data-action^='report-scope:']").forEach((button) => button.addEventListener("click", () => { ui.reportScope = button.dataset.action.split(":")[1]; ui.reportClaimsPage = 1; ui.reportDebtsPage = 1; renderReports(); }));
+      document.querySelectorAll("[data-action^='report-scope:']").forEach((button) => button.addEventListener("click", () => { ui.reportScope = button.dataset.action.split(":")[1]; ui.reportClaimsPage = 1; ui.reportDebtsPage = 1; reportRankedCount = 20; renderReports(); renderReportTransactions(); }));
       document.querySelectorAll("[data-report-page]").forEach((button) => {
         button.addEventListener("click", () => {
           const [section, page] = button.dataset.reportPage.split(":");
@@ -3379,24 +3469,30 @@
       return `<div class="card" style="padding:12px;"><div class="person-card-actions"><button class="chip chip-dark" type="button" data-report-page="${section}:${page - 1}" ${page <= 1 ? "disabled" : ""}>السابق</button><strong>صفحة ${page} من ${pages} • ${total} سجل</strong><button class="chip primary" type="button" data-report-page="${section}:${page + 1}" ${page >= pages ? "disabled" : ""}>التالي</button></div></div>`;
     }
 
-    let reportTransactionCount = 20;
     function renderReportTransactions() {
       const query = document.getElementById("reportTransactionSearch").value.trim().toLowerCase();
       const period = document.getElementById("reportTransactionPeriod").value;
       const currency = document.getElementById("reportTransactionCurrency").value;
       const month = todayString().slice(0, 7);
       const cutoff = new Date(Date.now() - 30 * 86400000).toISOString().slice(0,10);
+      const allowedPeople = new Set(state.people.filter((person) => ui.reportScope === "all" ||
+        (ui.reportScope === "personal" ? ["شخصي", "عائلة"].includes(person.category) : ["عمل", "مورد"].includes(person.category))
+      ).map((person) => person.id));
       const items = state.transactions.filter((item) => {
+        if (!allowedPeople.has(item.personId)) return false;
         if (currency !== "all" && item.currency !== currency) return false;
         if (period === "month" && !item.date.startsWith(month)) return false;
         if (period === "30" && item.date < cutoff) return false;
         const name = state.people.find((person) => person.id === item.personId)?.name || "";
         return !query || [name, item.note || "", item.reference || "", getTransactionLabel(item.type)].some((value) => value.toLowerCase().includes(query));
-      }).sort((a,b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt));
+      }).sort((a,b) => b.date.localeCompare(a.date) || (b.createdAt || "").localeCompare(a.createdAt || ""));
       document.getElementById("reportTransactionList").innerHTML = items.length ? items.slice(0, reportTransactionCount).map((item) => {
         const person = state.people.find((entry) => entry.id === item.personId);
-        return `<div class="transaction-card"><div class="inline-row" style="justify-content:space-between"><strong>${escapeHtml(person?.name || "حساب")}</strong><strong>${formatAmount(item.amount,item.currency)}</strong></div><p class="note">${getTransactionLabel(item.type)} • ${formatDisplayDate(item.date)}${item.note ? ` • ${escapeHtml(item.note)}` : ""}</p></div>`;
+        return `<button class="transaction-card report-transaction-button" type="button" data-report-person="${item.personId}"><div class="inline-row" style="justify-content:space-between"><strong>${escapeHtml(person?.name || "حساب")}</strong><strong>${formatAmount(item.amount,item.currency)}</strong></div><p class="note">${getTransactionLabel(item.type)} • ${formatDisplayDate(item.date)}${item.note ? ` • ${escapeHtml(item.note)}` : ""}</p></button>`;
       }).join("") : createEmpty("لا توجد نتائج", "غيّر البحث أو الفلاتر.");
+      document.querySelectorAll("[data-report-person]").forEach((button) => {
+        button.onclick = () => openPersonDetail(button.dataset.reportPerson);
+      });
       const more = document.getElementById("reportTransactionMore");
       more.hidden = items.length <= reportTransactionCount;
       more.onclick = () => { reportTransactionCount += 20; renderReportTransactions(); };
@@ -3434,7 +3530,7 @@
         { label: "عدد الأشخاص", value: String(state.people.length), tone: "blue" },
         { label: "عدد الحركات", value: String(state.transactions.length), tone: "dark" },
         { label: "الخطط النشطة", value: String(activeSchedulesCount), tone: activeSchedulesCount > 0 ? "gold" : "blue" },
-        { label: "تنبيهات المواعيد", value: state.settings.notificationsEnabled ? "مفعّلة" : "بانتظار الإذن", tone: state.settings.notificationsEnabled ? "green" : "gold" },
+        { label: "تنبيهات المواعيد", value: !isNativeApp() ? "تُعرض داخل التطبيق" : state.settings.notificationsEnabled ? "مفعّلة" : "بانتظار الإذن", tone: state.settings.notificationsEnabled && isNativeApp() ? "green" : "gold" },
         { label: "آخر حفظ محلي", value: state.meta.lastLocalSaveAt ? formatDisplayDateTime(state.meta.lastLocalSaveAt) : "بانتظار أول حفظ", tone: "green" },
         { label: "آخر نسخة مصدرة", value: state.settings.lastExportedAt ? formatDisplayDateTime(state.settings.lastExportedAt) : "لم يتم بعد", tone: state.settings.lastExportedAt ? "blue" : "gold" },
         { label: "نسخ الاسترداد المحلية", value: `${snapshotsCount} محفوظة`, tone: snapshotsCount ? "green" : "gold" },
@@ -3478,7 +3574,7 @@
       elements.disablePinButton.hidden = !state.settings.lockEnabled;
       const faceAvailable = Boolean(ui.faceIdAvailable);
       elements.faceIdStatus.textContent = !isNativeApp()
-        ? "Face ID متاح داخل تطبيق iPhone فقط."
+        ? "Face ID غير متاح لنسخة الويب. يمكنك استخدام رمز القفل بدلًا منه."
         : !faceAvailable
           ? "Face ID غير متاح أو غير معدّ على هذا الجهاز."
           : state.settings.faceIdEnabled
@@ -4326,10 +4422,16 @@
           return;
         }
 
+        const previousState = state;
         state = importedState;
         ui.transactionCurrency = state.settings.currency;
         ui.isLocked = Boolean((state.settings.lockEnabled && hasPinLock()) || state.settings.faceIdEnabled);
-        persistState();
+        if (!persistState()) {
+          state = previousState;
+          renderApp();
+          alert("الملف أكبر من مساحة الحفظ المتاحة في Safari. لم تتغير بياناتك. احفظ الملف وجرّب إخلاء مساحة على الجهاز.");
+          return;
+        }
         renderApp();
         showToast("تم استيراد النسخة الاحتياطية بنجاح.");
       } catch {
@@ -4481,7 +4583,7 @@
           pinHash,
           pinSalt,
           faceIdEnabled: false,
-          notificationsEnabled: Boolean(parsed.settings?.notificationsEnabled),
+          notificationsEnabled: isNativeApp() && Boolean(parsed.settings?.notificationsEnabled),
           lastExportedAt: cleanText(parsed.settings?.lastExportedAt, 80) || null
           ,privacyShieldEnabled: parsed.settings?.privacyShieldEnabled !== false
           ,themeMode: ["system","light","dark"].includes(parsed.settings?.themeMode) ? parsed.settings.themeMode : "system"
@@ -4812,16 +4914,19 @@
 
     function bindScheduleActions() {
       document.querySelectorAll("[data-schedule-edit]").forEach((button) => {
-        button.addEventListener("click", () => {
+        button.onclick = () => {
           closeModal("personDetailModal");
-          openScheduleModal(ui.selectedPersonId, button.dataset.scheduleEdit);
-        });
+          openScheduleModal(null, button.dataset.scheduleEdit);
+        };
       });
       document.querySelectorAll("[data-schedule-record]").forEach((button) => {
-        button.addEventListener("click", () => recordScheduledInstallment(button.dataset.scheduleRecord));
+        button.onclick = () => recordScheduledInstallment(button.dataset.scheduleRecord);
+      });
+      document.querySelectorAll("[data-schedule-link]").forEach((button) => {
+        button.onclick = () => openRecordedPaymentModal(button.dataset.scheduleLink);
       });
       document.querySelectorAll("[data-schedule-stop]").forEach((button) => {
-        button.addEventListener("click", () => stopSchedule(button.dataset.scheduleStop));
+        button.onclick = () => stopSchedule(button.dataset.scheduleStop);
       });
     }
 
@@ -4854,6 +4959,54 @@
       ui.scheduleRecordDate = todayString();
       renderScheduleRecordModal();
       openModal("scheduleRecordModal");
+    }
+
+    function openRecordedPaymentModal(scheduleId) {
+      const schedule = state.schedules.find((item) => item.id === scheduleId);
+      if (!schedule || !schedule.active) return;
+      const earliest = addMonthsToDate(schedule.nextDueDate, -Math.max(1, schedule.intervalMonths || 1));
+      const expectedType = schedule.type === "payToHim" ? "paidToHim" : "collectedFromHim";
+      const candidates = state.transactions.filter((item) =>
+        item.personId === schedule.personId && item.currency === schedule.currency &&
+        item.type === expectedType && !item.scheduleId && item.date >= earliest && item.date <= todayString()
+      ).sort((a, b) => b.date.localeCompare(a.date));
+      const list = document.getElementById("recordedPaymentList");
+      list.innerHTML = candidates.length ? candidates.map((payment) => `
+        <button class="transaction-card" type="button" data-link-payment="${payment.id}">
+          <strong>${formatDisplayDate(payment.date)}</strong>
+          <span>${formatAmount(payment.amount, payment.currency)}</span>
+        </button>
+      `).join("") : createEmpty("لا توجد دفعة مناسبة", "يمكنك تعديل الموعد يدويًا أو تسجيل دفعة جديدة.");
+      list.querySelectorAll("[data-link-payment]").forEach((button) => {
+        button.onclick = () => linkRecordedPayment(scheduleId, button.dataset.linkPayment);
+      });
+      openModal("recordedPaymentModal");
+    }
+
+    function linkRecordedPayment(scheduleId, transactionId) {
+      const schedule = state.schedules.find((item) => item.id === scheduleId);
+      const payment = state.transactions.find((item) => item.id === transactionId);
+      if (!schedule || !payment || payment.scheduleId || !schedule.active) return;
+      if (!confirm("ربط الدفعة بالموعد؟ سيُستخدم السجل الموجود من دون إضافة حركة ثانية.")) return;
+      const balance = computeNetBalance(state.transactions.filter((item) =>
+        item.personId === schedule.personId && item.currency === schedule.currency
+      ));
+      const outstanding = schedule.type === "payToHim" ? Math.max(0, -balance) : Math.max(0, balance);
+      const remainingAmount = Math.min(schedule.remainingAmount, outstanding);
+      let nextDueDate = schedule.nextDueDate;
+      const daysEarly = Math.round((new Date(`${schedule.nextDueDate}T12:00:00`) - new Date(`${payment.date}T12:00:00`)) / 86400000);
+      if (nextDueDate <= todayString() || (daysEarly >= 0 && daysEarly <= 14)) {
+        do { nextDueDate = addMonthsToDate(nextDueDate, Math.max(1, schedule.intervalMonths || 1)); }
+        while (nextDueDate <= todayString());
+      }
+      state.transactions = state.transactions.map((item) => item.id === transactionId ? { ...item, scheduleId } : item);
+      state.schedules = state.schedules.map((item) => item.id === scheduleId ? {
+        ...item, remainingAmount, nextDueDate, active: remainingAmount > 0.009, updatedAt: new Date().toISOString()
+      } : item);
+      closeModal("recordedPaymentModal");
+      persistState();
+      renderApp();
+      showToast("تم ربط الدفعة بالموعد دون تسجيلها مرتين.");
     }
 
     function saveSchedule() {
@@ -5034,8 +5187,6 @@
       if (id === "transactionModal") resetTransactionForm(ui.selectedPersonId);
     }
 
-    let suppressSnapshotOnce = false;
-
     function loadSnapshots() {
       try {
         const value = JSON.parse(localStorage.getItem(SNAPSHOTS_KEY) || "[]");
@@ -5104,16 +5255,19 @@
         if (suppressSnapshotOnce) {
           suppressSnapshotOnce = false;
         } else {
-          savePreviousSnapshot(previousRaw, nextRaw);
+          try { savePreviousSnapshot(previousRaw, nextRaw); } catch { /* Keep the main record writable if snapshots are full. */ }
         }
         localStorage.setItem(STORAGE_KEY, nextRaw);
         ui.saveState = "saved";
+        return true;
       } catch {
         ui.saveState = "error";
+        return false;
+      } finally {
+        updateSavePill();
+        if (ui.activeTab === "home") renderHome();
+        if (ui.activeTab === "settings") renderSettings();
       }
-      updateSavePill();
-      if (ui.activeTab === "home") renderHome();
-      if (ui.activeTab === "settings") renderSettings();
     }
 
     function loadState() {
@@ -5590,8 +5744,6 @@
         document.activeElement.blur();
       }
     }
-
-    let toastTimer = null;
 
     function showToast(message) {
       if (!elements.toast) return;

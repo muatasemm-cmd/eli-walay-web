@@ -1,4 +1,4 @@
-const CACHE_NAME = "eli-walay-iphone-web-v2";
+const CACHE_NAME = "eli-walay-iphone-web-v3";
 const CORE = [
   "./",
   "./index.html",
