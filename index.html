@@ -1463,6 +1463,25 @@
         <div class="list-stack" id="peopleList"></div>
       </section>
 
+      <section class="screen" id="screen-followup">
+        <div class="screen-head"><div class="stack" style="gap: 2px;"><span class="screen-kicker">خطوتك التالية</span><h2 class="screen-title">المواعيد</h2><p class="screen-subtitle">الدفعات القادمة والحسابات المفتوحة</p></div></div>
+        <div class="card"><button class="button primary" id="newFollowupSchedule" type="button">موعد جديد</button></div>
+        <div class="card">
+          <div class="section-head">
+            <div class="stack" style="gap: 4px;">
+              <h2>المواعيد والمتأخرات</h2>
+              <p>تابع الدفعات التي تحتاج إجراء الآن</p>
+            </div>
+          </div>
+          <div class="panel-grid" id="scheduleSummaryGrid"></div>
+          <div class="filters-row" id="scheduleReportFilterRow"></div>
+          <div class="list-stack" id="scheduleOverviewList"></div>
+        </div>
+
+        <div class="card"><div class="section-head"><div class="stack"><h2>مواعيد مكتملة أو موقوفة</h2><p>يمكن تعديلها وإعادة تفعيلها</p></div></div><div class="list-stack" id="followupArchivedList"></div></div>
+        <div class="card"><div class="section-head"><div class="stack"><h2>حسابات مفتوحة</h2><p>مرتبة حسب أكبر رصيد</p></div></div><div class="list-stack" id="followupOpenPeople"></div></div>
+      </section>
+
       <section class="screen" id="screen-reports">
         <div class="screen-head">
           <div class="stack" style="gap: 2px;">
@@ -1506,23 +1525,18 @@
         <div class="card">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
-              <h2>المواعيد والمتأخرات</h2>
-              <p>تابع الدفعات التي تحتاج إجراء الآن</p>
-            </div>
-          </div>
-          <div class="panel-grid" id="scheduleSummaryGrid"></div>
-          <div class="filters-row" id="scheduleReportFilterRow"></div>
-          <div class="list-stack" id="scheduleOverviewList"></div>
-        </div>
-
-        <div class="card">
-          <div class="section-head">
-            <div class="stack" style="gap: 4px;">
               <h2>أعلى ناس عليك إلهم</h2>
               <p>هذه المبالغ تحتاج ترتيب دفع</p>
             </div>
           </div>
           <div class="list-stack" id="topDebtsList"></div>
+        </div>
+        <div class="card">
+          <div class="section-head"><div class="stack"><h2>سجل الحركات</h2><p>بحث وفلاتر بدل التمرير الطويل</p></div></div>
+          <input class="text-input" id="reportTransactionSearch" placeholder="ابحث باسم أو ملاحظة أو مرجع" type="search" />
+          <div class="filters-row"><select class="text-input" id="reportTransactionPeriod"><option value="all">كل الفترات</option><option value="month">هذا الشهر</option><option value="30">آخر 30 يوم</option></select><select class="text-input" id="reportTransactionCurrency"><option value="all">كل العملات</option><option value="ILS">شيكل</option><option value="JOD">دينار</option><option value="USD">دولار</option></select></div>
+          <div class="list-stack" id="reportTransactionList"></div>
+          <button class="button secondary" id="reportTransactionMore" type="button" hidden>عرض 20 حركة أخرى</button>
         </div>
       </section>
 
@@ -2863,6 +2877,8 @@
       renderHome();
       renderPeople();
       renderReports();
+      renderFollowup();
+      renderReportTransactions();
       renderSettings();
       renderPersonModal();
       renderScheduleModal();
@@ -2878,6 +2894,7 @@
       const items = [
         { key: "home", label: "الرئيسية", icon: "⌂" },
         { key: "people", label: "الأشخاص", icon: "◉" },
+        { key: "followup", label: "المواعيد", icon: "▦" },
         { key: "reports", label: "التقارير", icon: "◔" },
         { key: "settings", label: "الإعدادات", icon: "⚙" }
       ];
@@ -3360,6 +3377,47 @@
     function reportPagerHtml(section, page, pages, total) {
       if (pages <= 1) return "";
       return `<div class="card" style="padding:12px;"><div class="person-card-actions"><button class="chip chip-dark" type="button" data-report-page="${section}:${page - 1}" ${page <= 1 ? "disabled" : ""}>السابق</button><strong>صفحة ${page} من ${pages} • ${total} سجل</strong><button class="chip primary" type="button" data-report-page="${section}:${page + 1}" ${page >= pages ? "disabled" : ""}>التالي</button></div></div>`;
+    }
+
+    let reportTransactionCount = 20;
+    function renderReportTransactions() {
+      const query = document.getElementById("reportTransactionSearch").value.trim().toLowerCase();
+      const period = document.getElementById("reportTransactionPeriod").value;
+      const currency = document.getElementById("reportTransactionCurrency").value;
+      const month = todayString().slice(0, 7);
+      const cutoff = new Date(Date.now() - 30 * 86400000).toISOString().slice(0,10);
+      const items = state.transactions.filter((item) => {
+        if (currency !== "all" && item.currency !== currency) return false;
+        if (period === "month" && !item.date.startsWith(month)) return false;
+        if (period === "30" && item.date < cutoff) return false;
+        const name = state.people.find((person) => person.id === item.personId)?.name || "";
+        return !query || [name, item.note || "", item.reference || "", getTransactionLabel(item.type)].some((value) => value.toLowerCase().includes(query));
+      }).sort((a,b) => b.date.localeCompare(a.date) || b.createdAt.localeCompare(a.createdAt));
+      document.getElementById("reportTransactionList").innerHTML = items.length ? items.slice(0, reportTransactionCount).map((item) => {
+        const person = state.people.find((entry) => entry.id === item.personId);
+        return `<div class="transaction-card"><div class="inline-row" style="justify-content:space-between"><strong>${escapeHtml(person?.name || "حساب")}</strong><strong>${formatAmount(item.amount,item.currency)}</strong></div><p class="note">${getTransactionLabel(item.type)} • ${formatDisplayDate(item.date)}${item.note ? ` • ${escapeHtml(item.note)}` : ""}</p></div>`;
+      }).join("") : createEmpty("لا توجد نتائج", "غيّر البحث أو الفلاتر.");
+      const more = document.getElementById("reportTransactionMore");
+      more.hidden = items.length <= reportTransactionCount;
+      more.onclick = () => { reportTransactionCount += 20; renderReportTransactions(); };
+      ["reportTransactionSearch","reportTransactionPeriod","reportTransactionCurrency"].forEach((id) => {
+        document.getElementById(id).oninput = () => { reportTransactionCount = 20; renderReportTransactions(); };
+      });
+    }
+
+    function renderFollowup() {
+      const archived = state.schedules.filter((schedule) => schedule.active === false || schedule.remainingAmount <= 0);
+      const archiveList = document.getElementById("followupArchivedList");
+      archiveList.innerHTML = archived.length ? archived.map((schedule) => {
+        const person = state.people.find((item) => item.id === schedule.personId);
+        return `<div class="schedule-card"><strong>${escapeHtml(person?.name || "حساب")}</strong><p class="note">${formatDisplayDate(schedule.nextDueDate)} • ${formatAmount(schedule.remainingAmount, schedule.currency)}</p><button class="open-inline-button" data-followup-edit="${schedule.id}" type="button">تعديل</button></div>`;
+      }).join("") : createEmpty("لا توجد مواعيد مكتملة", "ستظهر هنا بعد إتمام الدفعات.");
+      archiveList.querySelectorAll("[data-followup-edit]").forEach((button) => button.addEventListener("click", () => openScheduleModal(null, button.dataset.followupEdit)));
+      const open = getPeopleWithBalances().filter((person) => person.openCurrenciesCount > 0).sort((a,b) => Math.abs(b.net) - Math.abs(a.net));
+      const openList = document.getElementById("followupOpenPeople");
+      openList.innerHTML = open.length ? open.map((person) => personRowHtml(person.id, person.name, person.category || "شخصي", person.balanceSummary, "")).join("") : createEmpty("كل الحسابات مسكّرة", "لا توجد أرصدة تحتاج متابعة.");
+      bindPeopleOpen();
+      document.getElementById("newFollowupSchedule").onclick = () => openScheduleModal();
     }
 
     function renderSettings() {
