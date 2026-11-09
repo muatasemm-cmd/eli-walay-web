@@ -1327,6 +1327,17 @@
     body[data-theme="dark"] .topbar { background:linear-gradient(145deg,#1a2c24,#14211c); }
     body[data-theme="dark"] .text-input,body[data-theme="dark"] .textarea,body[data-theme="dark"] .person-card,body[data-theme="dark"] .transaction-card,body[data-theme="dark"] .status-card { background:rgba(26,39,33,.94); color:var(--text); border-color:var(--line); }
     @media (prefers-color-scheme:dark){ body[data-theme="system"] { --bg:#0d1512; --surface:rgba(22,33,28,.96); --surface-strong:#18251f; --surface-soft:#202f28; --line:#34443c; --text:#f3f7f5; --muted:#aab7b1; --dark:#edf7f2; background:#0d1512; } }
+    /* Native iPhone visual direction */
+    :root { --bg:#f1f6fc; --surface:#fff; --surface-strong:#fff; --surface-soft:#edf5ff; --line:#dce9f5; --text:#142131; --muted:#758396; --green:#2876b9; --green-soft:#e2f1ff; --blue:#2876b9; --blue-soft:#dfefff; --dark:#183a67; --shadow:0 16px 38px rgba(44,111,174,.10); --shadow-soft:0 7px 20px rgba(44,111,174,.07); }
+    body { background:linear-gradient(180deg,#f5faff,#eaf4ff 48%,#f8fbff); }
+    .topbar { background:rgba(255,255,255,.82); border-color:#e5eff8; backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
+    .brand-mark { background:linear-gradient(145deg,#65b7ec,#226ab4); }
+    .hero { background:linear-gradient(140deg,#244d92,#1e78b7 60%,#5db5e7); box-shadow:0 20px 42px rgba(27,99,170,.22); }
+    .card,.person-card,.transaction-card,.status-card,.action-card { border-color:#e3edf7; box-shadow:var(--shadow-soft); }
+    .bottom-nav { background:rgba(255,255,255,.88); border:1px solid #d9e6f2; backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); box-shadow:0 16px 36px rgba(25,72,123,.16); }
+    .filter-chip.active,.tiny-chip.active,.chip.primary,.button.primary { background:#2876b9; color:white; }
+    body[data-theme="dark"] { --bg:#101a28; --surface:#172538; --surface-strong:#1c2b40; --surface-soft:#243751; --line:#31465e; --text:#f4f8ff; --muted:#a9b9cd; --dark:#eaf4ff; background:#101a28; }
+    body[data-theme="dark"] .topbar,body[data-theme="dark"] .bottom-nav { background:rgba(22,36,55,.94); border-color:#31465e; }
   </style>
 </head>
 <body>
@@ -1336,13 +1347,13 @@
         <div class="brand-row">
           <div class="brand-mark">إ/ع</div>
           <div class="brand-copy">
-            <p class="eyebrow">تطبيق iPhone</p>
+            <p class="eyebrow">دفتر حساباتك</p>
             <h1>إلي وعليّ</h1>
-            <p class="subtitle">ديونك، مستحقاتك، وحركاتك كلها في مكان واحد، محفوظة بأمان على جهازك.</p>
+            <p class="subtitle">حساباتك ودفعاتك في مكان واحد</p>
           </div>
         </div>
         <div class="stack" style="justify-items: end; gap: 8px;">
-          <span class="version-badge">2.0</span>
+          <span class="version-badge">ويب 3.7</span>
           <button class="save-pill" id="saveStatePill" data-state="idle" type="button">بانتظار أول حفظ</button>
         </div>
       </div>
@@ -1357,8 +1368,8 @@
         <div class="hero">
           <div class="hero-head">
             <div class="stack" style="gap: 8px;">
-              <p class="eyebrow">لوحة اليوم</p>
-              <h2 class="hero-title">ابدأ من الصحيح</h2>
+              <p class="eyebrow">نظرة مالية</p>
+              <h2 class="hero-title">أهلًا بك</h2>
               <p class="hero-subtitle" id="heroInsight">كل شيء تحت السيطرة، ومجرد لمستين تكفيان لإضافة أي حركة جديدة.</p>
             </div>
             <div class="stack" style="justify-items: end; gap: 10px;">
@@ -4248,7 +4259,10 @@
       try {
         const raw = await file.text();
         const parsed = JSON.parse(raw);
-        const importedState = normalizeImportedState(parsed);
+        const source = parsed?.format === "eli-walay-native-backup" && parsed?.version === 1
+          ? parsed.state
+          : parsed;
+        const importedState = normalizeImportedState(source);
 
         if (!confirm("سيتم استبدال البيانات الحالية بالنسخة المستوردة. هل تريد المتابعة؟")) {
           return;
@@ -4408,7 +4422,7 @@
           pinCode: legacyPin,
           pinHash,
           pinSalt,
-          faceIdEnabled: Boolean(parsed.settings?.faceIdEnabled),
+          faceIdEnabled: false,
           notificationsEnabled: Boolean(parsed.settings?.notificationsEnabled),
           lastExportedAt: cleanText(parsed.settings?.lastExportedAt, 80) || null
           ,privacyShieldEnabled: parsed.settings?.privacyShieldEnabled !== false
