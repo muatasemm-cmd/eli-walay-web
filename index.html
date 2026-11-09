@@ -1376,6 +1376,16 @@
     #recordedPaymentList .transaction-card { display:flex; width:100%; justify-content:space-between; align-items:center; color:var(--text); font:inherit; cursor:pointer; }
     #settingsHighlights { display:none; }
     #screen-reports > .hero { display:none; }
+    body[data-tab]:not([data-tab="home"]) .topbar { display:none; }
+    #screen-home #summaryGrid > :nth-child(n+3), #focusGrid,
+    #homeSchedulesSection, #homePrioritiesSection { display:none; }
+    #recentTransactionsList .transaction-meta-item:nth-child(n+3),
+    #recentTransactionsList .transaction-card-actions > .muted { display:none; }
+    #recentTransactionsList .transaction-card { padding:13px; gap:8px; border-radius:20px; }
+    .home-followup-button { width:100%; display:flex; align-items:center; gap:12px; color:var(--text); text-align:right; cursor:pointer; font:inherit; }
+    .home-followup-button strong { font-size:1rem; }
+    .home-followup-button span:nth-child(2) { color:var(--muted); font-size:.8rem; margin-inline-start:auto; }
+    .home-followup-button span:last-child { color:var(--blue); font-size:1.8rem; line-height:1; }
     details.card > summary, .report-extra > summary { cursor:pointer; font-weight:800; color:var(--text); padding:4px 0; }
     details.card[open] > summary, .report-extra[open] > summary { margin-bottom:14px; }
     @media (max-width:560px) {
@@ -1465,8 +1475,9 @@
         <div id="welcomeCardSlot"></div>
         <div class="summary-grid" id="summaryGrid"></div>
         <div class="panel-grid" id="focusGrid"></div>
+        <button class="card home-followup-button" id="homeFollowupButton" type="button"><strong>ما يحتاج متابعة</strong><span>المواعيد والحسابات المفتوحة</span><span aria-hidden="true">‹</span></button>
 
-        <div class="card">
+        <div class="card" id="homeSchedulesSection">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
               <h2>الدفعات المجدولة</h2>
@@ -1476,7 +1487,7 @@
           <div class="list-stack" id="upcomingSchedulesList"></div>
         </div>
 
-        <div class="card">
+        <div class="card" id="homePrioritiesSection">
           <div class="section-head">
             <div class="stack" style="gap: 4px;">
               <h2>أولوية اليوم</h2>
@@ -2962,6 +2973,7 @@
     }
 
     function renderNav() {
+      document.body.dataset.tab = ui.activeTab;
       const items = [
         { key: "home", label: "الرئيسية", icon: navIcon("home") },
         { key: "people", label: "الأشخاص", icon: navIcon("people") },
@@ -2978,15 +2990,17 @@
       `).join("");
 
       elements.bottomNav.querySelectorAll("[data-tab]").forEach((button) => {
-        button.addEventListener("click", () => {
-          ui.activeTab = button.dataset.tab;
-          document.querySelectorAll(".screen").forEach((screen) => {
-            screen.classList.toggle("active", screen.id === `screen-${ui.activeTab}`);
-          });
-          renderNav();
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
+        button.addEventListener("click", () => switchTab(button.dataset.tab));
       });
+    }
+
+    function switchTab(tab) {
+      ui.activeTab = tab;
+      document.querySelectorAll(".screen").forEach((screen) => {
+        screen.classList.toggle("active", screen.id === `screen-${tab}`);
+      });
+      renderNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function renderHome() {
@@ -3209,6 +3223,7 @@
       bindPeopleOpen();
       bindTransactionEdit();
       bindScheduleActions();
+      document.getElementById("homeFollowupButton").onclick = () => switchTab("followup");
       document.getElementById("welcomeImportButton")?.addEventListener("click", () => elements.backupFileInput.click());
       document.getElementById("welcomeAddPersonButton")?.addEventListener("click", () => {
         state.meta.hasSeenWelcome = true;
